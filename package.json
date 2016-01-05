@@ -1,0 +1,68 @@
+{
+  "name": "formbuilder",
+  "version": "0.0.1",
+  "description": "A tool to build forms on the web",
+  "scripts": {
+    "build:css": "cp css/react-jsonschema-form.css dist/",
+    "build:formbuilder": "rimraf build && webpack --config webpack.config.prod.js --optimize-minimize && cp formbuilder/index.prod.html build/index.html",
+    "lint": "eslint src test",
+    "publish-to-gh-pages": "npm run build:formbuilder && gh-pages --dist build/",
+    "publish-to-npm": "npm run dist && npm publish",
+    "start": "node devServer.js",
+    "tdd": "npm run test -- -w",
+    "test": "NODE_ENV=test mocha --compilers js:babel/register --recursive --require ./test/setup-jsdom.js $(find test -name '*_test.js')"
+  },
+  "main": "lib/index.js",
+  "files": [
+    "dist",
+    "lib"
+  ],
+  "peerDependencies": {
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3"
+  },
+  "dependencies": {
+    "react-jsonschema-form": "^0.7.1"
+  },
+  "devDependencies": {
+    "babel": "^5.8.20",
+    "babel-eslint": "^4.1.6",
+    "babel-loader": "^5.3.2",
+    "babel-plugin-react-transform": "^1.1.1",
+    "chai": "^3.3.0",
+    "css-loader": "^0.23.1",
+    "eslint": "^1.8.0",
+    "eslint-plugin-react": "^3.6.3",
+    "express": "^4.13.3",
+    "extract-text-webpack-plugin": "^0.9.1",
+    "gh-pages": "^0.4.0",
+    "html": "0.0.10",
+    "jsdom": "^7.2.1",
+    "mocha": "^2.3.0",
+    "react-addons-test-utils": "^0.14.3",
+    "react-transform-catch-errors": "^1.0.0",
+    "react-transform-hmr": "^1.0.1",
+    "redbox-react": "^1.2.0",
+    "rimraf": "^2.4.4",
+    "sinon": "^1.17.2",
+    "style-loader": "^0.13.0",
+    "webpack": "^1.10.5",
+    "webpack-dev-middleware": "^1.4.0",
+    "webpack-hot-middleware": "^2.6.0"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mozilla-services/formbuilder.git"
+  },
+  "author": "Alexis Métaireau <alexis@mozilla.com>",
+  "keywords": [
+    "react",
+    "form",
+    "json-schema"
+  ],
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/mozilla-services/formbuilder#readme"
+}

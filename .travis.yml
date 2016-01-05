@@ -1,0 +1,11 @@
+sudo: false
+language:
+- node_js
+node_js:
+- "4"
+env:
+- ACTION=test
+- ACTION="run lint"
+- ACTION="run dist"
+script:
+- npm $ACTION
