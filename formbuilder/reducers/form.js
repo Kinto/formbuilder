@@ -2,12 +2,17 @@ import {
   FIELD_ADD,
 } from "../actions/fieldlist";
 
-const INITIAL_STATE = [];
+const INITIAL_STATE = {};
 
-export default function collections(state = INITIAL_STATE, action) {
+export default function form(state = INITIAL_STATE, action) {
   switch(action.type) {
   case FIELD_ADD:
-    return [...state, action.notification];
+    const { field } = action;
+    const name = btoa(Math.random());
+    const newState = JSON.parse(JSON.stringify(state));
+    newState.schema.properties[name] = field.jsonSchema;
+    newState.uiSchema[name] = field.uiSchema;
+    return newState;
   default:
     return state;
   }
