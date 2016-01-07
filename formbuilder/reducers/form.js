@@ -1,5 +1,6 @@
 import {
   FIELD_ADD,
+  FIELD_REMOVE
 } from "../actions/fieldlist";
 
 const INITIAL_STATE = {};
@@ -9,10 +10,15 @@ export default function form(state = INITIAL_STATE, action) {
   case FIELD_ADD:
     const { field } = action;
     const name = btoa(Math.random());
-    const newState = JSON.parse(JSON.stringify(state));
-    newState.schema.properties[name] = field.jsonSchema;
-    newState.uiSchema[name] = field.uiSchema;
-    return newState;
+    const addedState = JSON.parse(JSON.stringify(state));
+    addedState.schema.properties[name] = field.jsonSchema;
+    addedState.uiSchema[name] = field.uiSchema;
+    return addedState;
+  case FIELD_REMOVE:
+    const removedState = JSON.parse(JSON.stringify(state));
+    delete removedState.schema.properties[action.name];
+    delete removedState.uiSchema.properties[action.name];
+    return removedState;
   default:
     return state;
   }
