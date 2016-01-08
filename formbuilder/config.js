@@ -2,7 +2,7 @@ export default {
   fieldList: [
     {
       id: "checkbox",
-      icon: "checkbox",
+      icon: "check",
       label: "CheckBox",
       jsonSchema: {
         type: "boolean",
@@ -14,7 +14,7 @@ export default {
     },
     {
       id: "radiobutton",
-      icon: "radiobutton",
+      icon: "record",
       label: "Radio Button",
       jsonSchema: {
         type: "boolean",
@@ -22,33 +22,34 @@ export default {
         default: false
       },
       uiSchema: {
-        widget: "radio"
+        widget: "radio",
       },
       formData: {}
     },
     {
       id: "text",
-      icon: "text",
-      label: "Single line text field",
-      jsonSchema: {
-        type: "string",
-        title: "Text",
-        default: ""
-      },
-      uiSchema: {},
-      formData: {}
-    },
-    {
-      id: "multilinetext",
-      icon: "multilinetext",
-      label: "Multiline text field",
+      icon: "text-color",
+      label: "Single line text",
       jsonSchema: {
         type: "string",
         title: "Text",
         default: ""
       },
       uiSchema: {
-        widget: "textarea"
+      },
+      formData: {}
+    },
+    {
+      id: "multilinetext",
+      icon: "align-left",
+      label: "Multiline text",
+      jsonSchema: {
+        type: "string",
+        title: "Text",
+        default: ""
+      },
+      uiSchema: {
+        widget: "textarea",
       },
       formData: {}
     }

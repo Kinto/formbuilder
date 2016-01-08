@@ -8,17 +8,17 @@ export default class FieldList extends Component {
 
   render() {
     return (
-      <ul> {
+      <div className="list-group"> {
         this.props.fieldList.map((field, index) => {
           return (
-            <li key={index}>
-              <a href="#" onClick={this.addField.bind(this, field)}>
-                {field.label}
-              </a>
-            </li>
+            <button key={index} type="button" className="list-group-item"
+              onClick={this.addField.bind(this, field)}>
+              <i className={`glyphicon glyphicon-${field.icon}`} />
+              {" " + field.label}
+            </button>
           );
         })
-      }</ul>
+      }</div>
     );
   }
 }

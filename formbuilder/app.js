@@ -29,10 +29,10 @@ render((
       </div>
       <NotificationContainer />
       <div className="row">
-        <div className="col-sm-6">
+        <div className="col-sm-4">
           <FieldListContainer />
         </div>
-        <div className="col-sm-6">
+        <div className="col-sm-8">
           <FormContainer />
         </div>
       </div>
