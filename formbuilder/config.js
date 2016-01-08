@@ -10,6 +10,15 @@ export default {
         default: ""
       },
       uiSchema: {
+        editSchema: {
+          type: "object",
+          properties: {
+            name: {type: "string", title: "Field name"},
+            title: {type: "string", title: "Label"},
+            description: {type: "string", title: "Placeholder"},
+            required: {type: "boolean"},
+          }
+        },
       },
       formData: {}
     },
@@ -24,6 +33,15 @@ export default {
       },
       uiSchema: {
         widget: "textarea",
+        editSchema: {
+          type: "object",
+          properties: {
+            name: {type: "string", title: "Field name"},
+            title: {type: "string", title: "Label"},
+            description: {type: "string", title: "Placeholder"},
+            required: {type: "boolean"},
+          }
+        },
       },
       formData: {}
     },
@@ -36,7 +54,16 @@ export default {
         title: "Edit me",
         default: false,
       },
-      uiSchema: {},
+      uiSchema: {
+        editSchema: {
+          type: "object",
+          properties: {
+            name: {type: "string", title: "Field name"},
+            title: {type: "string", title: "Label"},
+            required: {type: "boolean"},
+          }
+        },
+      },
       formData: {}
     },
     {
@@ -50,6 +77,14 @@ export default {
       },
       uiSchema: {
         widget: "radio",
+        editSchema: {
+          type: "object",
+          properties: {
+            name: {type: "string", title: "Field name"},
+            title: {type: "string", title: "Label"},
+            required: {type: "boolean"},
+          }
+        },
       },
       formData: {}
     },
@@ -63,6 +98,21 @@ export default {
         enum: []
       },
       uiSchema: {
+        editSchema: {
+          type: "object",
+          properties: {
+            name: {type: "string", title: "Field name"},
+            title: {type: "string", title: "Label"},
+            required: {type: "boolean"},
+            enum: {
+              type: "array",
+              title: "Options",
+              items: {
+                type: "string"
+              }
+            }
+          }
+        },
       },
       formData: {}
     },
@@ -76,7 +126,19 @@ export default {
         default: 0
       },
       uiSchema: {
-        widget: "updown"
+        widget: "updown",
+        editSchema: {
+          type: "object",
+          properties: {
+            name: {type: "string", title: "Field name"},
+            title: {type: "string", title: "Label"},
+            description: {type: "string", title: "Placeholder"},
+            multipleOf: {type: "number", title: "Step"},
+            minimum: {type: "number", title: "Minimum"},
+            maximum: {type: "number", title: "Maximum"},
+            required: {type: "boolean"},
+          }
+        },
       },
       formData: {}
     },
@@ -90,7 +152,19 @@ export default {
         default: 0
       },
       uiSchema: {
-        widget: "range"
+        widget: "range",
+        editSchema: {
+          type: "object",
+          properties: {
+            name: {type: "string", title: "Field name"},
+            title: {type: "string", title: "Label"},
+            description: {type: "string", title: "Placeholder"},
+            multipleOf: {type: "number", title: "Step"},
+            minimum: {type: "number", title: "Minimum"},
+            maximum: {type: "number", title: "Maximum"},
+            required: {type: "boolean"},
+          }
+        },
       },
       formData: {}
     }

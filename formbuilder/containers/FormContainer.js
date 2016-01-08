@@ -1,6 +1,8 @@
+import React from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import Form from "react-jsonschema-form";
+import SchemaField from "react-jsonschema-form/lib/components/fields/SchemaField";
+
 import * as FieldListActions from "../actions/fieldlist";
 import EditableField from "../components/EditableField";
 
@@ -8,7 +10,7 @@ function mapStateToProps(state) {
   return {
     schema: state.form.schema,
     uiSchema: state.form.uiSchema,
-    formData: state.form.formData
+    formData: state.form.formData,
   };
 }
 
@@ -27,11 +29,20 @@ function mergeProps(stateProps, dispatchProps, ownProps) {
     ...dispatchProps,
     ...ownProps,
     SchemaField: EditableField,
+    onChange: () => {}
   };
 }
+
+const SchemaFieldWrapper = (props) => {
+  return (
+    <div className="rjsf">
+      <SchemaField {...props} />
+    </div>
+  );
+};
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
   mergeProps
-)(Form);
+)(SchemaFieldWrapper);

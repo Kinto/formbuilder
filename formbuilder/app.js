@@ -17,7 +17,8 @@ const store = configureStore({
       properties: {}
     },
     uiSchema: {},
-    formData: {}
+    formData: {},
+    editSchema: {},
   }
 });
 
