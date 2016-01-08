@@ -9,12 +9,18 @@ export default function EditableField(props) {
     props.removeField(props.name);
   };
 
+  if (props.schema.type === "object") {
+    return <SchemaField {...props}/>;
+  }
+
   return (
-    <div className="editable-field">
-      <SchemaField {...props}/>
-      {props.schema.type !== "object" ?
-        <button onClick={handleDelete}>delete</button> :
-        null}
+    <div className="row editable-field">
+      <div className="col-sm-6">
+        <SchemaField {...props}/>
+      </div>
+      <div className="col-sm-6">
+        <button onClick={handleDelete}>delete</button>
+      </div>
     </div>
   );
 }

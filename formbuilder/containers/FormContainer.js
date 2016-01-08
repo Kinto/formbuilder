@@ -14,8 +14,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   const actions = bindActionCreators(FieldListActions, dispatch);
-  // Side effect: attaching action creators to EditableField, so they're
-  // available within the Form fields hierarchy.
+  // Side effect: attaching action creators as EditableField props, so they're
+  // available from within the Form fields hierarchy.
   EditableField.defaultProps = Object.assign(
     {}, EditableField.defaultProps || {}, actions);
   return actions;

@@ -7,6 +7,7 @@ const INITIAL_STATE = {};
 
 export default function form(state = INITIAL_STATE, action) {
   switch(action.type) {
+
   case FIELD_ADD:
     const { field } = action;
     const name = btoa(Math.random());
@@ -14,11 +15,13 @@ export default function form(state = INITIAL_STATE, action) {
     addedState.schema.properties[name] = field.jsonSchema;
     addedState.uiSchema[name] = field.uiSchema;
     return addedState;
+
   case FIELD_REMOVE:
     const removedState = JSON.parse(JSON.stringify(state));
     delete removedState.schema.properties[action.name];
     delete removedState.uiSchema[action.name];
     return removedState;
+
   default:
     return state;
   }
