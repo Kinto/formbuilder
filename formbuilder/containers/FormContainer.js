@@ -13,7 +13,11 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(FieldListActions, dispatch);
+  const boundActionCreators = bindActionCreators(FieldListActions, dispatch);
+  console.log(boundActionCreators);
+  // Side effect: attaching action creators to EditableField
+  EditableField.actions = boundActionCreators;
+  return boundActionCreators;
 }
 
 function mergeProps(stateProps, dispatchProps, ownProps) {
@@ -21,7 +25,7 @@ function mergeProps(stateProps, dispatchProps, ownProps) {
     ...stateProps,
     ...dispatchProps,
     ...ownProps,
-    SchemaField: EditableField
+    SchemaField: EditableField,
   };
 }
 

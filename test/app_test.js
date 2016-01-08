@@ -6,7 +6,7 @@ import React from "react";
 import { Simulate, renderIntoDocument } from "react-addons-test-utils";
 import { findDOMNode } from "react-dom";
 
-import App from "../formbuilder";
+import App from "../formbuilder/app";
 
 function createComponent(props) {
   const comp = renderIntoDocument(<App {...props} />);

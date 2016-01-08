@@ -1,15 +1,20 @@
 import React from "react";
 
+import SchemaField from "react-jsonschema-form/lib/components/fields/SchemaField";
+
 export default function EditableField(props) {
-  const handleDelete = function(name, event) {
+  const handleDelete = function(event) {
     event.preventDefault();
-    props.deleteField(name);
+    // XXX: We need to find a way to access this action...
+    EditableField.actions.removeField(props.name);
   };
 
   return (
-    <div>
+    <div className="editable-field">
       <SchemaField {...props}/>
-      <button onClick={handleDelete}>delete</button>
+      {props.schema.type !== "object" ?
+        <button onClick={handleDelete}>delete</button> :
+        null}
     </div>
   );
 }

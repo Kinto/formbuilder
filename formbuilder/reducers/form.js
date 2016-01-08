@@ -17,7 +17,7 @@ export default function form(state = INITIAL_STATE, action) {
   case FIELD_REMOVE:
     const removedState = JSON.parse(JSON.stringify(state));
     delete removedState.schema.properties[action.name];
-    delete removedState.uiSchema.properties[action.name];
+    delete removedState.uiSchema[action.name];
     return removedState;
   default:
     return state;
