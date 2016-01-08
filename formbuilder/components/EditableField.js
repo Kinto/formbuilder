@@ -5,7 +5,9 @@ import SchemaField from "react-jsonschema-form/lib/components/fields/SchemaField
 export default function EditableField(props) {
   const handleDelete = function(event) {
     event.preventDefault();
-    props.removeField(props.name);
+    if (confirm("Are you sure you want to delete this field?")) {
+      props.removeField(props.name);
+    }
   };
 
   if (props.schema.type === "object") {

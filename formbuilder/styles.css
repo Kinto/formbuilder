@@ -4,6 +4,7 @@
 }
 
 .rjsf input[type=text],
+.rjsf input[type=number],
 .rjsf textarea {
   display: block;
   width: 100%;
