@@ -13,11 +13,12 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  const boundActionCreators = bindActionCreators(FieldListActions, dispatch);
-  console.log(boundActionCreators);
-  // Side effect: attaching action creators to EditableField
-  EditableField.actions = boundActionCreators;
-  return boundActionCreators;
+  const actions = bindActionCreators(FieldListActions, dispatch);
+  // Side effect: attaching action creators to EditableField, so they're
+  // available within the Form fields hierarchy.
+  EditableField.defaultProps = Object.assign(
+    {}, EditableField.defaultProps || {}, actions);
+  return actions;
 }
 
 function mergeProps(stateProps, dispatchProps, ownProps) {

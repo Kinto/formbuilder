@@ -6,7 +6,7 @@ export default function EditableField(props) {
   const handleDelete = function(event) {
     event.preventDefault();
     // XXX: We need to find a way to access this action...
-    EditableField.actions.removeField(props.name);
+    props.removeField(props.name);
   };
 
   return (
