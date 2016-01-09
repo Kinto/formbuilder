@@ -10,38 +10,45 @@ function clone(obj) {
   return JSON.parse(JSON.stringify(obj));
 }
 
+function addField(state, field) {
+  // Generating a usually temporary random, unique field name.
+  const name = btoa(Math.random());
+  state.schema.properties[name] = field.jsonSchema;
+  state.uiSchema[name] = field.uiSchema;
+  state.editSchema[name] = field.editSchema;
+  return state;
+}
+
+function removeField(state, name) {
+  const requiredFields = state.schema.required || [];
+  delete state.schema.properties[name];
+  delete state.uiSchema[name];
+  delete state.editSchema[name];
+  state.schema.required = requiredFields
+    .filter(requiredFieldName => name !== requiredFieldName);
+  return state;
+}
+
+function updateField(state, name, schema, required) {
+  const requiredFields = state.schema.required || [];
+  state.schema.properties[name] = schema;
+  if (required) {
+    state.schema.required = requiredFields.concat(name);
+  } else {
+    state.schema.required = requiredFields
+      .filter(requiredFieldName => name !== requiredFieldName);
+  }
+  return state;
+}
+
 export default function form(state = INITIAL_STATE, action) {
   switch(action.type) {
-
   case FIELD_ADD:
-    const { field } = action;
-    // Generating a usually temporary random, unique field name.
-    const name = btoa(Math.random());
-    const addedState = clone(state);
-    addedState.schema.properties[name] = field.jsonSchema;
-    addedState.uiSchema[name] = field.uiSchema;
-    addedState.editSchema[name] = field.editSchema;
-    return addedState;
-
+    return addField(clone(state), action.field);
   case FIELD_REMOVE:
-    const removedState = clone(state);
-    delete removedState.schema.properties[action.name];
-    delete removedState.uiSchema[action.name];
-    delete removedState.editSchema[action.name];
-    return removedState;
-
+    return removeField(clone(state), action.name);
   case FIELD_UPDATE:
-    const updatedState = clone(state);
-    const requiredFields = updatedState.schema.required || [];
-    updatedState.schema.properties[action.name] = action.schema;
-    if (action.required) {
-      updatedState.schema.required = requiredFields.concat(action.name);
-    } else {
-      updatedState.schema.required = requiredFields
-        .filter(requiredFieldName => action.name !== requiredFieldName);
-    }
-    return updatedState;
-
+    return updateField(clone(state), action.name, action.schema, action.required);
   default:
     return state;
   }
