@@ -132,7 +132,6 @@ export default {
           properties: {
             name: {type: "string", title: "Field name"},
             title: {type: "string", title: "Label"},
-            description: {type: "string", title: "Placeholder"},
             multipleOf: {type: "number", title: "Step"},
             minimum: {type: "number", title: "Minimum"},
             maximum: {type: "number", title: "Maximum"},
@@ -158,7 +157,6 @@ export default {
           properties: {
             name: {type: "string", title: "Field name"},
             title: {type: "string", title: "Label"},
-            description: {type: "string", title: "Placeholder"},
             multipleOf: {type: "number", title: "Step"},
             minimum: {type: "number", title: "Minimum"},
             maximum: {type: "number", title: "Maximum"},
