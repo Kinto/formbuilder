@@ -8,7 +8,6 @@ export function addField(field) {
 }
 
 export function removeField(name) {
-  console.log(name);
   return {type: FIELD_REMOVE, name};
 }
 
