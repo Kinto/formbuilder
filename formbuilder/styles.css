@@ -50,14 +50,21 @@
 
 .editable-field-actions {
   text-align: right;
+  padding-left: 0;
+  padding-right: 0;
 }
 
-.editable-field-actions button {
+.editable-field-actions button,
+button.close-btn {
   background: none;
   border: none;
 }
 
-
 form > p {
   padding: 1em 0;
+}
+
+.panel-heading .close-btn {
+  float: right;
+  margin-right: -1em;
 }
