@@ -11,8 +11,8 @@ export function removeField(name) {
   return {type: FIELD_REMOVE, name};
 }
 
-export function updateField(name, schema, required) {
-  return {type: FIELD_UPDATE, name, schema, required};
+export function updateField(name, schema, required, newName) {
+  return {type: FIELD_UPDATE, name, schema, required, newName};
 }
 
 export function moveField(name, direction) {

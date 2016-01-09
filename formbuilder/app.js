@@ -20,7 +20,6 @@ const store = configureStore({
       "ui:order": []
     },
     formData: {},
-    editSchema: {},
   }
 });
 

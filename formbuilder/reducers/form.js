@@ -34,7 +34,6 @@ function addField(state, field) {
   state.schema.properties[name] = {...field.jsonSchema, title: name};
   state.uiSchema[name] = field.uiSchema;
   state.uiSchema["ui:order"] = (state.uiSchema["ui:order"] || []).concat(name);
-  state.editSchema[name] = field.editSchema;
   return state;
 }
 
@@ -50,7 +49,7 @@ function removeField(state, name) {
   return state;
 }
 
-function updateField(state, name, schema, required) {
+function updateField(state, name, schema, required, newName) {
   const requiredFields = state.schema.required || [];
   state.schema.properties[name] = schema;
   if (required) {
@@ -59,6 +58,23 @@ function updateField(state, name, schema, required) {
     state.schema.required = requiredFields
       .filter(requiredFieldName => name !== requiredFieldName);
   }
+  if (newName !== name) {
+    return renameField(state, name, newName);
+  }
+  return state;
+}
+
+function renameField(state, name, newName) {
+  const schema = clone(state.schema.properties[name]);
+  const uiSchema = clone(state.uiSchema[name]);
+  const order = state.uiSchema["ui:order"];
+  delete state.schema.properties[name];
+  delete state.uiSchema[name];
+  state.schema.properties[newName] = schema;
+  state.uiSchema[newName] = uiSchema;
+  state.uiSchema["ui:order"] = order.map(fieldName => {
+    return fieldName === name ? newName : fieldName;
+  });
   return state;
 }
 
@@ -80,7 +96,8 @@ export default function form(state = INITIAL_STATE, action) {
   case FIELD_REMOVE:
     return removeField(clone(state), action.name);
   case FIELD_UPDATE:
-    return updateField(clone(state), action.name, action.schema, action.required);
+    const {name, schema, required, newName} = action;
+    return updateField(clone(state), name, schema, required, newName);
   case FIELD_MOVE:
     return moveField(clone(state), action.name, action.direction);
   default:

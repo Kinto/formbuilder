@@ -44,7 +44,8 @@ export default class EditableField extends Component {
     const schema = {...this.props.schema, ...formData};
     this.setState({edit: false, schema});
     // XXX handle rename
-    this.props.updateField(this.props.name, schema, formData.required);
+    this.props.updateField(
+      this.props.name, schema, formData.required, formData.name);
   }
 
   handleDelete(event) {
