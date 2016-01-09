@@ -68,9 +68,13 @@ function renameField(state, name, newName) {
   const schema = clone(state.schema.properties[name]);
   const uiSchema = clone(state.uiSchema[name]);
   const order = state.uiSchema["ui:order"];
+  const required = state.schema.required;
   delete state.schema.properties[name];
   delete state.uiSchema[name];
   state.schema.properties[newName] = schema;
+  state.schema.required = required.map(fieldName => {
+    return fieldName === name ? newName : fieldName;
+  });
   state.uiSchema[newName] = uiSchema;
   state.uiSchema["ui:order"] = order.map(fieldName => {
     return fieldName === name ? newName : fieldName;
