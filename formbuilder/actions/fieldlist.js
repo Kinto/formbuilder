@@ -15,6 +15,6 @@ export function updateField(name, schema, required) {
   return {type: FIELD_UPDATE, name, schema, required};
 }
 
-export function move(name, direction) {
+export function moveField(name, direction) {
   return {type: FIELD_MOVE, name, direction};
 }
