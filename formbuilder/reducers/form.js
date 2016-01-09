@@ -1,7 +1,8 @@
 import {
   FIELD_ADD,
   FIELD_REMOVE,
-  FIELD_UPDATE
+  FIELD_UPDATE,
+  FIELD_MOVE,
 } from "../actions/fieldlist";
 
 const INITIAL_STATE = {};
@@ -49,6 +50,12 @@ function updateField(state, name, schema, required) {
   return state;
 }
 
+function moveField(state, name, direction) {
+  const fields = Object.keys(state.schema.properties);
+  const currIndex = fields.indexOf(name);
+
+}
+
 export default function form(state = INITIAL_STATE, action) {
   switch(action.type) {
   case FIELD_ADD:
@@ -57,6 +64,8 @@ export default function form(state = INITIAL_STATE, action) {
     return removeField(clone(state), action.name);
   case FIELD_UPDATE:
     return updateField(clone(state), action.name, action.schema, action.required);
+  case FIELD_MOVE:
+    return moveField(clone(state), action.name, action.direction);
   default:
     return state;
   }
