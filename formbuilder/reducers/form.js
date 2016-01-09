@@ -33,7 +33,7 @@ function addField(state, field) {
   const name = generateUniqueFieldName(Object.keys(state.schema.properties));
   state.schema.properties[name] = {...field.jsonSchema, title: name};
   state.uiSchema[name] = field.uiSchema;
-  state.uiSchema.order = (state.uiSchema.order || []).concat(name);
+  state.uiSchema["ui:order"] = (state.uiSchema["ui:order"] || []).concat(name);
   state.editSchema[name] = field.editSchema;
   return state;
 }
@@ -42,7 +42,7 @@ function removeField(state, name) {
   const requiredFields = state.schema.required || [];
   delete state.schema.properties[name];
   delete state.uiSchema[name];
-  state.uiSchema.order = state.uiSchema.order.filter(
+  state.uiSchema["ui:order"] = state.uiSchema["ui:order"].filter(
     (field) => field !== name);
   delete state.editSchema[name];
   state.schema.required = requiredFields
@@ -64,12 +64,12 @@ function updateField(state, name, schema, required) {
 
 function moveField(state, name, direction) {
   const fields = Object.keys(state.schema.properties);
-  const order = state.uiSchema.order || fields;
+  const order = state.uiSchema["ui:order"] || fields;
   const from = order.indexOf(name);
   const to = direction === "up" && from > 0 ? from - 1 :
              direction === "down" && from < order.length - 1 ? from + 1 :
              from;
-  state.uiSchema.order = moveInArray(order, from, to);
+  state.uiSchema["ui:order"] = moveInArray(order, from, to);
   return state;
 }
 

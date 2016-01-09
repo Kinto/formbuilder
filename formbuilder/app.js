@@ -17,7 +17,7 @@ const store = configureStore({
       properties: {}
     },
     uiSchema: {
-      order: []
+      "ui:order": []
     },
     formData: {},
     editSchema: {},

@@ -32,7 +32,7 @@ export default {
         default: ""
       },
       uiSchema: {
-        widget: "textarea",
+        "ui:widget": "textarea",
         editSchema: {
           type: "object",
           properties: {
@@ -76,7 +76,7 @@ export default {
         default: false
       },
       uiSchema: {
-        widget: "radio",
+        "ui:widget": "radio",
         editSchema: {
           type: "object",
           properties: {
@@ -126,7 +126,7 @@ export default {
         default: 0
       },
       uiSchema: {
-        widget: "updown",
+        "ui:widget": "updown",
         editSchema: {
           type: "object",
           properties: {
@@ -152,7 +152,7 @@ export default {
         default: 0
       },
       uiSchema: {
-        widget: "range",
+        "ui:widget": "range",
         editSchema: {
           type: "object",
           properties: {
