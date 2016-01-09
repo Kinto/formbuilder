@@ -43,7 +43,6 @@ function removeField(state, name) {
   delete state.uiSchema[name];
   state.uiSchema["ui:order"] = state.uiSchema["ui:order"].filter(
     (field) => field !== name);
-  delete state.editSchema[name];
   state.schema.required = requiredFields
     .filter(requiredFieldName => name !== requiredFieldName);
   return state;
