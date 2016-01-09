@@ -10,9 +10,17 @@ function clone(obj) {
   return JSON.parse(JSON.stringify(obj));
 }
 
+function generateUniqueFieldName(names) {
+  const name = "field_" + Math.random().toString().substr(2, 7);
+  if (names.indexOf(name) !== -1) {
+    return generateUniqueFieldName(names);
+  }
+  return name;
+}
+
 function addField(state, field) {
   // Generating a usually temporary random, unique field name.
-  const name = btoa(Math.random());
+  const name = generateUniqueFieldName(Object.keys(state.schema.properties));
   state.schema.properties[name] = field.jsonSchema;
   state.uiSchema[name] = field.uiSchema;
   state.editSchema[name] = field.editSchema;
