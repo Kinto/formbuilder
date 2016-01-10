@@ -68,3 +68,9 @@ form > p {
   float: right;
   margin-right: -1em;
 }
+
+textarea.json-viewer {
+  width: 100%;
+  height: 350px;
+  font-family: Consolas, "Ubuntu Mono", "Monaco", monospace;
+}

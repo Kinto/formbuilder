@@ -1,13 +1,14 @@
 import React from "react";
 import { render } from "react-dom";
 import { Provider } from "react-redux";
+import { Router } from "react-router";
+const createHashHistory = require("history/lib/createHashHistory");
+
+import routes from "./routes";
+import configureStore from "./store/configureStore";
 
 import "./styles.css";
 
-import configureStore from "./store/configureStore";
-import NotificationContainer from "./containers/NotificationContainer";
-import FieldListContainer from "./containers/FieldListContainer";
-import FormContainer from "./containers/FormContainer";
 
 const store = configureStore({
   notifications: [],
@@ -22,22 +23,12 @@ const store = configureStore({
     formData: {},
   }
 });
+const history = createHashHistory();
 
 render((
   <Provider store={store}>
-    <div className="container">
-      <div className="page-header">
-        <h1>FormBuilder</h1>
-      </div>
-      <NotificationContainer />
-      <div className="row">
-        <div className="col-sm-4">
-          <FieldListContainer />
-        </div>
-        <div className="col-sm-8">
-          <FormContainer />
-        </div>
-      </div>
-    </div>
+    <Router history={history}>
+      {routes}
+    </Router>
   </Provider>
 ), document.getElementById("app"));

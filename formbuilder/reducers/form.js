@@ -3,6 +3,7 @@ import {
   FIELD_REMOVE,
   FIELD_UPDATE,
   FIELD_MOVE,
+  FORM_UPDATE_PROPERTIES,
 } from "../actions/fieldlist";
 
 const INITIAL_STATE = {};
@@ -92,6 +93,12 @@ function moveField(state, name, direction) {
   return state;
 }
 
+function updateFormProperties(state, {title, description}) {
+  state.schema.title = title;
+  state.schema.description = description;
+  return state;
+}
+
 export default function form(state = INITIAL_STATE, action) {
   switch(action.type) {
   case FIELD_ADD:
@@ -103,6 +110,8 @@ export default function form(state = INITIAL_STATE, action) {
     return updateField(clone(state), name, schema, required, newName);
   case FIELD_MOVE:
     return moveField(clone(state), action.name, action.direction);
+  case FORM_UPDATE_PROPERTIES:
+    return updateFormProperties(clone(state), action.properties);
   default:
     return state;
   }

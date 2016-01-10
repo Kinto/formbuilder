@@ -1,24 +1,39 @@
-import React, { Component } from "react";
+import React from "react";
+import { Link } from "react-router";
 
-export default class FieldList extends Component {
-  addField(field, event) {
-    event.preventDefault();
-    this.props.addField(field);
-  }
 
-  render() {
-    return (
-      <div className="list-group"> {
-        this.props.fieldList.map((field, index) => {
-          return (
-            <button key={index} type="button" className="list-group-item"
-              onClick={this.addField.bind(this, field)}>
-              <i className={`glyphicon glyphicon-${field.icon}`} />
-              {" " + field.label}
-            </button>
-          );
-        })
-      }</div>
-    );
-  }
+export default function FieldList(props) {
+  return (
+    <div>
+      <div className="list-group">
+        <Link to="/" className="list-group-item">
+          <i className="glyphicon glyphicon-home" />
+          {" Form editor home"}
+        </Link>
+        {
+          props.fieldList.map((field, index) => {
+            return (
+              <button key={index} type="button" className="list-group-item"
+                onClick={props.addField.bind(null, field)}>
+                <i className={`glyphicon glyphicon-${field.icon}`} />
+                {" " + field.label}
+              </button>
+            );
+          })
+        }
+      </div>
+      <div className="list-group">
+        <Link to="/settings" className="list-group-item">
+          <i className="glyphicon glyphicon-wrench" />
+          {" Edit form properties"}
+        </Link>
+        <Link to="/json" className="list-group-item">
+          <i className="glyphicon glyphicon-fullscreen" />
+          {" Show as JSON"}
+        </Link>
+      </div>
+    </div>
+  );
 }
+
+
