@@ -6,10 +6,6 @@ export default function FieldList(props) {
   return (
     <div>
       <div className="list-group">
-        <Link to="/" className="list-group-item">
-          <i className="glyphicon glyphicon-home" />
-          {" Form editor home"}
-        </Link>
         {
           props.fieldList.map((field, index) => {
             return (
