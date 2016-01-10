@@ -89,6 +89,35 @@ export default {
       formData: {}
     },
     {
+      id: "radiobuttonlist",
+      icon: "list",
+      label: "Radio Button list",
+      jsonSchema: {
+        type: "string",
+        title: "Edit me",
+        enum: ["option 1", "option 2", "option 3"],
+      },
+      uiSchema: {
+        "ui:widget": "radio",
+        editSchema: {
+          type: "object",
+          properties: {
+            name: {type: "string", title: "Field name"},
+            title: {type: "string", title: "Label"},
+            required: {type: "boolean"},
+            enum: {
+              type: "array",
+              title: "Options",
+              items: {
+                type: "string"
+              }
+            }
+          }
+        },
+      },
+      formData: {}
+    },
+    {
       id: "selectbox",
       icon: "list-alt",
       label: "Select box",
