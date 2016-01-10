@@ -5,6 +5,8 @@ import SchemaField from "react-jsonschema-form/lib/components/fields/SchemaField
 
 import * as FieldListActions from "../actions/fieldlist";
 import EditableField from "../components/EditableField";
+import Default from "../components/Default";
+
 
 function mapStateToProps(state) {
   return {
@@ -34,6 +36,9 @@ function mergeProps(stateProps, dispatchProps, ownProps) {
 }
 
 const SchemaFieldWrapper = (props) => {
+  if (Object.keys(props.schema.properties).length === 0) {
+    return <Default />;
+  }
   return (
     <div className="rjsf">
       <SchemaField {...props} />
