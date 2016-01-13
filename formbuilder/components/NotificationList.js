@@ -1,12 +1,15 @@
-import React, { Component } from "react";
+import React from "react";
 
-export default class NotificationList extends Component {
-  render() {
-    return <ul> {
-      this.props.notifications.map((notif, index) => {
+export default function NotificationList(props) {
+  const {notifications} = props;
+  if (notifications.length === 0) {
+    return <div/>;
+  }
+  return (
+    <ul>{
+      notifications.map((notif, index) => {
         return <li key={index}>{notif}</li>;
       })
-    }
-    </ul>;
-  }
+    }</ul>
+  );
 }

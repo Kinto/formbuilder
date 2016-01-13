@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router";
+import { Draggable } from "react-drag-and-drop";
 
 
 export default function FieldList(props) {
@@ -9,11 +10,14 @@ export default function FieldList(props) {
         {
           props.fieldList.map((field, index) => {
             return (
-              <button key={index} type="button" className="list-group-item"
-                onClick={props.addField.bind(null, field)}>
-                <i className={`glyphicon glyphicon-${field.icon}`} />
-                {" " + field.label}
-              </button>
+              <Draggable key={index} type="field"
+                data={JSON.stringify(field)}
+                className="list-group-item field-list-entry">
+                <div>
+                  <i className={`glyphicon glyphicon-${field.icon}`} />
+                  {" " + field.label}
+                </div>
+              </Draggable>
             );
           })
         }

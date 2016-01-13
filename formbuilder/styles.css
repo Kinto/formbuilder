@@ -74,3 +74,12 @@ textarea.json-viewer {
   height: 350px;
   font-family: Consolas, "Ubuntu Mono", "Monaco", monospace;
 }
+
+.form-area {
+  padding-bottom: 5em;
+}
+
+.field-list-entry:hover {
+  background: #fafafa;
+  cursor: move;
+}

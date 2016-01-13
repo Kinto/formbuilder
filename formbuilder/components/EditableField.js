@@ -1,7 +1,8 @@
 import React, { Component } from "react";
+import { Draggable, Droppable } from "react-drag-and-drop";
 import Form from "react-jsonschema-form";
-
 import SchemaField from "react-jsonschema-form/lib/components/fields/SchemaField";
+
 
 function FieldPropertiesEditor(props) {
   const {schema, name, required, uiSchema, cancel, update} = props;
@@ -65,6 +66,17 @@ export default class EditableField extends Component {
     this.props.moveField(this.props.name, direction);
   }
 
+  handleDrop(data) {
+    const {name} = this.props;
+    if ("moved-field" in data && data["moved-field"]) {
+      if (data["moved-field"] !== name) {
+        this.props.swapFields(data["moved-field"], name);
+      }
+    } else if ("field" in data && data.field) {
+      this.props.insertField(JSON.parse(data.field), name);
+    }
+  }
+
   render() {
     const props = this.props;
 
@@ -83,26 +95,31 @@ export default class EditableField extends Component {
     }
 
     return (
-      <div className="row editable-field"
-           onDoubleClick={this.handleEdit.bind(this)}>
-        <div className="col-sm-9">
-          <SchemaField {...props} schema={this.state.schema} />
-        </div>
-        <div className="col-sm-3 editable-field-actions">
-          <button onClick={this.handleMove.bind(this, "up")}>
-            <i className="glyphicon glyphicon-arrow-up"/>
-          </button>
-          <button onClick={this.handleMove.bind(this, "down")}>
-            <i className="glyphicon glyphicon-arrow-down"/>
-          </button>
-          <button onClick={this.handleEdit.bind(this)}>
-            <i className="glyphicon glyphicon-edit"/>
-          </button>
-          <button onClick={this.handleDelete.bind(this)}>
-            <i className="glyphicon glyphicon-remove-sign"/>
-          </button>
-        </div>
-      </div>
+      <Draggable type="moved-field" data={props.name}>
+        <Droppable types={["moved-field", "field"]}
+          onDrop={this.handleDrop.bind(this)}>
+          <div className="row editable-field"
+               onDoubleClick={this.handleEdit.bind(this)}>
+            <div className="col-sm-9">
+              <SchemaField {...props} schema={this.state.schema} />
+            </div>
+            <div className="col-sm-3 editable-field-actions">
+              <button onClick={this.handleMove.bind(this, "up")}>
+                <i className="glyphicon glyphicon-arrow-up"/>
+              </button>
+              <button onClick={this.handleMove.bind(this, "down")}>
+                <i className="glyphicon glyphicon-arrow-down"/>
+              </button>
+              <button onClick={this.handleEdit.bind(this)}>
+                <i className="glyphicon glyphicon-edit"/>
+              </button>
+              <button onClick={this.handleDelete.bind(this)}>
+                <i className="glyphicon glyphicon-remove-sign"/>
+              </button>
+            </div>
+          </div>
+        </Droppable>
+      </Draggable>
     );
   }
 }
