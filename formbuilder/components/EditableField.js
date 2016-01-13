@@ -83,7 +83,8 @@ export default class EditableField extends Component {
     }
 
     return (
-      <div className="row editable-field">
+      <div className="row editable-field"
+           onDoubleClick={this.handleEdit.bind(this)}>
         <div className="col-sm-9">
           <SchemaField {...props} schema={this.state.schema} />
         </div>
@@ -105,4 +106,3 @@ export default class EditableField extends Component {
     );
   }
 }
-
