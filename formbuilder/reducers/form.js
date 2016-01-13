@@ -3,7 +3,6 @@ import {
   FIELD_REMOVE,
   FIELD_UPDATE,
   FIELD_INSERT,
-  FIELD_MOVE,
   FIELD_SWAP,
   FORM_UPDATE_PROPERTIES,
 } from "../actions/fieldlist";
@@ -98,17 +97,6 @@ function insertField(state, field, before) {
   return insertedState;
 }
 
-function moveField(state, name, direction) {
-  const fields = Object.keys(state.schema.properties);
-  const order = state.uiSchema["ui:order"] || fields;
-  const from = order.indexOf(name);
-  const to = direction === "up" && from > 0 ? from - 1 :
-             direction === "down" && from < order.length - 1 ? from + 1 :
-             from;
-  state.uiSchema["ui:order"] = moveInArray(order, from, to);
-  return state;
-}
-
 function swapFields(state, source, target) {
   const order = state.uiSchema["ui:order"];
   const idxSource = order.indexOf(source);
@@ -135,8 +123,6 @@ export default function form(state = INITIAL_STATE, action) {
     return updateField(clone(state), name, schema, required, newName);
   case FIELD_INSERT:
     return insertField(clone(state), action.field, action.before);
-  case FIELD_MOVE:
-    return moveField(clone(state), action.name, action.direction);
   case FIELD_SWAP:
     return swapFields(clone(state), action.source, action.target);
   case FORM_UPDATE_PROPERTIES:

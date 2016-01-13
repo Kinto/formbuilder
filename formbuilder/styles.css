@@ -46,6 +46,11 @@
 
 .editable-field:hover {
   background: #fafafa;
+  cursor: move;
+}
+
+.editable-field label:hover {
+  cursor: move;
 }
 
 .editable-field-actions {
@@ -82,4 +87,8 @@ textarea.json-viewer {
 .field-list-entry:hover {
   background: #fafafa;
   cursor: move;
+}
+
+.glyphicon + span {
+  margin-left: .5em;
 }

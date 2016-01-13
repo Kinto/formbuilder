@@ -61,11 +61,6 @@ export default class EditableField extends Component {
     this.setState({edit: false});
   }
 
-  handleMove(direction, event) {
-    event.preventDefault();
-    this.props.moveField(this.props.name, direction);
-  }
-
   handleDrop(data) {
     const {name} = this.props;
     if ("moved-field" in data && data["moved-field"]) {
@@ -104,12 +99,6 @@ export default class EditableField extends Component {
               <SchemaField {...props} schema={this.state.schema} />
             </div>
             <div className="col-sm-3 editable-field-actions">
-              <button onClick={this.handleMove.bind(this, "up")}>
-                <i className="glyphicon glyphicon-arrow-up"/>
-              </button>
-              <button onClick={this.handleMove.bind(this, "down")}>
-                <i className="glyphicon glyphicon-arrow-down"/>
-              </button>
               <button onClick={this.handleEdit.bind(this)}>
                 <i className="glyphicon glyphicon-edit"/>
               </button>

@@ -13,10 +13,8 @@ export default function FieldList(props) {
               <Draggable key={index} type="field"
                 data={JSON.stringify(field)}
                 className="list-group-item field-list-entry">
-                <div>
-                  <i className={`glyphicon glyphicon-${field.icon}`} />
-                  {" " + field.label}
-                </div>
+                <i className={`glyphicon glyphicon-${field.icon}`} />
+                <span>{field.label}</span>
               </Draggable>
             );
           })
