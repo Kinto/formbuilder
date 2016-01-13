@@ -85,11 +85,17 @@ function renameField(state, name, newName) {
 }
 
 function insertField(state, field, before) {
-  const addedState = addField(state, field);
-  const order = addedState.uiSchema["ui:order"];
+  const insertedState = addField(state, field);
+  const order = insertedState.uiSchema["ui:order"];
   const added = order[order.length - 1];
-  const swappedState = swapFields(addedState, added, before);
-  return swappedState;
+  const idxBefore = order.indexOf(before);
+  const newOrder = [].concat(
+    order.slice(0, idxBefore),
+    added,
+    order.slice(idxBefore, order.length - 1)
+  );
+  insertedState.uiSchema["ui:order"] = newOrder;
+  return insertedState;
 }
 
 function moveField(state, name, direction) {

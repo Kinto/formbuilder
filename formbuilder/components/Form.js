@@ -14,8 +14,8 @@ export default function SchemaFieldWrapper(props) {
 
   return (
     <div>
-      <div>
-        <div className="rjsf"><SchemaField {...props} /></div>
+      <div className="rjsf">
+        <SchemaField {...props} />
       </div>
       <Droppable types={["field"]} className="form-area" onDrop={onDrop}>
         {Object.keys(properties).length === 0 ?
