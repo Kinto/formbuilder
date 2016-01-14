@@ -23,11 +23,11 @@ export default function FieldList(props) {
       <div className="list-group">
         <Link to="/settings" className="list-group-item">
           <i className="glyphicon glyphicon-wrench" />
-          {" Edit form properties"}
+          Edit form properties
         </Link>
         <Link to="/json" className="list-group-item">
           <i className="glyphicon glyphicon-fullscreen" />
-          {" Show as JSON"}
+          Show as JSON
         </Link>
       </div>
     </div>

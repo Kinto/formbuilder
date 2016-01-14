@@ -26,6 +26,39 @@ function FieldPropertiesEditor(props) {
   );
 }
 
+function DraggableFieldContainer(props) {
+  const {
+    children,
+    draggableType,
+    droppableTypes,
+    dragData,
+    onEdit,
+    onDelete,
+    onDoubleClick,
+    onDrop
+  } = props;
+  return (
+    <Draggable type={draggableType} data={dragData}>
+      <Droppable types={droppableTypes} data={dragData}
+        onDrop={onDrop}>
+        <div className="row editable-field" onDoubleClick={onDoubleClick}>
+          <div className="col-sm-9">
+            {children}
+          </div>
+          <div className="col-sm-3 editable-field-actions">
+            <button type="button" onClick={onEdit}>
+              <i className="glyphicon glyphicon-edit"/>
+            </button>
+            <button type="button" onClick={onDelete}>
+              <i className="glyphicon glyphicon-remove-sign"/>
+            </button>
+          </div>
+        </div>
+      </Droppable>
+    </Draggable>
+  );
+}
+
 export default class EditableField extends Component {
   constructor(props) {
     super(props);
@@ -42,9 +75,16 @@ export default class EditableField extends Component {
   }
 
   handleUpdate({formData}) {
-    const schema = {...this.props.schema, ...formData};
+    function pickKeys(source, target) {
+      const result = {};
+      for (let key in source) {
+        result[key] = target[key];
+      }
+      return result;
+    }
+    const updated = pickKeys(this.props.schema, formData);
+    const schema = {...this.props.schema, ...updated};
     this.setState({edit: false, schema});
-    // XXX handle rename
     this.props.updateField(
       this.props.name, schema, formData.required, formData.name);
   }
@@ -62,23 +102,18 @@ export default class EditableField extends Component {
   }
 
   handleDrop(data) {
-    const {name} = this.props;
+    const {name, swapFields, insertField} = this.props;
     if ("moved-field" in data && data["moved-field"]) {
       if (data["moved-field"] !== name) {
-        this.props.swapFields(data["moved-field"], name);
+        swapFields(data["moved-field"], name);
       }
     } else if ("field" in data && data.field) {
-      this.props.insertField(JSON.parse(data.field), name);
+      insertField(JSON.parse(data.field), name);
     }
   }
 
   render() {
     const props = this.props;
-
-    if (props.schema.type === "object") {
-      // This can only be the root form object, returning a regular SchemaField.
-      return <SchemaField {...props}/>;
-    }
 
     if (this.state.edit) {
       return (
@@ -89,26 +124,40 @@ export default class EditableField extends Component {
       );
     }
 
-    return (
-      <Draggable type="moved-field" data={props.name}>
-        <Droppable types={["moved-field", "field"]}
+    if (props.schema.type === "object") {
+      if (!props.name) {
+        // This can only be the root form object, returning a regular SchemaField.
+        return <SchemaField {...props}/>;
+      }
+      // This is a preset fieldSet
+      return (
+        <DraggableFieldContainer
+          draggableType="moved-field"
+          droppableTypes={["field", "moved-field"]}
+          dragData={props.name}
+          onEdit={this.handleEdit.bind(this)}
+          onDelete={this.handleDelete.bind(this)}
+          onDoubleClick={this.handleEdit.bind(this)}
           onDrop={this.handleDrop.bind(this)}>
-          <div className="row editable-field"
-               onDoubleClick={this.handleEdit.bind(this)}>
-            <div className="col-sm-9">
-              <SchemaField {...props} schema={this.state.schema} />
-            </div>
-            <div className="col-sm-3 editable-field-actions">
-              <button onClick={this.handleEdit.bind(this)}>
-                <i className="glyphicon glyphicon-edit"/>
-              </button>
-              <button onClick={this.handleDelete.bind(this)}>
-                <i className="glyphicon glyphicon-remove-sign"/>
-              </button>
-            </div>
-          </div>
-        </Droppable>
-      </Draggable>
+          <SchemaField {...props}
+            SchemaField={SchemaField}
+            schema={this.state.schema} />
+        </DraggableFieldContainer>
+      );
+    }
+
+    return (
+      <DraggableFieldContainer
+        draggableType="moved-field"
+        droppableTypes={["moved-field", "field"]}
+        dragData={props.name}
+        onEdit={this.handleEdit.bind(this)}
+        onDelete={this.handleDelete.bind(this)}
+        onDoubleClick={this.handleEdit.bind(this)}
+        onDrop={this.handleDrop.bind(this)}>
+        <SchemaField {...props}
+          schema={this.state.schema} />
+      </DraggableFieldContainer>
     );
   }
 }

@@ -1,3 +1,6 @@
+import countries from "./data/countries";
+
+
 export default {
   fieldList: [
     {
@@ -7,6 +10,7 @@ export default {
       jsonSchema: {
         type: "string",
         title: "Edit me",
+        description: "",
         default: ""
       },
       uiSchema: {
@@ -29,6 +33,7 @@ export default {
       jsonSchema: {
         type: "string",
         title: "Edit me",
+        description: "",
         default: ""
       },
       uiSchema: {
@@ -152,6 +157,10 @@ export default {
       jsonSchema: {
         type: "number",
         title: "Edit me",
+        description: "",
+        multipleOf: 1,
+        minimum: 1,
+        maximum: 100,
         default: 0
       },
       uiSchema: {
@@ -161,6 +170,7 @@ export default {
           properties: {
             name: {type: "string", title: "Field name"},
             title: {type: "string", title: "Label"},
+            description: {type: "string", title: "Placeholder"},
             multipleOf: {type: "number", title: "Step"},
             minimum: {type: "number", title: "Minimum"},
             maximum: {type: "number", title: "Maximum"},
@@ -177,6 +187,9 @@ export default {
       jsonSchema: {
         type: "number",
         title: "Edit me",
+        multipleOf: 1,
+        minimum: 1,
+        maximum: 100,
         default: 0
       },
       uiSchema: {
@@ -194,6 +207,65 @@ export default {
         },
       },
       formData: {}
+    },
+    {
+      id: "address",
+      icon: "leaf",
+      label: "Postal address",
+      jsonSchema: {
+        type: "object",
+        title: "",
+        description: "",
+        properties: {
+          address1: {type: "string", title: "Address line 1"},
+          address2: {type: "string", title: "Address line 2"},
+          zip: {type: "string", title: "Zip code"},
+          city: {type: "string", title: "City"},
+          state: {type: "string", title: "State"},
+          country: {type: "string", title: "Country", enum: countries},
+        }
+      },
+      uiSchema: {
+        editSchema: {
+          type: "object",
+          properties: {
+            name: {type: "string", title: "Field name"},
+            title: {type: "string", title: "Label"},
+            description: {type: "string", title: "Description"},
+            required: {type: "boolean"},
+          }
+        },
+      },
+      formData: {}
     }
+  ],
+  fieldSets: [
+    // {
+    //   id: "address",
+    //   icon: "leaf",
+    //   label: "Postal address",
+    //   jsonSchema: {
+    //     type: "object",
+    //     properties: {
+    //       address1: {type: "string", title: "Address line 1"},
+    //       address2: {type: "string", title: "Address line 2"},
+    //       zip: {type: "string", title: "Zip code"},
+    //       city: {type: "string", title: "City"},
+    //       state: {type: "string", title: "State"},
+    //       country: {type: "string", title: "Country", enum: countries},
+    //     }
+    //   },
+    //   uiSchema: {
+    //     editSchema: {
+    //       type: "object",
+    //       properties: {
+    //         name: {type: "string", title: "Field name"},
+    //         title: {type: "string", title: "Label"},
+    //         required: {type: "boolean"},
+    //       }
+    //     }
+    //   },
+    //   formData: {}
+    // }
   ]
 };
