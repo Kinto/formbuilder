@@ -207,7 +207,9 @@ export default {
         },
       },
       formData: {}
-    },
+    }
+  ],
+  fieldSets: [
     {
       id: "address",
       icon: "leaf",
@@ -238,34 +240,5 @@ export default {
       },
       formData: {}
     }
-  ],
-  fieldSets: [
-    // {
-    //   id: "address",
-    //   icon: "leaf",
-    //   label: "Postal address",
-    //   jsonSchema: {
-    //     type: "object",
-    //     properties: {
-    //       address1: {type: "string", title: "Address line 1"},
-    //       address2: {type: "string", title: "Address line 2"},
-    //       zip: {type: "string", title: "Zip code"},
-    //       city: {type: "string", title: "City"},
-    //       state: {type: "string", title: "State"},
-    //       country: {type: "string", title: "Country", enum: countries},
-    //     }
-    //   },
-    //   uiSchema: {
-    //     editSchema: {
-    //       type: "object",
-    //       properties: {
-    //         name: {type: "string", title: "Field name"},
-    //         title: {type: "string", title: "Label"},
-    //         required: {type: "boolean"},
-    //       }
-    //     }
-    //   },
-    //   formData: {}
-    // }
   ]
 };
