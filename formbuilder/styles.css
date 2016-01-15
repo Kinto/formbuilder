@@ -92,3 +92,22 @@ textarea.json-viewer {
 .glyphicon + span {
   margin-left: .5em;
 }
+
+.array-item-list .field-string {
+  width: calc(100% - 30px);
+  float: left;
+}
+.array-item-list .array-item-remove {
+  width: 26px;
+  float: right;
+}
+.array-item-list .array-item-remove button {
+  width: 30px;
+  height: 29px;
+}
+.array-item-add {
+  clear: both;
+}
+.array-item-add:before {
+  content: "Add a new element ";
+}

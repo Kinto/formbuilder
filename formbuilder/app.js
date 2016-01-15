@@ -15,6 +15,7 @@ const store = configureStore({
   form: {
     schema: {
       type: "object",
+      title: "Untitled form",
       properties: {}
     },
     uiSchema: {
