@@ -38,8 +38,6 @@ function FieldPropertiesEditor(props) {
 function DraggableFieldContainer(props) {
   const {
     children,
-    draggableType,
-    droppableTypes,
     dragData,
     onEdit,
     onDelete,
@@ -47,8 +45,8 @@ function DraggableFieldContainer(props) {
     onDrop
   } = props;
   return (
-    <Draggable type={draggableType} data={dragData}>
-      <Droppable types={droppableTypes} data={dragData}
+    <Draggable type="moved-field" data={dragData}>
+      <Droppable types={["field", "moved-field"]}
         onDrop={onDrop}>
         <div className="row editable-field" onDoubleClick={onDoubleClick}>
           <div className="col-sm-9">
@@ -143,8 +141,6 @@ export default class EditableField extends Component {
       // This is a preset fieldSet
       return (
         <DraggableFieldContainer
-          draggableType="moved-field"
-          droppableTypes={["field", "moved-field"]}
           dragData={props.name}
           onEdit={this.handleEdit.bind(this)}
           onDelete={this.handleDelete.bind(this)}
