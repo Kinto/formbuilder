@@ -13,26 +13,60 @@ function shouldHandleDoubleClick(node) {
   return true;
 }
 
-function FieldPropertiesEditor(props) {
-  const {schema, name, required, uiSchema, cancel, update} = props;
-  const formData = {...schema, name, required};
-  return (
-    <div className="panel panel-default">
-      <div className="panel-heading">
-        <strong>Edit {name}</strong>
-        <button type="button" className="close-btn"
-          onClick={cancel}>
-          <i className="glyphicon glyphicon-remove-sign"/>
-        </button>
+function isDefaultFieldName(name) {
+  return /^field_\d{7}$/.test(name);
+}
+
+function slugify(title) {
+  return title
+    .toLowerCase()
+    .trim()
+    .replace(/\s/g, "_")
+    .replace(/[^a-z0-9]/, "");
+}
+
+class FieldPropertiesEditor extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {name: props.name, title: props.schema.title};
+  }
+
+  onChange({formData}) {
+    if (isDefaultFieldName(this.props.name)) {
+      this.setState({
+        title: formData.title,
+        name: slugify(formData.title)
+      });
+    }
+  }
+
+  render() {
+    const {schema, name, required, uiSchema, cancel, update} = this.props;
+    const formData = {
+      ...schema,
+      title: this.state.title,
+      name: this.state.name,
+      required
+    };
+    return (
+      <div className="panel panel-default">
+        <div className="panel-heading">
+          <strong>Edit {name}</strong>
+          <button type="button" className="close-btn"
+            onClick={cancel}>
+            <i className="glyphicon glyphicon-remove-sign"/>
+          </button>
+        </div>
+        <div className="panel-body">
+          <Form
+            schema={uiSchema.editSchema}
+            formData={formData}
+            onChange={this.onChange.bind(this)}
+            onSubmit={update} />
+        </div>
       </div>
-      <div className="panel-body">
-        <Form
-          schema={uiSchema.editSchema}
-          formData={formData}
-          onSubmit={update} />
-      </div>
-    </div>
-  );
+    );
+  }
 }
 
 function DraggableFieldContainer(props) {
