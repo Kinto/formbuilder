@@ -44,6 +44,12 @@ export default function FieldList(props) {
           <i className="glyphicon glyphicon-fullscreen" />
           Show as JSON
         </Link>
+        <button type="button"
+          onClick={() => confirm("Are you sure?") && props.resetForm()}
+          className="list-group-item list-group-item-danger">
+          <i className="glyphicon glyphicon-remove" />
+          Reset form
+        </button>
       </div>
     </div>
   );

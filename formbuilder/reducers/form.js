@@ -4,10 +4,21 @@ import {
   FIELD_UPDATE,
   FIELD_INSERT,
   FIELD_SWAP,
+  FORM_RESET,
   FORM_UPDATE_PROPERTIES,
 } from "../actions/fieldlist";
 
-const INITIAL_STATE = {};
+const INITIAL_STATE = {
+  schema: {
+    type: "object",
+    title: "Untitled form",
+    properties: {}
+  },
+  uiSchema: {
+    "ui:order": []
+  },
+  formData: {},
+};
 
 function clone(obj) {
   return JSON.parse(JSON.stringify(obj));
@@ -116,6 +127,8 @@ export default function form(state = INITIAL_STATE, action) {
     return insertField(clone(state), action.field, action.before);
   case FIELD_SWAP:
     return swapFields(clone(state), action.source, action.target);
+  case FORM_RESET:
+    return INITIAL_STATE;
   case FORM_UPDATE_PROPERTIES:
     return updateFormProperties(clone(state), action.properties);
   default:

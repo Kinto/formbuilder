@@ -12,17 +12,6 @@ import "./styles.css";
 
 const store = configureStore({
   notifications: [],
-  form: {
-    schema: {
-      type: "object",
-      title: "Untitled form",
-      properties: {}
-    },
-    uiSchema: {
-      "ui:order": []
-    },
-    formData: {},
-  }
 });
 const history = createHashHistory();
 
