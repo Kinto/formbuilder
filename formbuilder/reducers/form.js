@@ -9,6 +9,7 @@ import {
 } from "../actions/fieldlist";
 
 const INITIAL_STATE = {
+  error: null,
   schema: {
     type: "object",
     title: "Untitled form",
@@ -22,6 +23,10 @@ const INITIAL_STATE = {
 
 function clone(obj) {
   return JSON.parse(JSON.stringify(obj));
+}
+
+function unique(array) {
+  return Array.from(new Set(array));
 }
 
 function generateUniqueFieldName(names) {
@@ -49,14 +54,21 @@ function removeField(state, name) {
     (field) => field !== name);
   state.schema.required = requiredFields
     .filter(requiredFieldName => name !== requiredFieldName);
-  return state;
+  return {...state, error: null};
 }
 
 function updateField(state, name, schema, required, newName) {
+  const existing = Object.keys(state.schema.properties);
+  if (name !== newName && existing.indexOf(newName) !== -1) {
+    // Field name already exists, we can't update state
+    const error = `Duplicate field name "${newName}", operation aborted.`;
+    return {...state, error};
+  }
   const requiredFields = state.schema.required || [];
   state.schema.properties[name] = schema;
   if (required) {
-    state.schema.required = requiredFields.concat(name);
+    // Ensure uniquely required field names
+    state.schema.required = unique(requiredFields.concat(name));
   } else {
     state.schema.required = requiredFields
       .filter(requiredFieldName => name !== requiredFieldName);
@@ -64,7 +76,7 @@ function updateField(state, name, schema, required, newName) {
   if (newName !== name) {
     return renameField(state, name, newName);
   }
-  return state;
+  return {...state, error: null};
 }
 
 function renameField(state, name, newName) {
@@ -82,7 +94,7 @@ function renameField(state, name, newName) {
   state.uiSchema["ui:order"] = order.map(fieldName => {
     return fieldName === name ? newName : fieldName;
   });
-  return state;
+  return {...state, error: null};
 }
 
 function insertField(state, field, before) {
@@ -96,7 +108,7 @@ function insertField(state, field, before) {
     order.slice(idxBefore, order.length - 1)
   );
   insertedState.uiSchema["ui:order"] = newOrder;
-  return insertedState;
+  return {...insertedState, error: null};
 }
 
 function swapFields(state, source, target) {
@@ -105,13 +117,13 @@ function swapFields(state, source, target) {
   const idxTarget = order.indexOf(target);
   order[idxSource] = target;
   order[idxTarget] = source;
-  return state;
+  return {...state, error: null};
 }
 
 function updateFormProperties(state, {title, description}) {
   state.schema.title = title;
   state.schema.description = description;
-  return state;
+  return {...state, error: null};
 }
 
 export default function form(state = INITIAL_STATE, action) {

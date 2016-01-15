@@ -2,7 +2,16 @@ import React, { Component } from "react";
 import { Draggable, Droppable } from "react-drag-and-drop";
 import Form from "react-jsonschema-form";
 import SchemaField from "react-jsonschema-form/lib/components/fields/SchemaField";
+import slug from "slug";
 
+
+function pickKeys(source, target) {
+  const result = {};
+  for (let key in source) {
+    result[key] = target[key];
+  }
+  return result;
+}
 
 function shouldHandleDoubleClick(node) {
   // disable doubleclick on number input, so people can use inc/dec arrows
@@ -17,25 +26,17 @@ function isDefaultFieldName(name) {
   return /^field_\d{7}$/.test(name);
 }
 
-function slugify(title) {
-  return title
-    .toLowerCase()
-    .trim()
-    .replace(/\s/g, "_")
-    .replace(/[^a-z0-9]/, "");
-}
-
 class FieldPropertiesEditor extends Component {
   constructor(props) {
     super(props);
-    this.state = {name: props.name, title: props.schema.title};
+    this.state = {name: props.name, editedSchema: props.schema};
   }
 
   onChange({formData}) {
     if (isDefaultFieldName(this.props.name)) {
       this.setState({
-        title: formData.title,
-        name: slugify(formData.title)
+        editedSchema: formData,
+        name: slug(formData.title, {mode: "rfc3986", replacement: "_"}),
       });
     }
   }
@@ -44,16 +45,15 @@ class FieldPropertiesEditor extends Component {
     const {schema, name, required, uiSchema, cancel, update} = this.props;
     const formData = {
       ...schema,
-      title: this.state.title,
-      name: this.state.name,
-      required
+      required,
+      ...this.state.editedSchema,
+      name: this.state.name
     };
     return (
       <div className="panel panel-default">
         <div className="panel-heading">
           <strong>Edit {name}</strong>
-          <button type="button" className="close-btn"
-            onClick={cancel}>
+          <button type="button" className="close-btn" onClick={cancel}>
             <i className="glyphicon glyphicon-remove-sign"/>
           </button>
         </div>
@@ -118,13 +118,6 @@ export default class EditableField extends Component {
   }
 
   handleUpdate({formData}) {
-    function pickKeys(source, target) {
-      const result = {};
-      for (let key in source) {
-        result[key] = target[key];
-      }
-      return result;
-    }
     const updated = pickKeys(this.props.schema, formData);
     const schema = {...this.props.schema, ...updated};
     this.setState({edit: false, schema});

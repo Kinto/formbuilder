@@ -8,6 +8,7 @@ import EditableField from "../components/EditableField";
 
 function mapStateToProps(state) {
   return {
+    error: state.form.error,
     schema: state.form.schema,
     uiSchema: state.form.uiSchema,
     formData: state.form.formData,
