@@ -4,6 +4,15 @@ import Form from "react-jsonschema-form";
 import SchemaField from "react-jsonschema-form/lib/components/fields/SchemaField";
 
 
+function shouldHandleDoubleClick(node) {
+  // disable doubleclick on number input, so people can use inc/dec arrows
+  if (node.tagName === "INPUT" &&
+      node.getAttribute("type") === "number") {
+    return false;
+  }
+  return true;
+}
+
 function FieldPropertiesEditor(props) {
   const {schema, name, required, uiSchema, cancel, update} = props;
   const formData = {...schema, name, required};
@@ -71,7 +80,9 @@ export default class EditableField extends Component {
 
   handleEdit(event) {
     event.preventDefault();
-    this.setState({edit: true});
+    if (shouldHandleDoubleClick(event.target)) {
+      this.setState({edit: true});
+    }
   }
 
   handleUpdate({formData}) {

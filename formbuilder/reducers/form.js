@@ -13,15 +13,6 @@ function clone(obj) {
   return JSON.parse(JSON.stringify(obj));
 }
 
-function moveInArray(array, from, to) {
-  const arrayCopy = [].slice.call(array);
-  if (to === from) {
-    return arrayCopy;
-  }
-  arrayCopy.splice(to, 0, arrayCopy.splice(from, 1)[0]);
-  return arrayCopy;
-}
-
 function generateUniqueFieldName(names) {
   const name = "field_" + Math.random().toString().substr(2, 7);
   if (names.indexOf(name) !== -1) {
