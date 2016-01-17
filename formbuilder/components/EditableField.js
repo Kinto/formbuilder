@@ -26,17 +26,37 @@ function isDefaultFieldName(name) {
   return /^field_\d{7}$/.test(name);
 }
 
+function slugify(string) {
+  return slug(string, {mode: "rfc3986", replacement: "_"});
+}
+
 class FieldPropertiesEditor extends Component {
   constructor(props) {
     super(props);
-    this.state = {name: props.name, editedSchema: props.schema};
+    this.state = {
+      name: props.name,
+      editedSchema: props.schema,
+      autoName: false,
+    };
   }
 
   onChange({formData}) {
-    if (isDefaultFieldName(this.props.name)) {
+    if (this.state.autoName || isDefaultFieldName(formData.name)) {
       this.setState({
         editedSchema: formData,
-        name: slug(formData.title, {mode: "rfc3986", replacement: "_"}),
+        name: slugify(formData.title),
+        autoName: true,
+      });
+    } else if (!this.state.autoName) {
+      this.setState({
+        editedSchema: formData,
+        name: formData.name
+      });
+    } else {
+      this.setState({
+        editedSchema: formData,
+        name: formData.name,
+        autoName: false,
       });
     }
   }
