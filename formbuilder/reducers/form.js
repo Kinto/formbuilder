@@ -54,6 +54,9 @@ function removeField(state, name) {
     (field) => field !== name);
   state.schema.required = requiredFields
     .filter(requiredFieldName => name !== requiredFieldName);
+  if (state.schema.required.length === 0) {
+    delete state.schema.required;
+  }
   return {...state, error: null};
 }
 
@@ -73,7 +76,7 @@ function updateField(state, name, schema, required, newName) {
     state.schema.required = requiredFields
       .filter(requiredFieldName => name !== requiredFieldName);
   }
-  if (newName !== name) {
+  if (newName && newName !== name) {
     return renameField(state, name, newName);
   }
   return {...state, error: null};
