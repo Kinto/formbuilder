@@ -176,7 +176,7 @@ describe("form reducer", () => {
         .eql(state.uiSchema["ui:order"]);
     });
 
-    describe("Renaming", () => {
+    describe("Successful Renaming", () => {
       const newFieldName = "renamed";
       var renamedState;
 
@@ -204,6 +204,23 @@ describe("form reducer", () => {
       it("should update uiSchema order", () => {
         expect(renamedState.uiSchema["ui:order"])
           .eql([newFieldName]);
+      });
+    });
+
+    describe("Failed Renaming", () => {
+      var secondFieldAdded;
+
+      beforeEach(() => {
+        state = form(state, actions.addField(multilineTextField));
+        secondFieldAdded = Object.keys(state.schema.properties)[1];
+      });
+
+      it("should notify renaming conflicts with an error", () => {
+        state = form(state, actions.updateField(secondFieldAdded,
+          state.schema.properties[secondFieldAdded], false, firstFieldAdded));
+
+        expect(state.error)
+          .eql(`Duplicate field name "${firstFieldAdded}", operation aborted.`);
       });
     });
   });
