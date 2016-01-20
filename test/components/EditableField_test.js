@@ -45,6 +45,7 @@ describe("EditableField", () => {
   beforeEach(() => {
     sandbox = sinon.sandbox.create();
     compProps = {
+      name: "field_1234567",
       schema,
       uiSchema,
       addField: sandbox.spy(),
@@ -87,6 +88,14 @@ describe("EditableField", () => {
       Simulate.submit(comp.findOne("form"));
 
       expect(comp.findOne("label").textContent).eql(value);
+    });
+
+    it("should genereate a sluggified fireld name", () => {
+      Simulate.change(comp.findOne("[type=text][value='Edit me']"), {
+        target: {value: "I want a slug"}
+      });
+
+      expect(comp.findOne("[type=text]").value).eql("i_want_a_slug");
     });
   });
 });
