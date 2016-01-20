@@ -70,7 +70,7 @@ class FieldPropertiesEditor extends Component {
       name: this.state.name
     };
     return (
-      <div className="panel panel-default">
+      <div className="panel panel-default field-editor">
         <div className="panel-heading">
           <strong>Edit {name}</strong>
           <button type="button" className="close-btn" onClick={cancel}>
@@ -107,10 +107,10 @@ function DraggableFieldContainer(props) {
             {children}
           </div>
           <div className="col-sm-3 editable-field-actions">
-            <button type="button" onClick={onEdit}>
+            <button type="button" className="edit-btn" onClick={onEdit}>
               <i className="glyphicon glyphicon-edit"/>
             </button>
-            <button type="button" onClick={onDelete}>
+            <button type="button" className="delete-btn" onClick={onDelete}>
               <i className="glyphicon glyphicon-remove-sign"/>
             </button>
           </div>
