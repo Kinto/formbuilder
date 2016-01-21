@@ -2,39 +2,15 @@
 
 import { expect } from "chai";
 import sinon from "sinon";
-import React from "react";
-import { Simulate, renderIntoDocument } from "react-addons-test-utils";
-import { findDOMNode } from "react-dom";
+import { Simulate } from "react-addons-test-utils";
 
+import { createComponent } from "../test-utils";
 import config from "../../formbuilder/config";
 import EditableField from "../../formbuilder/components/EditableField";
 
 
 const {fieldList} = config;
 const textField = fieldList.find(x => x.id === "text");
-
-function createComponent(props) {
-  const comp = renderIntoDocument(<EditableField {...props} />);
-  const findAll = (selector) => {
-    const element = findDOMNode(comp);
-    if (selector) {
-      return element.querySelectorAll(selector);
-    }
-    return element;
-  };
-  const findOne = (selector) => {
-    const element = findDOMNode(comp);
-    if (selector) {
-      return element.querySelector(selector);
-    }
-    return element;
-  };
-  return {...comp, findOne, findAll};
-}
-
-function d(node) {
-  console.log(require("html").prettyPrint(node.outerHTML, {indent_size: 2}));
-}
 
 describe("EditableField", () => {
   var sandbox, compProps;
@@ -60,9 +36,9 @@ describe("EditableField", () => {
 
   describe("Default state", () => {
     it("should render an editable field", () => {
-      const comp = createComponent(compProps);
+      const comp = createComponent(EditableField, compProps);
 
-      expect(comp.findAll(".editable-field"))
+      expect(comp.queryAll(".editable-field"))
         .to.have.length.of(1);
     });
   });
@@ -71,31 +47,31 @@ describe("EditableField", () => {
     var comp;
 
     beforeEach(() => {
-      comp = createComponent(compProps);
-      Simulate.click(comp.findOne(".edit-btn"));
+      comp = createComponent(EditableField, compProps);
+      Simulate.click(comp.query(".edit-btn"));
     });
 
     it("should render a properties edition form", () => {
-      expect(comp.findOne().classList.contains("field-editor"))
+      expect(comp.query().classList.contains("field-editor"))
         .eql(true);
     });
 
     it("should update field properties", () => {
       const value = "modified";
-      Simulate.change(comp.findOne("[type=text][value='Edit me']"), {
+      Simulate.change(comp.query("[type=text][value='Edit me']"), {
         target: {value}
       });
-      Simulate.submit(comp.findOne("form"));
+      Simulate.submit(comp.query("form"));
 
-      expect(comp.findOne("label").textContent).eql(value);
+      expect(comp.query("label").textContent).eql(value);
     });
 
-    it("should genereate a sluggified fireld name", () => {
-      Simulate.change(comp.findOne("[type=text][value='Edit me']"), {
+    it("should generate a sluggified field name", () => {
+      Simulate.change(comp.query("[type=text][value='Edit me']"), {
         target: {value: "I want a slug"}
       });
 
-      expect(comp.findOne("[type=text]").value).eql("i_want_a_slug");
+      expect(comp.query("[type=text]").value).eql("i_want_a_slug");
     });
   });
 });
