@@ -6,7 +6,8 @@ import SchemaField from "react-jsonschema-form/lib/components/fields/SchemaField
 
 
 export default function SchemaFieldWrapper(props) {
-  const {properties} = props.schema;
+  const {error, schema} = props;
+  const {properties} = schema;
 
   const onDrop = ({field}) => {
     props.addField(JSON.parse(field));
@@ -14,6 +15,7 @@ export default function SchemaFieldWrapper(props) {
 
   return (
     <div>
+      {error ? <div className="alert alert-danger">{error}</div> : null}
       <div className="rjsf">
         <SchemaField {...props} />
       </div>

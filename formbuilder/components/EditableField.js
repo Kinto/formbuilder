@@ -2,7 +2,16 @@ import React, { Component } from "react";
 import { Draggable, Droppable } from "react-drag-and-drop";
 import Form from "react-jsonschema-form";
 import SchemaField from "react-jsonschema-form/lib/components/fields/SchemaField";
+import slug from "slug";
 
+
+function pickKeys(source, target) {
+  const result = {};
+  for (let key in source) {
+    result[key] = target[key];
+  }
+  return result;
+}
 
 function shouldHandleDoubleClick(node) {
   // disable doubleclick on number input, so people can use inc/dec arrows
@@ -13,26 +22,71 @@ function shouldHandleDoubleClick(node) {
   return true;
 }
 
-function FieldPropertiesEditor(props) {
-  const {schema, name, required, uiSchema, cancel, update} = props;
-  const formData = {...schema, name, required};
-  return (
-    <div className="panel panel-default">
-      <div className="panel-heading">
-        <strong>Edit {name}</strong>
-        <button type="button" className="close-btn"
-          onClick={cancel}>
-          <i className="glyphicon glyphicon-remove-sign"/>
-        </button>
+function isDefaultFieldName(name) {
+  return /^field_\d{7}$/.test(name);
+}
+
+function slugify(string) {
+  return slug(string, {mode: "rfc3986", replacement: "_"});
+}
+
+class FieldPropertiesEditor extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: props.name,
+      editedSchema: props.schema,
+      autoName: false,
+    };
+  }
+
+  onChange({formData}) {
+    if (this.state.autoName || isDefaultFieldName(formData.name)) {
+      this.setState({
+        editedSchema: formData,
+        name: slugify(formData.title),
+        autoName: true,
+      });
+    } else if (!this.state.autoName) {
+      this.setState({
+        editedSchema: formData,
+        name: formData.name
+      });
+    } else {
+      this.setState({
+        editedSchema: formData,
+        name: formData.name,
+        autoName: false,
+      });
+    }
+  }
+
+  render() {
+    const {schema, name, required, uiSchema, cancel, update} = this.props;
+    const formData = {
+      ...schema,
+      required,
+      ...this.state.editedSchema,
+      name: this.state.name
+    };
+    return (
+      <div className="panel panel-default field-editor">
+        <div className="panel-heading">
+          <strong>Edit {name}</strong>
+          <button type="button" className="close-btn" onClick={cancel}>
+            <i className="glyphicon glyphicon-remove-sign"/>
+          </button>
+        </div>
+        <div className="panel-body">
+          <Form
+            schema={uiSchema.editSchema}
+            formData={formData}
+            onChange={this.onChange.bind(this)}
+            onSubmit={update} />
+        </div>
       </div>
-      <div className="panel-body">
-        <Form
-          schema={uiSchema.editSchema}
-          formData={formData}
-          onSubmit={update} />
-      </div>
-    </div>
-  );
+    );
+  }
 }
 
 function DraggableFieldContainer(props) {
@@ -53,10 +107,10 @@ function DraggableFieldContainer(props) {
             {children}
           </div>
           <div className="col-sm-3 editable-field-actions">
-            <button type="button" onClick={onEdit}>
+            <button type="button" className="edit-btn" onClick={onEdit}>
               <i className="glyphicon glyphicon-edit"/>
             </button>
-            <button type="button" onClick={onDelete}>
+            <button type="button" className="delete-btn" onClick={onDelete}>
               <i className="glyphicon glyphicon-remove-sign"/>
             </button>
           </div>
@@ -84,13 +138,6 @@ export default class EditableField extends Component {
   }
 
   handleUpdate({formData}) {
-    function pickKeys(source, target) {
-      const result = {};
-      for (let key in source) {
-        result[key] = target[key];
-      }
-      return result;
-    }
     const updated = pickKeys(this.props.schema, formData);
     const schema = {...this.props.schema, ...updated};
     this.setState({edit: false, schema});
