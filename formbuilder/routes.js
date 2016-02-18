@@ -7,7 +7,8 @@ import NotificationContainer from "./containers/NotificationContainer";
 import FormContainer from "./containers/FormContainer";
 import FormOptionsContainer from "./containers/FormOptionsContainer";
 import JsonViewContainer from "./containers/JsonViewContainer";
-
+import PublishFormContainer from "./containers/PublishFormContainer";
+import UserFormContainer from "./containers/UserFormContainer";
 
 const common = {
   notifications: NotificationContainer,
@@ -32,6 +33,10 @@ export default (
       components={{...common, fieldList: LinkBack, content: FormOptionsContainer}} />
     <Route path="json"
       components={{...common, fieldList: LinkBack, content: JsonViewContainer}} />
+    <Route path="publish-form"
+      components={{...common, fieldList: LinkBack, content: PublishFormContainer}} />
+    <Route path="form/:id"
+      components={{...common, fieldList: LinkBack, content: UserFormContainer}} />
     <Route path="*" components={{
       fieldList: FieldListContainer,
       content: _ => <h1>Page not found.</h1>

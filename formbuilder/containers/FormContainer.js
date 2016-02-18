@@ -2,6 +2,8 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
 import * as FieldListActions from "../actions/fieldlist";
+import * as ServerActions from "../actions/server";
+
 import Form from "../components/Form";
 import EditableField from "../components/EditableField";
 
@@ -16,7 +18,8 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  const actions = bindActionCreators(FieldListActions, dispatch);
+  const actionCreators = {...FieldListActions, ...ServerActions};
+  const actions = bindActionCreators(actionCreators, dispatch);
   // Side effect: attaching action creators as EditableField props, so they're
   // available from within the Form fields hierarchy.
   EditableField.defaultProps = Object.assign(

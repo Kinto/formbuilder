@@ -9,6 +9,12 @@ export default function SchemaFieldWrapper(props) {
   const {error, schema} = props;
   const {properties} = schema;
 
+  const onClick = (event) => {
+    props.publishForm(() => {
+      props.history.pushState(null, `/publish-form`);
+    });
+  };
+
   const onDrop = ({field}) => {
     props.addField(JSON.parse(field));
   };
@@ -23,6 +29,11 @@ export default function SchemaFieldWrapper(props) {
         {Object.keys(properties).length === 0 ?
           <Default /> : null}
       </Droppable>
+      <div className="pull-right">
+        <button onClick={onClick} className="btn btn-default align-right">
+          Publish form
+        </button>
+      </div>
     </div>
   );
 }
