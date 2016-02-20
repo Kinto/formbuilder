@@ -13,6 +13,7 @@ import UserFormContainer from "./containers/UserFormContainer";
 const common = {
   notifications: NotificationContainer,
   fieldList: FieldListContainer,
+  displayTitle: true
 };
 
 const LinkBack = () => {
@@ -27,19 +28,21 @@ const LinkBack = () => {
 };
 
 export default (
-  <Route path="/" component={App}>
-    <IndexRoute components={{...common, content: FormContainer}} />
-    <Route path="settings"
-      components={{...common, fieldList: LinkBack, content: FormOptionsContainer}} />
-    <Route path="json"
-      components={{...common, fieldList: LinkBack, content: JsonViewContainer}} />
-    <Route path="publish-form"
-      components={{...common, fieldList: LinkBack, content: PublishFormContainer}} />
-    <Route path="form/:id"
-      components={{...common, fieldList: LinkBack, content: UserFormContainer}} />
-    <Route path="*" components={{
-      fieldList: FieldListContainer,
-      content: _ => <h1>Page not found.</h1>
-    }}/>
-  </Route>
+  <div>
+    <Route path="/" component={App}>
+      <IndexRoute components={{...common, content: FormContainer}} />
+      <Route path="settings"
+        components={{...common, fieldList: LinkBack, content: FormOptionsContainer}} />
+      <Route path="json"
+        components={{...common, fieldList: LinkBack, content: JsonViewContainer}} />
+      <Route path="publish-form"
+        components={{...common, fieldList: LinkBack, content: PublishFormContainer}} />
+      <Route path="form/:id"
+        components={{...common, fieldList: null, displayTitle: null, content: UserFormContainer}} />
+      <Route path="*" components={{
+        fieldList: FieldListContainer,
+        content: _ => <h1>Page not found.</h1>
+      }}/>
+    </Route>
+  </div>
 );

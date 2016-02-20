@@ -6,6 +6,9 @@ export const FORM_PUBLICATION_PENDING = "FORM_PUBLICATION_PENDING";
 export const FORM_PUBLICATION_DONE = "FORM_PUBLICATION_DONE";
 export const FORM_RECORD_PENDING = "FORM_RECORD_PENDING";
 export const FORM_RECORD_DONE = "FORM_RECORD_DONE";
+export const SCHEMA_RETRIEVAL_PENDING = "SCHEMA_RETRIEVAL_PENDING";
+export const SCHEMA_RETRIEVAL_DONE = "SCHEMA_RETRIEVAL_DONE";
+
 
 const api = new KintoAPI(
   "http://localhost:8888/v1",
@@ -14,10 +17,12 @@ const api = new KintoAPI(
 
 export function publishForm(redirect) {
   return (dispatch, getState) => {
-    const schema = getState().form.schema;
+    const form = getState().form;
+    const schema = form.schema;
+    const uiSchema = form.uiSchema;
     // XXX Add permissions.
     dispatch({type: FORM_PUBLICATION_PENDING});
-    api.createCollection({data: {schema}})
+    api.createCollection({data: {schema, uiSchema}})
     .then(({data}) => {
       dispatch({
         type: FORM_PUBLICATION_DONE,
@@ -49,6 +54,23 @@ export function submitRecord(record, collectionID, redirect) {
     })
     .catch((error) => {
       console.log(error);
+      dispatch(addNotification({type: "error", message: error}));
+    });
+  };
+}
+
+export function loadSchema(collectionID) {
+  return (dispatch, getState) => {
+    dispatch({type: SCHEMA_RETRIEVAL_PENDING});
+    api.getCollection(collectionID)
+    .then(({data}) => {
+      console.log("Retrieved the schema", data);
+      dispatch({
+        type: SCHEMA_RETRIEVAL_DONE,
+        data: data
+      });
+    })
+    .catch((error) => {
       dispatch(addNotification({type: "error", message: error}));
     });
   };

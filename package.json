@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "history": "^1.17.0",
-    "kinto-client": "^0.2.2",
+    "kinto-client": "^0.2.3",
     "react-drag-and-drop": "^2.0.1",
     "react-jsonschema-form": "^0.9.2",
     "react-redux": "^4.0.6",
