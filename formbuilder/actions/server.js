@@ -2,6 +2,7 @@ import KintoAPI from "kinto-client";
 import btoa from "btoa";
 
 import {addNotification} from "./notifications";
+import config from "../config";
 
 export const FORM_PUBLISH = "FORM_PUBLISH";
 export const FORM_PUBLICATION_PENDING = "FORM_PUBLICATION_PENDING";
@@ -14,8 +15,8 @@ export const RECORDS_RETRIEVAL_PENDING = "RECORDS_RETRIEVAL_PENDING";
 export const RECORDS_RETRIEVAL_DONE = "RECORDS_RETRIEVAL_DONE";
 
 const api = new KintoAPI(
-  "http://localhost:8888/v1",
-  { headers: {Authorization: "Basic " + btoa("token:formbuilder")} }
+  config.server.remote,
+  { headers: {Authorization: "Basic " + btoa(config.server.auth)} }
 );
 
 export function publishForm(redirect) {

@@ -2,6 +2,10 @@ import countries from "./data/countries";
 
 
 export default {
+  server: {
+    remote: "http://localhost:8888/v1",
+    auth: "token:formbuilder"
+  },
   fieldList: [
     {
       id: "text",
