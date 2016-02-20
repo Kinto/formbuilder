@@ -22,6 +22,7 @@
     "react-dom": "^0.14.3"
   },
   "dependencies": {
+    "btoa": "^1.1.2",
     "history": "^1.17.0",
     "kinto-client": "^0.2.3",
     "react-drag-and-drop": "^2.0.1",

@@ -1,4 +1,6 @@
 import KintoAPI from "kinto-client";
+import btoa from "btoa";
+
 import {addNotification} from "./notifications";
 
 export const FORM_PUBLISH = "FORM_PUBLISH";
