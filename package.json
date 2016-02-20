@@ -64,14 +64,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mozilla-services/formbuilder.git"
+    "url": "git+https://github.com/Kinto/formbuilder.git"
   },
-  "author": "Alexis Métaireau <alexis@mozilla.com>",
+  "author": "Kinto team <kinto@mozilla.org>",
   "keywords": [
     "react",
     "form",
     "json-schema"
   ],
   "license": "Apache-2.0",
-  "homepage": "https://github.com/mozilla-services/formbuilder#readme"
+  "homepage": "https://github.com/Kinto/formbuilder#readme"
 }

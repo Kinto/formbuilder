@@ -30,7 +30,6 @@ const LinkBack = () => {
 };
 
 export default (
-  <div>
     <Route path="/" component={App}>
       <IndexRoute components={{...common, content: FormContainer}} />
       <Route path="settings"
@@ -50,5 +49,4 @@ export default (
         content: _ => <h1>Page not found.</h1>
       }}/>
     </Route>
-  </div>
-);
+  );
