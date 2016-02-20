@@ -11,8 +11,9 @@ export default class UserForm extends Component {
   }
   render() {
     const onSubmit = ({formData}) => {
-      console.log("submitted", formData);
-      this.props.submitRecord(formData, this.props.params.id);
+      this.props.submitRecord(formData, this.props.params.id, () => {
+        this.props.history.pushState(null, "/data-sent");
+      });
     };
     return <Form schema={this.props.schema} uiSchema={this.props.uiSchema}
     onSubmit={onSubmit}/>;

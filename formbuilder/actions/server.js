@@ -4,8 +4,8 @@ import {addNotification} from "./notifications";
 export const FORM_PUBLISH = "FORM_PUBLISH";
 export const FORM_PUBLICATION_PENDING = "FORM_PUBLICATION_PENDING";
 export const FORM_PUBLICATION_DONE = "FORM_PUBLICATION_DONE";
-export const FORM_RECORD_PENDING = "FORM_RECORD_PENDING";
-export const FORM_RECORD_DONE = "FORM_RECORD_DONE";
+export const FORM_RECORD_CREATION_PENDING = "FORM_RECORD_CREATION_PENDING";
+export const FORM_RECORD_CREATION_DONE = "FORM_RECORD_CREATION_DONE";
 export const SCHEMA_RETRIEVAL_PENDING = "SCHEMA_RETRIEVAL_PENDING";
 export const SCHEMA_RETRIEVAL_DONE = "SCHEMA_RETRIEVAL_DONE";
 
@@ -40,14 +40,13 @@ export function publishForm(redirect) {
 export function submitRecord(record, collectionID, redirect) {
   return (dispatch, getState) => {
     // XXX Add permissions.
-    dispatch({type: FORM_RECORD_PENDING});
+    dispatch({type: FORM_RECORD_CREATION_PENDING});
     console.log("youpi");
     api.createRecord(collectionID, record)
     .then(({data}) => {
       dispatch({
-        type: FORM_RECORD_DONE,
+        type: FORM_RECORD_CREATION_DONE,
       });
-      console.log("hop, new item added");
       if (redirect) {
         redirect();
       }

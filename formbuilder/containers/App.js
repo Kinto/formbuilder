@@ -9,7 +9,7 @@ export default function App(props) {
     <div className="container">
     {displayTitle ? <div className="page-header"><h1>FormBuilder</h1></div> : null}
       <div className="row">
-        {fieldList ? <div className="col-sm-4">{{fieldList}}</div> : null}
+        {fieldList ? <div className="col-sm-4">{fieldList}</div> : null}
         <div className={contentClassName}>
           {notifications}
           {content || <p>Nothing to render</p>}
