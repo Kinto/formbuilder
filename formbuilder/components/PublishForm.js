@@ -1,14 +1,23 @@
 import React from "react";
-import { Link } from "react-router";
 
 
 export default function PublishForm(props) {
   console.log(props.publicationStatus);
-  const collectionID = props.publicationStatus.collectionID;
+  const collectionID = props.params.id;
+  const origin = window.location.origin;
+  const userformURL = `${origin}/#/form/${collectionID}`;
+  const adminURL = `${origin}/#/admin/${collectionID}`;
   return (
     <div>
       <h3>Your form is ready to be filled!</h3>
-      <Link to={`/form/${collectionID}`}>Your form is here</Link>
+      <div className="form-group">
+        <label>Link to fill the form</label>
+        <input type="text" className="form-control" value={userformURL} />
+      </div>
+      <div className="form-group">
+        <label>Link to the admin</label>
+        <input type="text" className="form-control" value={adminURL} />
+      </div>
     </div>
   );
 }

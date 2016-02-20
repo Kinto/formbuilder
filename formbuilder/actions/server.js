@@ -8,7 +8,8 @@ export const FORM_RECORD_CREATION_PENDING = "FORM_RECORD_CREATION_PENDING";
 export const FORM_RECORD_CREATION_DONE = "FORM_RECORD_CREATION_DONE";
 export const SCHEMA_RETRIEVAL_PENDING = "SCHEMA_RETRIEVAL_PENDING";
 export const SCHEMA_RETRIEVAL_DONE = "SCHEMA_RETRIEVAL_DONE";
-
+export const RECORDS_RETRIEVAL_PENDING = "RECORDS_RETRIEVAL_PENDING";
+export const RECORDS_RETRIEVAL_DONE = "RECORDS_RETRIEVAL_DONE";
 
 const api = new KintoAPI(
   "http://localhost:8888/v1",
@@ -28,7 +29,7 @@ export function publishForm(redirect) {
         type: FORM_PUBLICATION_DONE,
         collectionID: data.id
       });
-      redirect();
+      redirect(data.id);
     })
     .catch((error) => {
       console.log(error);
@@ -67,6 +68,23 @@ export function loadSchema(collectionID) {
       dispatch({
         type: SCHEMA_RETRIEVAL_DONE,
         data: data
+      });
+    })
+    .catch((error) => {
+      dispatch(addNotification({type: "error", message: error}));
+    });
+  };
+}
+
+export function getRecords(collectionID) {
+  return (dispatch, getState) => {
+    dispatch({type: RECORDS_RETRIEVAL_PENDING});
+    api.getRecords(collectionID)
+    .then(({data}) => {
+      console.log("Retrieved the records", data);
+      dispatch({
+        type: RECORDS_RETRIEVAL_DONE,
+        records: data
       });
     })
     .catch((error) => {

@@ -10,8 +10,8 @@ export default function SchemaFieldWrapper(props) {
   const {properties} = schema;
 
   const onClick = (event) => {
-    props.publishForm(() => {
-      props.history.pushState(null, `/publish-form`);
+    props.publishForm((collectionID) => {
+      props.history.pushState(null, `/publish-form/${collectionID}`);
     });
   };
 
