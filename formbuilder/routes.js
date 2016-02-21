@@ -33,6 +33,8 @@ const LinkBack = () => {
 export default (
     <Route path="/" component={App}>
       <IndexRoute components={{...common, content: FormContainer}} />
+      <Route path="builder"
+        components={{...common, content: FormContainer}} />
       <Route path="builder/settings"
         components={{...common, fieldList: LinkBack, content: FormOptionsContainer}} />
       <Route path="builder/json"
