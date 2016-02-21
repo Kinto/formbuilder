@@ -8,7 +8,7 @@ const INITIAL_STATE = {
   collectionID: null,
 };
 
-export default function publicationStatus(state = INITIAL_STATE, action) {
+export default function serverStatus(state = INITIAL_STATE, action) {
   switch(action.type) {
 
   case FORM_PUBLICATION_PENDING:

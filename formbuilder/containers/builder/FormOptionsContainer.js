@@ -1,8 +1,8 @@
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
-import FormOptions from "../components/FormOptions";
-import * as FieldListActions from "../actions/fieldlist";
+import FormOptions from "../../components/builder/FormOptions";
+import * as FieldListActions from "../../actions/fieldlist";
 
 
 function mapStateToProps(state) {

@@ -2,12 +2,13 @@ import React from "react";
 import { Route, IndexRoute, Link } from "react-router";
 
 import App from "./containers/App";
-import FieldListContainer from "./containers/FieldListContainer";
+import FieldListContainer from "./containers/builder/FieldListContainer";
+import FormContainer from "./containers/builder/FormContainer";
+import FormOptionsContainer from "./containers/builder/FormOptionsContainer";
+import JsonViewContainer from "./containers/builder/JsonViewContainer";
+
 import NotificationContainer from "./containers/NotificationContainer";
-import FormContainer from "./containers/FormContainer";
-import FormOptionsContainer from "./containers/FormOptionsContainer";
-import JsonViewContainer from "./containers/JsonViewContainer";
-import PublishFormContainer from "./containers/PublishFormContainer";
+import FormCreatedContainer from "./containers/FormCreatedContainer";
 import UserFormContainer from "./containers/UserFormContainer";
 import RecordCreatedContainer from "./containers/RecordCreatedContainer";
 import AdminViewContainer from "./containers/AdminViewContainer";
@@ -32,13 +33,13 @@ const LinkBack = () => {
 export default (
     <Route path="/" component={App}>
       <IndexRoute components={{...common, content: FormContainer}} />
-      <Route path="settings"
+      <Route path="builder/settings"
         components={{...common, fieldList: LinkBack, content: FormOptionsContainer}} />
-      <Route path="json"
+      <Route path="builder/json"
         components={{...common, fieldList: LinkBack, content: JsonViewContainer}} />
-      <Route path="publish-form/:id"
-        components={{...common, fieldList: LinkBack, content: PublishFormContainer}} />
-      <Route path="data-sent"
+      <Route path="builder/published/:id"
+        components={{...common, fieldList: LinkBack, content: FormCreatedContainer}} />
+      <Route path="form/data-sent"
         components={{...common, fieldList: LinkBack, content: RecordCreatedContainer}} />
       <Route path="form/:id"
         components={{...common, fieldList: null, displayTitle: null, content: UserFormContainer}} />

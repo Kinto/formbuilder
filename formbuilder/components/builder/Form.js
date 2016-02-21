@@ -1,7 +1,7 @@
 import React from "react";
 import { Droppable } from "react-drag-and-drop";
 
-import Default from "../components/Default";
+import Default from "./Default";
 import SchemaField from "react-jsonschema-form/lib/components/fields/SchemaField";
 
 

@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 
-import PublishForm from "../components/PublishForm";
+import FormCreated from "../components/FormCreated";
 
 
 function mapStateToProps(state) {
@@ -14,4 +14,4 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-)(PublishForm);
+)(FormCreated);

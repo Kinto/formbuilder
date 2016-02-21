@@ -1,7 +1,7 @@
 import React from "react";
 
 
-export default function PublishForm(props) {
+export default function FormCreated(props) {
   console.log(props.publicationStatus);
   const collectionID = props.params.id;
   const origin = window.location.origin;

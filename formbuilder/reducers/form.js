@@ -155,7 +155,6 @@ export default function form(state = INITIAL_STATE, action) {
   case FORM_UPDATE_PROPERTIES:
     return updateFormProperties(clone(state), action.properties);
   case SCHEMA_RETRIEVAL_DONE:
-    console.log(action);
     return setSchema(clone(state), action.data);
   default:
     return state;

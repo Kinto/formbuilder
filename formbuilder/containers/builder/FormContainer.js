@@ -1,11 +1,11 @@
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
-import * as FieldListActions from "../actions/fieldlist";
-import * as ServerActions from "../actions/server";
+import * as FieldListActions from "../../actions/fieldlist";
+import * as ServerActions from "../../actions/server";
 
-import Form from "../components/Form";
-import EditableField from "../components/EditableField";
+import Form from "../../components/builder/Form";
+import EditableField from "../../components/builder/EditableField";
 
 
 function mapStateToProps(state) {
