@@ -11,7 +11,7 @@ export default function SchemaFieldWrapper(props) {
 
   const onClick = (event) => {
     props.publishForm((collectionID) => {
-      props.history.pushState(null, `/publish-form/${collectionID}`);
+      props.history.pushState(null, `/builder/published/${collectionID}`);
     });
   };
 
