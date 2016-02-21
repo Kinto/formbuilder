@@ -19,6 +19,13 @@ export default function SchemaFieldWrapper(props) {
     props.addField(JSON.parse(field));
   };
 
+  const button = (
+    <div className="pull-right">
+      <button onClick={onClick} className="btn btn-default align-right">
+        Publish form
+      </button>
+    </div>);
+
   return (
     <div>
       {error ? <div className="alert alert-danger">{error}</div> : null}
@@ -29,11 +36,7 @@ export default function SchemaFieldWrapper(props) {
         {Object.keys(properties).length === 0 ?
           <Default /> : null}
       </Droppable>
-      <div className="pull-right">
-        <button onClick={onClick} className="btn btn-default align-right">
-          Publish form
-        </button>
-      </div>
+      {Object.keys(properties).length === 0 ? null : button}
     </div>
   );
 }
