@@ -21,8 +21,8 @@ export default function SchemaFieldWrapper(props) {
 
   const button = (
     <div className="pull-right">
-      <button onClick={onClick} className="btn btn-default align-right">
-        Publish form
+      <button onClick={onClick} className="btn btn-success align-right">
+        Create form
       </button>
     </div>);
 
