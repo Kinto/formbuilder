@@ -3,7 +3,7 @@ import Header from "../components/Header";
 
 export default function App(props) {
   const {fieldList, content, notifications, displayTitle} = props;
-  const contentClassName = fieldList? "col-sm-9" : null;
+  const contentClassName = fieldList? "col-sm-9" : "col-sm-9 center";
   return (
     <div>
       {displayTitle ? <Header /> : null}

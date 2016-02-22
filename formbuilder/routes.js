@@ -12,6 +12,7 @@ import FormCreatedContainer from "./containers/FormCreatedContainer";
 import UserFormContainer from "./containers/UserFormContainer";
 import RecordCreatedContainer from "./containers/RecordCreatedContainer";
 import AdminViewContainer from "./containers/AdminViewContainer";
+import Check from "./components/Check";
 
 const common = {
   notifications: NotificationContainer,
@@ -40,7 +41,7 @@ export default (
       <Route path="builder/json"
         components={{...common, fieldList: LinkBack, content: JsonViewContainer}} />
       <Route path="builder/published/:id"
-        components={{...common, fieldList: LinkBack, content: FormCreatedContainer}} />
+        components={{...common, fieldList: Check, content: FormCreatedContainer}} />
       <Route path="form/data-sent"
         components={{...common, fieldList: LinkBack, content: RecordCreatedContainer}} />
       <Route path="form/:id"
