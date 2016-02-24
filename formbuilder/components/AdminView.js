@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-
-const EXCLUDED_FIELDS = ["last_modified", "id", "schema"];
+import CSVDownloader from "./CSVDownloader";
 
 export default class AdminView extends Component {
   componentDidMount() {
@@ -12,15 +11,17 @@ export default class AdminView extends Component {
     const properties = this.props.schema.properties;
     const title = this.props.schema.title;
     const ready = Object.keys(properties).length !== 0;
-    const schemaFields = Object.keys(properties).filter((key) => {
-      return EXCLUDED_FIELDS.indexOf(key) == -1;
-    }).sort();
+    const schemaFields = this.props.uiSchema["ui:order"];
 
     let content = "loading";
     if (ready) {
       content = (
       <div>
         <h3>Results for {title}</h3>
+        <CSVDownloader
+          schema={this.props.schema}
+          fields={schemaFields}
+          records={this.props.records} />
         <table className="table table-striped">
         <thead>
           <tr>{
@@ -43,13 +44,5 @@ export default class AdminView extends Component {
       </div>);
     }
     return <div>{content}</div>;
-    /**
-    const fields = Object.keys(records[0])
-      .filter((key) => {
-        return EXCLUDED_FIELDS.indexOf(key) == -1;
-      })
-      .sort();
-
-  );*/
   }
 }
