@@ -12,7 +12,7 @@ export default class UserForm extends Component {
   render() {
     const onSubmit = ({formData}) => {
       this.props.submitRecord(formData, this.props.params.id, () => {
-        this.props.history.pushState(null, "/data-sent");
+        this.props.history.pushState(null, "/form/data-sent");
       });
     };
     return <Form schema={this.props.schema} uiSchema={this.props.uiSchema}

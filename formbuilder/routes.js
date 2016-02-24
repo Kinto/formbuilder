@@ -43,7 +43,7 @@ export default (
       <Route path="builder/published/:id"
         components={{...common, fieldList: Check, content: FormCreatedContainer}} />
       <Route path="form/data-sent"
-        components={{...common, fieldList: LinkBack, content: RecordCreatedContainer}} />
+        components={{...common, fieldList: Check, content: RecordCreatedContainer}} />
       <Route path="form/:id"
         components={{...common, fieldList: null, displayTitle: null, content: UserFormContainer}} />
       <Route path="admin/:id"
