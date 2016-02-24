@@ -10,7 +10,11 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-  return { records: state.records };
+  return {
+    records: state.records,
+    schema: state.form.schema,
+    uiSchema: state.form.uiSchema,
+  };
 }
 
 export default connect(
