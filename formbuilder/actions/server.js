@@ -14,7 +14,7 @@ export const SCHEMA_RETRIEVAL_DONE = "SCHEMA_RETRIEVAL_DONE";
 export const RECORDS_RETRIEVAL_PENDING = "RECORDS_RETRIEVAL_PENDING";
 export const RECORDS_RETRIEVAL_DONE = "RECORDS_RETRIEVAL_DONE";
 
-const api = new KintoAPI(
+export const api = new KintoAPI(
   config.server.remote,
   { headers: {Authorization: "Basic " + btoa(config.server.auth)} }
 );
@@ -32,10 +32,11 @@ export function publishForm(redirect) {
         type: FORM_PUBLICATION_DONE,
         collectionID: data.id
       });
-      redirect(data.id);
+      if (redirect) {
+        redirect(data.id);
+      }
     })
     .catch((error) => {
-      console.log(error);
       dispatch(addNotification({type: "error", message: error}));
     });
   };
@@ -43,9 +44,7 @@ export function publishForm(redirect) {
 
 export function submitRecord(record, collectionID, redirect) {
   return (dispatch, getState) => {
-    // XXX Add permissions.
     dispatch({type: FORM_RECORD_CREATION_PENDING});
-    console.log("youpi");
     api.createRecord(collectionID, record)
     .then(({data}) => {
       dispatch({
@@ -56,7 +55,6 @@ export function submitRecord(record, collectionID, redirect) {
       }
     })
     .catch((error) => {
-      console.log(error);
       dispatch(addNotification({type: "error", message: error}));
     });
   };
@@ -67,7 +65,6 @@ export function loadSchema(collectionID) {
     dispatch({type: SCHEMA_RETRIEVAL_PENDING});
     api.getCollection(collectionID)
     .then(({data}) => {
-      console.log("Retrieved the schema", data);
       dispatch({
         type: SCHEMA_RETRIEVAL_DONE,
         data: data
@@ -84,7 +81,6 @@ export function getRecords(collectionID) {
     dispatch({type: RECORDS_RETRIEVAL_PENDING});
     api.getRecords(collectionID)
     .then(({data}) => {
-      console.log("Retrieved the records", data);
       dispatch({
         type: RECORDS_RETRIEVAL_DONE,
         records: data
