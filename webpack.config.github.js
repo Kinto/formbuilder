@@ -4,8 +4,8 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const serverURL = process.env.SERVER_URL || "https://kinto-forms.herokuapp.com/v1/";
 
-
 module.exports = {
+  devtool: "eval",
   entry: "./formbuilder/app",
   output: {
     path: path.join(__dirname, "build"),
@@ -16,9 +16,8 @@ module.exports = {
     new ExtractTextPlugin("styles.css", {allChunks: true}),
     new webpack.DefinePlugin({
       "process.env": {
-        NODE_ENV: JSON.stringify("production"),
         SERVER_URL: JSON.stringify(serverURL)
-      },
+      }
     })
   ],
   resolve: {

@@ -1,6 +1,8 @@
 var path = require("path");
 var webpack = require("webpack");
 
+const serverURL = process.env.SERVER_URL || "http://localhost:8888/v1/";
+
 module.exports = {
   devtool: "eval",
   entry: [
@@ -14,7 +16,12 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.NoErrorsPlugin(),
+    new webpack.DefinePlugin({
+      "process.env": {
+        SERVER_URL: JSON.stringify(serverURL)
+      }
+    })
   ],
   module: {
     loaders: [

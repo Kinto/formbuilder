@@ -5,8 +5,9 @@
   "scripts": {
     "build:css": "cp css/react-jsonschema-form.css dist/",
     "build:formbuilder": "rimraf build && webpack --config webpack.config.prod.js --optimize-minimize && cp formbuilder/index.prod.html build/index.html",
+    "build:formbuilder-gh": "rimraf build && webpack --config webpack.config.github.js && cp formbuilder/index.prod.html build/index.html",
     "lint": "eslint src test",
-    "publish-to-gh-pages": "npm run build:formbuilder && gh-pages --dist build/",
+    "publish-to-gh-pages": "npm run build:formbuilder-gh && gh-pages --dist build/",
     "publish-to-npm": "npm run dist && npm publish",
     "start": "node devServer.js",
     "tdd": "npm run test -- -w",

@@ -1,16 +1,8 @@
 import countries from "./data/countries";
 
-let remote;
-
-if (process.env.NODE_ENV === "production") {
-  remote = "https://kinto-forms.herokuapp.com/v1/";
-} else {
-  remote = "http://localhost:8888/v1";
-}
-
 export default {
   server: {
-    remote: remote,
+    remote: process.env.SERVER_URL,
     auth: "token:formbuilder"
   },
   fieldList: [
