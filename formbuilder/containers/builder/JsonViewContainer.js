@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 
-import FormOptions from "../components/JsonView";
+import FormOptions from "../../components/builder/JsonView";
 
 
 function mapStateToProps(state) {

@@ -111,3 +111,13 @@ textarea.json-viewer {
 .array-item-add:before {
   content: "Add a new element ";
 }
+
+.check {
+  font-size: 10em;
+  color: green;
+}
+
+.center {
+  margin: 0 auto;
+  float: none;
+}

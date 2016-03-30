@@ -8,6 +8,8 @@ import {
   FORM_UPDATE_PROPERTIES,
 } from "../actions/fieldlist";
 
+import {SCHEMA_RETRIEVAL_DONE} from "../actions/server";
+
 const INITIAL_STATE = {
   error: null,
   schema: {
@@ -129,6 +131,12 @@ function updateFormProperties(state, {title, description}) {
   return {...state, error: null};
 }
 
+function setSchema(state, data) {
+  state.schema = data.schema;
+  state.uiSchema = data.uiSchema;
+  return {...state, error: null};
+}
+
 export default function form(state = INITIAL_STATE, action) {
   switch(action.type) {
   case FIELD_ADD:
@@ -146,6 +154,8 @@ export default function form(state = INITIAL_STATE, action) {
     return INITIAL_STATE;
   case FORM_UPDATE_PROPERTIES:
     return updateFormProperties(clone(state), action.properties);
+  case SCHEMA_RETRIEVAL_DONE:
+    return setSchema(clone(state), action.data);
   default:
     return state;
   }

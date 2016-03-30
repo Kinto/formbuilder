@@ -1,7 +1,10 @@
 import countries from "./data/countries";
 
-
 export default {
+  server: {
+    remote: process.env.SERVER_URL,
+    auth: "token:formbuilder"
+  },
   fieldList: [
     {
       id: "text",

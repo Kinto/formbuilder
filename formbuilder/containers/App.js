@@ -1,20 +1,19 @@
 import React from "react";
-
+import Header from "../components/Header";
 
 export default function App(props) {
-  const {fieldList, content, notifications} = props;
+  const {fieldList, content, notifications, displayTitle} = props;
+  const contentClassName = fieldList? "col-sm-9" : "col-sm-9 center";
   return (
-    <div className="container">
-      <div className="page-header">
-        <h1>FormBuilder</h1>
-      </div>
-      <div className="row">
-        <div className="col-sm-4">
-          {fieldList}
-        </div>
-        <div className="col-sm-8">
-          {notifications}
-          {content || <p>Nothing to render</p>}
+    <div>
+      {displayTitle ? <Header /> : null}
+      <div className="container">
+        <div className="row">
+          {fieldList ? <div className="col-sm-3">{fieldList}</div> : null}
+          <div className={contentClassName}>
+            {notifications}
+            {content || <p>Nothing to render</p>}
+          </div>
         </div>
       </div>
     </div>

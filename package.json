@@ -5,12 +5,13 @@
   "scripts": {
     "build:css": "cp css/react-jsonschema-form.css dist/",
     "build:formbuilder": "rimraf build && webpack --config webpack.config.prod.js --optimize-minimize && cp formbuilder/index.prod.html build/index.html",
+    "build:formbuilder-gh": "rimraf build && webpack --config webpack.config.github.js && cp formbuilder/index.prod.html build/index.html",
     "lint": "eslint src test",
-    "publish-to-gh-pages": "npm run build:formbuilder && gh-pages --dist build/",
+    "publish-to-gh-pages": "npm run build:formbuilder-gh && gh-pages --dist build/",
     "publish-to-npm": "npm run dist && npm publish",
     "start": "node devServer.js",
     "tdd": "npm run test -- -w",
-    "test": "NODE_ENV=test mocha --compilers js:babel/register --recursive --require ./test/setup-jsdom.js $(find test -name '*_test.js')"
+    "test": "SERVER_URL=http://localhost:8888/v1 NODE_ENV=test mocha --compilers js:babel/register --recursive --require ./test/setup-jsdom.js $(find test -name '*_test.js')"
   },
   "main": "lib/index.js",
   "files": [
@@ -22,7 +23,9 @@
     "react-dom": "^0.14.3"
   },
   "dependencies": {
+    "btoa": "^1.1.2",
     "history": "^1.17.0",
+    "kinto-client": "^0.2.3",
     "react-drag-and-drop": "^2.0.1",
     "react-jsonschema-form": "^0.9.2",
     "react-redux": "^4.0.6",
@@ -62,14 +65,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mozilla-services/formbuilder.git"
+    "url": "git+https://github.com/Kinto/formbuilder.git"
   },
-  "author": "Alexis Métaireau <alexis@mozilla.com>",
+  "author": "Kinto team <kinto@mozilla.org>",
   "keywords": [
     "react",
     "form",
     "json-schema"
   ],
   "license": "Apache-2.0",
-  "homepage": "https://github.com/mozilla-services/formbuilder#readme"
+  "homepage": "https://github.com/Kinto/formbuilder#readme"
 }

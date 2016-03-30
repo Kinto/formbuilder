@@ -6,6 +6,7 @@ export const FIELD_SWAP = "FIELD_SWAP";
 export const FORM_RESET = "FORM_RESET";
 export const FORM_UPDATE_PROPERTIES = "FORM_UPDATE_PROPERTIES";
 
+
 export function addField(field) {
   return {type: FIELD_ADD, field};
 }

@@ -36,11 +36,11 @@ export default function FieldList(props) {
         fields={fieldSets}
         onDoubleClick={addField} />
       <div className="list-group">
-        <Link to="/settings" className="list-group-item">
+        <Link to="/builder/settings" className="list-group-item">
           <i className="glyphicon glyphicon-wrench" />
           Edit form properties
         </Link>
-        <Link to="/json" className="list-group-item">
+        <Link to="/builder/json" className="list-group-item">
           <i className="glyphicon glyphicon-fullscreen" />
           Show as JSON
         </Link>
@@ -54,5 +54,3 @@ export default function FieldList(props) {
     </div>
   );
 }
-
-
