@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "description": "A tool to build forms on the web",
   "scripts": {
-    "build:css": "cp css/react-jsonschema-form.css dist/",
     "build:formbuilder": "rimraf build && webpack --config webpack.config.prod.js --optimize-minimize && cp formbuilder/index.prod.html build/index.html",
     "build:formbuilder-gh": "rimraf build && webpack --config webpack.config.github.js && cp formbuilder/index.prod.html build/index.html",
     "lint": "eslint src test",
@@ -25,9 +24,10 @@
   "dependencies": {
     "btoa": "^1.1.2",
     "history": "^1.17.0",
+    "isomorphic-fetch": "^2.2.1",
     "kinto-client": "^0.2.3",
     "react-drag-and-drop": "^2.0.1",
-    "react-jsonschema-form": "^0.9.2",
+    "react-jsonschema-form": "^0.21.1",
     "react-redux": "^4.0.6",
     "react-router": "^1.0.3",
     "redux": "^3.0.5",

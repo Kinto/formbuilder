@@ -3,9 +3,11 @@ import { Droppable } from "react-drag-and-drop";
 
 import Default from "./Default";
 import SchemaField from "react-jsonschema-form/lib/components/fields/SchemaField";
+import TitleField from "react-jsonschema-form/lib/components/fields/TitleField";
 
+import EditableField from "./EditableField";
 
-export default function SchemaFieldWrapper(props) {
+export default function EditableForm(props) {
   const {error, schema} = props;
   const {properties} = schema;
 
@@ -15,8 +17,14 @@ export default function SchemaFieldWrapper(props) {
     });
   };
 
-  const onDrop = ({field}) => {
-    props.addField(JSON.parse(field));
+  const onDrop = ({field}) => props.addField(JSON.parse(field));
+
+  const registry = {
+    ...SchemaField.defaultProps.registry,
+    fields: {
+      ...SchemaField.defaultProps.registry.fields,
+      SchemaField: EditableField,
+    }
   };
 
   const button = (
@@ -28,15 +36,15 @@ export default function SchemaFieldWrapper(props) {
 
   return (
     <div>
-      {error ? <div className="alert alert-danger">{error}</div> : null}
+      {error ? <div className="alert alert-danger">{error}</div> : <div/>}
       <div className="rjsf">
-        <SchemaField {...props} />
+        <SchemaField {...props} registry={registry} />
       </div>
       <Droppable types={["field"]} className="form-area" onDrop={onDrop}>
         {Object.keys(properties).length === 0 ?
-          <Default /> : null}
+          <Default /> : <div/>}
       </Droppable>
-      {Object.keys(properties).length === 0 ? null : button}
+      {Object.keys(properties).length === 0 ? <div/> : button}
     </div>
   );
 }
