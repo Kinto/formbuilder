@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Draggable, Droppable } from "react-drag-and-drop";
 import Form from "react-jsonschema-form";
 import SchemaField from "react-jsonschema-form/lib/components/fields/SchemaField";
+import { toIdSchema } from "react-jsonschema-form/lib/utils";
 import slug from "slug";
 
 
@@ -183,7 +184,7 @@ export default class EditableField extends Component {
     if (props.schema.type === "object") {
       if (!props.name) {
         // This can only be the root form object, returning a regular SchemaField.
-        return <SchemaField {...props}/>;
+        return <SchemaField {...props} idSchema={{id: props.name}} />;
       }
       // This is a preset fieldSet
       return (
@@ -195,7 +196,8 @@ export default class EditableField extends Component {
           onDrop={this.handleDrop.bind(this)}>
           <SchemaField {...props}
             SchemaField={SchemaField}
-            schema={this.state.schema} />
+            schema={this.state.schema}
+            idSchema={{id: props.name}} />
         </DraggableFieldContainer>
       );
     }
@@ -210,7 +212,8 @@ export default class EditableField extends Component {
         onDoubleClick={this.handleEdit.bind(this)}
         onDrop={this.handleDrop.bind(this)}>
         <SchemaField {...props}
-          schema={this.state.schema} />
+          schema={this.state.schema}
+          idSchema={{id: props.name}} />
       </DraggableFieldContainer>
     );
   }

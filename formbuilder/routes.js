@@ -12,12 +12,13 @@ import FormCreatedContainer from "./containers/FormCreatedContainer";
 import UserFormContainer from "./containers/UserFormContainer";
 import RecordCreatedContainer from "./containers/RecordCreatedContainer";
 import AdminViewContainer from "./containers/AdminViewContainer";
+import Header from "./components/Header";
 import Check from "./components/Check";
 
 const common = {
   notifications: NotificationContainer,
   fieldList: FieldListContainer,
-  displayTitle: true
+  header: Header
 };
 
 const LinkBack = () => {
@@ -45,9 +46,9 @@ export default (
       <Route path="form/data-sent"
         components={{...common, fieldList: Check, content: RecordCreatedContainer}} />
       <Route path="form/:id"
-        components={{...common, fieldList: null, displayTitle: null, content: UserFormContainer}} />
+        components={{...common, fieldList: null, header: null, content: UserFormContainer}} />
       <Route path="admin/:id"
-        components={{...common, fieldList: null, displayTitle: null, content: AdminViewContainer}} />
+        components={{...common, fieldList: null, header: null, content: AdminViewContainer}} />
       <Route path="*" components={{
         fieldList: FieldListContainer,
         content: _ => <h1>Page not found.</h1>

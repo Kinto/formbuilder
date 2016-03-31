@@ -23,7 +23,7 @@ function mapDispatchToProps(dispatch) {
   // Side effect: attaching action creators as EditableField props, so they're
   // available from within the Form fields hierarchy.
   EditableField.defaultProps = Object.assign(
-    {}, EditableField.defaultProps || {}, actions);
+    {registry: {}}, EditableField.defaultProps || {}, actions);
   return actions;
 }
 
