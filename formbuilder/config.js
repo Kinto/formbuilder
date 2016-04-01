@@ -20,7 +20,6 @@ export default {
         editSchema: {
           type: "object",
           properties: {
-            name: {type: "string", title: "Field name"},
             title: {type: "string", title: "Label"},
             description: {type: "string", title: "Placeholder"},
             required: {type: "boolean"},
@@ -44,7 +43,6 @@ export default {
         editSchema: {
           type: "object",
           properties: {
-            name: {type: "string", title: "Field name"},
             title: {type: "string", title: "Label"},
             description: {type: "string", title: "Placeholder"},
             required: {type: "boolean"},
@@ -66,7 +64,6 @@ export default {
         editSchema: {
           type: "object",
           properties: {
-            name: {type: "string", title: "Field name"},
             title: {type: "string", title: "Label"},
             required: {type: "boolean"},
           }
@@ -88,7 +85,6 @@ export default {
         editSchema: {
           type: "object",
           properties: {
-            name: {type: "string", title: "Field name"},
             title: {type: "string", title: "Label"},
             required: {type: "boolean"},
           }
@@ -110,7 +106,6 @@ export default {
         editSchema: {
           type: "object",
           properties: {
-            name: {type: "string", title: "Field name"},
             title: {type: "string", title: "Label"},
             required: {type: "boolean"},
             enum: {
@@ -138,7 +133,6 @@ export default {
         editSchema: {
           type: "object",
           properties: {
-            name: {type: "string", title: "Field name"},
             title: {type: "string", title: "Label"},
             required: {type: "boolean"},
             enum: {
@@ -171,7 +165,6 @@ export default {
         editSchema: {
           type: "object",
           properties: {
-            name: {type: "string", title: "Field name"},
             title: {type: "string", title: "Label"},
             description: {type: "string", title: "Placeholder"},
             multipleOf: {type: "number", title: "Step"},
@@ -200,7 +193,6 @@ export default {
         editSchema: {
           type: "object",
           properties: {
-            name: {type: "string", title: "Field name"},
             title: {type: "string", title: "Label"},
             multipleOf: {type: "number", title: "Step"},
             minimum: {type: "number", title: "Minimum"},
@@ -234,7 +226,6 @@ export default {
         editSchema: {
           type: "object",
           properties: {
-            name: {type: "string", title: "Field name"},
             title: {type: "string", title: "Label"},
             description: {type: "string", title: "Description"},
             required: {type: "boolean"},

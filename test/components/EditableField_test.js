@@ -65,13 +65,5 @@ describe("EditableField", () => {
 
       expect(comp.query("label").textContent).eql(value);
     });
-
-    it("should generate a sluggified field name", () => {
-      Simulate.change(comp.query("[type=text][value='Edit me']"), {
-        target: {value: "I want a slug"}
-      });
-
-      expect(comp.query("[type=text]").value).eql("i_want_a_slug");
-    });
   });
 });

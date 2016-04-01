@@ -1,3 +1,4 @@
+import slug from "slug";
 import {
   FIELD_ADD,
   FIELD_REMOVE,
@@ -21,7 +22,12 @@ const INITIAL_STATE = {
     "ui:order": []
   },
   formData: {},
+  currentIndex: 0,
 };
+
+function slugify(string) {
+  return slug(string, {mode: "rfc3986", replacement: "_"});
+}
 
 function clone(obj) {
   return JSON.parse(JSON.stringify(obj));
@@ -31,20 +37,14 @@ function unique(array) {
   return Array.from(new Set(array));
 }
 
-function generateUniqueFieldName(names) {
-  const name = "field_" + Math.random().toString().substr(2, 7);
-  if (names.indexOf(name) !== -1) {
-    return generateUniqueFieldName(names);
-  }
-  return name;
-}
-
 function addField(state, field) {
   // Generating a usually temporary random, unique field name.
-  const name = generateUniqueFieldName(Object.keys(state.schema.properties));
-  state.schema.properties[name] = {...field.jsonSchema, title: name};
-  state.uiSchema[name] = field.uiSchema;
-  state.uiSchema["ui:order"] = (state.uiSchema["ui:order"] || []).concat(name);
+  state.currentIndex += 1;
+  const name = `Question ${state.currentIndex}`;
+  const _slug = slugify(name);
+  state.schema.properties[_slug] = {...field.jsonSchema, title: name};
+  state.uiSchema[_slug] = field.uiSchema;
+  state.uiSchema["ui:order"] = (state.uiSchema["ui:order"] || []).concat(_slug);
   return state;
 }
 
@@ -62,8 +62,9 @@ function removeField(state, name) {
   return {...state, error: null};
 }
 
-function updateField(state, name, schema, required, newName) {
+function updateField(state, name, schema, required, newLabel) {
   const existing = Object.keys(state.schema.properties);
+  const newName = slugify(newLabel);
   if (name !== newName && existing.indexOf(newName) !== -1) {
     // Field name already exists, we can't update state
     const error = `Duplicate field name "${newName}", operation aborted.`;
@@ -78,7 +79,7 @@ function updateField(state, name, schema, required, newName) {
     state.schema.required = requiredFields
       .filter(requiredFieldName => name !== requiredFieldName);
   }
-  if (newName && newName !== name) {
+  if (newName !== name) {
     return renameField(state, name, newName);
   }
   return {...state, error: null};

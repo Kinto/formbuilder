@@ -28,15 +28,15 @@ describe("form reducer", () => {
             .to.have.length.of(1);
         });
 
-        it("should generate a random name for the added field", () => {
+        it("should generate a sluggified name for the added field", () => {
           expect(firstFieldAdded)
-            .to.match(/^field_\d+/);
+            .to.match(/^question_\d+/);
         });
 
         it("should assign the expected title to added field", () => {
           const fieldSchema = state.schema.properties[firstFieldAdded];
 
-          expect(fieldSchema.title).eql(firstFieldAdded);
+          expect(fieldSchema.title).eql("Question 1");
         });
 
         it("should assign the expected type to added field", () => {
@@ -78,9 +78,9 @@ describe("form reducer", () => {
             .to.have.length.of(2);
         });
 
-        it("should generate a random name for the second field", () => {
+        it("should generate a sluggified name for the second field", () => {
           expect(secondFieldAdded)
-            .to.match(/^field_\d+/);
+            .to.match(/^question_\d+/);
         });
       });
 
@@ -112,9 +112,10 @@ describe("form reducer", () => {
       firstFieldAdded = Object.keys(state.schema.properties)[0];
     });
 
-    it("should remove a field from the list", () => {
-      expect(form(state, actions.removeField(firstFieldAdded)))
-        .eql(initialState);
+    it("should keep current index", () => {
+      const previousIndex = state.currentIndex;
+      expect(form(state, actions.removeField(firstFieldAdded)).currentIndex)
+        .eql(previousIndex);
     });
 
     describe("Multiple items", () => {
@@ -123,8 +124,9 @@ describe("form reducer", () => {
       beforeEach(() => {
         const intState = form(state, actions.addField(textField));
         const secondField = Object.keys(intState.schema.properties)[1];
+        const secondFieldSchema = intState.schema.properties[secondField];
         const requiredState = form(intState, actions.updateField(
-          secondField, state.schema.properties[secondField], true));
+          secondField, secondFieldSchema, true, secondFieldSchema.title));
         removedState = form(requiredState,
           actions.removeField(secondField));
       });
@@ -156,21 +158,24 @@ describe("form reducer", () => {
     });
 
     it("should update the form schema with the updated one", () => {
-      const action = actions.updateField(firstFieldAdded, newSchema, false);
+      const action = actions.updateField(firstFieldAdded, newSchema, false,
+        firstFieldAdded);
 
       expect(form(state, action).schema.properties[firstFieldAdded])
         .eql(newSchema);
     });
 
     it("should mark a field as required", () => {
-      const action = actions.updateField(firstFieldAdded, newSchema, true);
+      const action = actions.updateField(firstFieldAdded, newSchema, true,
+        firstFieldAdded);
 
       expect(form(state, action).schema.required)
         .eql([firstFieldAdded]);
     });
 
     it("shouldn't touch uiSchema order", () => {
-      const action = actions.updateField(firstFieldAdded, newSchema, false);
+      const action = actions.updateField(firstFieldAdded, newSchema, false,
+        firstFieldAdded);
 
       expect(form(state, action).uiSchema["ui:order"])
         .eql(state.uiSchema["ui:order"]);
