@@ -37,7 +37,7 @@ export function publishForm(redirect) {
       }
     })
     .catch((error) => {
-      dispatch(addNotification({type: "error", message: error}));
+      dispatch(addNotification({type: "error", message: error.message}));
     });
   };
 }
@@ -55,7 +55,7 @@ export function submitRecord(record, collectionID, redirect) {
       }
     })
     .catch((error) => {
-      dispatch(addNotification({type: "error", message: error}));
+      dispatch(addNotification({type: "error", message: error.message}));
     });
   };
 }

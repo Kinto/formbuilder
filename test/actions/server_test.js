@@ -84,7 +84,7 @@ describe("server actions", () => {
           if (payload.type == NOTIFICATION_ADD) {
             try {
               expect(payload.notification.type).to.eql("error");
-              expect(payload.notification.message.message).to.eql("error message");
+              expect(payload.notification.message).to.eql("error message");
               done();
             } catch(e) {
               return done(e);
