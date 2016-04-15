@@ -104,10 +104,9 @@ describe("form reducer", () => {
   });
 
   describe("FIELD_REMOVE action", () => {
-    var state, initialState, firstFieldAdded;
+    var state, firstFieldAdded;
 
     beforeEach(() => {
-      initialState = form(undefined, {type: null});
       state = form(undefined, actions.addField(textField));
       firstFieldAdded = Object.keys(state.schema.properties)[0];
     });
