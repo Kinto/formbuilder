@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { Draggable, Droppable } from "react-drag-and-drop";
 import Form from "react-jsonschema-form";
 import SchemaField from "react-jsonschema-form/lib/components/fields/SchemaField";
-import { toIdSchema } from "react-jsonschema-form/lib/utils";
-import slug from "slug";
 
 
 function pickKeys(source, target) {
@@ -23,43 +21,14 @@ function shouldHandleDoubleClick(node) {
   return true;
 }
 
-function isDefaultFieldName(name) {
-  return /^field_\d{7}$/.test(name);
-}
-
-function slugify(string) {
-  return slug(string, {mode: "rfc3986", replacement: "_"});
-}
-
 class FieldPropertiesEditor extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      name: props.name,
-      editedSchema: props.schema,
-      autoName: false,
-    };
+    this.state = {editedSchema: props.schema};
   }
 
   onChange({formData}) {
-    if (this.state.autoName || isDefaultFieldName(formData.name)) {
-      this.setState({
-        editedSchema: formData,
-        name: slugify(formData.title),
-        autoName: true,
-      });
-    } else if (!this.state.autoName) {
-      this.setState({
-        editedSchema: formData,
-        name: formData.name
-      });
-    } else {
-      this.setState({
-        editedSchema: formData,
-        name: formData.name,
-        autoName: false,
-      });
-    }
+    this.setState({editedSchema: formData});
   }
 
   render() {
@@ -143,7 +112,7 @@ export default class EditableField extends Component {
     const schema = {...this.props.schema, ...updated};
     this.setState({edit: false, schema});
     this.props.updateField(
-      this.props.name, schema, formData.required, formData.name);
+      this.props.name, schema, formData.required, formData.title);
   }
 
   handleDelete(event) {
