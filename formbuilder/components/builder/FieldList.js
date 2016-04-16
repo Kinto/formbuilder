@@ -15,7 +15,7 @@ function MenuSection(props) {
               onDoubleClick={_ => props.onDoubleClick(field)}
               data={JSON.stringify(field)}
               className="list-group-item field-list-entry">
-              <i className={`glyphicon glyphicon-${field.icon}`} />
+              <i className={`glyphicon glyphicon-${field.icon}`} />&nbsp;
               <span>{field.label}</span>
             </Draggable>
           );
@@ -37,17 +37,17 @@ export default function FieldList(props) {
         onDoubleClick={addField} />
       <div className="list-group">
         <Link to="/builder/settings" className="list-group-item">
-          <i className="glyphicon glyphicon-wrench" />
+          <i className="glyphicon glyphicon-wrench" />&nbsp;
           Edit form properties
         </Link>
         <Link to="/builder/json" className="list-group-item">
-          <i className="glyphicon glyphicon-fullscreen" />
+          <i className="glyphicon glyphicon-fullscreen" />&nbsp;
           Show as JSON
         </Link>
         <button type="button"
           onClick={() => confirm("Are you sure?") && props.resetForm()}
           className="list-group-item list-group-item-danger">
-          <i className="glyphicon glyphicon-remove" />
+          <i className="glyphicon glyphicon-remove" />&nbsp;
           Reset form
         </button>
       </div>
