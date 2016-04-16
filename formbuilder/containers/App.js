@@ -1,8 +1,13 @@
 import React from "react";
 
 export default function App(props) {
-  const {sidebarComponent, content, notifications, header} = props;
+  const {mainComponent, sidebarComponent, content, notifications, header} = props;
   const contentClassName = sidebarComponent? "col-sm-9" : "col-sm-9 center";
+
+  if (mainComponent) {
+    return <div>{mainComponent}</div>;
+  }
+
   return (
     <div>
       {header}
