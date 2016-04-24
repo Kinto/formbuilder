@@ -19,7 +19,7 @@ export const api = new KintoAPI(
   { headers: {Authorization: "Basic " + btoa(config.server.auth)} }
 );
 
-export function publishForm(redirect) {
+export function publishForm(callback) {
   return (dispatch, getState) => {
     const form = getState().form;
     const schema = form.schema;
@@ -32,8 +32,8 @@ export function publishForm(redirect) {
         type: FORM_PUBLICATION_DONE,
         collectionID: data.id
       });
-      if (redirect) {
-        redirect(data.id);
+      if (callback) {
+        callback(data.id);
       }
     })
     .catch((error) => {
@@ -42,7 +42,7 @@ export function publishForm(redirect) {
   };
 }
 
-export function submitRecord(record, collectionID, redirect) {
+export function submitRecord(record, collectionID, callback) {
   return (dispatch, getState) => {
     dispatch({type: FORM_RECORD_CREATION_PENDING});
     api.createRecord(collectionID, record)
@@ -50,8 +50,8 @@ export function submitRecord(record, collectionID, redirect) {
       dispatch({
         type: FORM_RECORD_CREATION_DONE,
       });
-      if (redirect) {
-        redirect();
+      if (callback) {
+        callback();
       }
     })
     .catch((error) => {
@@ -60,7 +60,7 @@ export function submitRecord(record, collectionID, redirect) {
   };
 }
 
-export function loadSchema(collectionID) {
+export function loadSchema(collectionID, callback) {
   return (dispatch, getState) => {
     dispatch({type: SCHEMA_RETRIEVAL_PENDING});
     api.getCollection(collectionID)
@@ -69,14 +69,17 @@ export function loadSchema(collectionID) {
         type: SCHEMA_RETRIEVAL_DONE,
         data: data
       });
+      if (callback) {
+        callback(data);
+      }
     })
     .catch((error) => {
-      dispatch(addNotification({type: "error", message: error}));
+      dispatch(addNotification({type: "error", message: error.message}));
     });
   };
 }
 
-export function getRecords(collectionID) {
+export function getRecords(collectionID, callback) {
   return (dispatch, getState) => {
     dispatch({type: RECORDS_RETRIEVAL_PENDING});
     api.getRecords(collectionID)
@@ -85,9 +88,12 @@ export function getRecords(collectionID) {
         type: RECORDS_RETRIEVAL_DONE,
         records: data
       });
+      if (callback) {
+        callback(data);
+      }
     })
     .catch((error) => {
-      dispatch(addNotification({type: "error", message: error}));
+      dispatch(addNotification({type: "error", message: error.message}));
     });
   };
 }
