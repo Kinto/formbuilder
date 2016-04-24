@@ -43,6 +43,6 @@ export default class AdminView extends Component {
         </table>
       </div>);
     }
-    return <div>{content}</div>;
+    return <div className="test">{content}</div>;
   }
 }
