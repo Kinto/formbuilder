@@ -9,6 +9,7 @@ export default class UserForm extends Component {
       this.props.loadSchema(this.props.params.id);
     }
   }
+
   render() {
     const onSubmit = ({formData}) => {
       this.props.submitRecord(formData, this.props.params.id, () => {
