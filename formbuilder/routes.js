@@ -14,6 +14,7 @@ import RecordCreatedContainer from "./containers/RecordCreatedContainer";
 import AdminViewContainer from "./containers/AdminViewContainer";
 import Header from "./components/Header";
 import Check from "./components/Check";
+import Welcome from "./components/Welcome";
 
 const common = {
   notifications: NotificationContainer,
@@ -34,7 +35,7 @@ const LinkBack = () => {
 
 export default (
     <Route path="/" component={App}>
-      <IndexRoute components={{...common, content: FormContainer}} />
+      <IndexRoute components={{...common, mainComponent: Welcome}} />
       <Route path="builder"
         components={{...common, content: FormContainer}} />
       <Route path="builder/settings"
