@@ -17,7 +17,7 @@ import Check from "./components/Check";
 
 const common = {
   notifications: NotificationContainer,
-  fieldList: FieldListContainer,
+  sidebarComponent: FieldListContainer,
   header: Header
 };
 
@@ -38,19 +38,19 @@ export default (
       <Route path="builder"
         components={{...common, content: FormContainer}} />
       <Route path="builder/settings"
-        components={{...common, fieldList: LinkBack, content: FormOptionsContainer}} />
+        components={{...common, sidebarComponent: LinkBack, content: FormOptionsContainer}} />
       <Route path="builder/json"
-        components={{...common, fieldList: LinkBack, content: JsonViewContainer}} />
+        components={{...common, sidebarComponent: LinkBack, content: JsonViewContainer}} />
       <Route path="builder/published/:id"
-        components={{...common, fieldList: Check, content: FormCreatedContainer}} />
+        components={{...common, sidebarComponent: Check, content: FormCreatedContainer}} />
       <Route path="form/data-sent"
-        components={{...common, fieldList: Check, content: RecordCreatedContainer}} />
+        components={{...common, sidebarComponent: Check, content: RecordCreatedContainer}} />
       <Route path="form/:id"
-        components={{...common, fieldList: null, header: null, content: UserFormContainer}} />
+        components={{...common, sidebarComponent: null, header: null, content: UserFormContainer}} />
       <Route path="admin/:id"
-        components={{...common, fieldList: null, header: null, content: AdminViewContainer}} />
+        components={{...common, sidebarComponent: null, header: null, content: AdminViewContainer}} />
       <Route path="*" components={{
-        fieldList: FieldListContainer,
+        sidebarComponent: FieldListContainer,
         content: _ => <h1>Page not found.</h1>
       }}/>
     </Route>
