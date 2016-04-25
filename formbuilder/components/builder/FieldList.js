@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router";
-import { Draggable } from "react-drag-and-drop";
 
 
 function MenuSection(props) {
@@ -11,13 +10,13 @@ function MenuSection(props) {
       <div className="list-group">{
         fields.map((field, index) => {
           return (
-            <Draggable key={index} type="field"
-              onDoubleClick={_ => props.onDoubleClick(field)}
+            <div key={index} type="field"
+              onClick={_ => props.onClick(field)}
               data={JSON.stringify(field)}
               className="list-group-item field-list-entry">
               <i className={`glyphicon glyphicon-${field.icon}`} />
               <span>{field.label}</span>
-            </Draggable>
+            </div>
           );
         })
       }</div>
@@ -31,10 +30,10 @@ export default function FieldList(props) {
     <div>
       <MenuSection heading="Widgets"
         fields={fieldList}
-        onDoubleClick={addField} />
+        onClick={addField} />
       <MenuSection heading="Fieldsets"
         fields={fieldSets}
-        onDoubleClick={addField} />
+        onClick={addField} />
       <div className="list-group">
         <Link to="/builder/settings" className="list-group-item">
           <i className="glyphicon glyphicon-wrench" />
