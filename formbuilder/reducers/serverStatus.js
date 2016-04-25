@@ -4,7 +4,7 @@ import {
 } from "../actions/server";
 
 const INITIAL_STATE = {
-  status: null,
+  status: "init",
   collectionID: null,
 };
 
