@@ -8,7 +8,7 @@ import { createComponent, d } from "../test-utils";
 import UserForm from "../../formbuilder/components/UserForm";
 
 
-describe.only("UserForm", () => {
+describe("UserForm", () => {
   var sandbox, compProps, schema;
 
   beforeEach(() => {
