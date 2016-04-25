@@ -1,5 +1,7 @@
 import React from "react";
 
+import btoa from "btoa";
+
 export default function CSVDownloader(props) {
   const filename = props.schema.title + ".csv";
   const titles = props.fields.map((key) => {

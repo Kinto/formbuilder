@@ -16,4 +16,3 @@ export function createComponent(Component, props) {
 export function d(node) {
   console.log(require("html").prettyPrint(node.outerHTML, {indent_size: 2}));
 }
-
