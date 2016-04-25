@@ -34,3 +34,8 @@
     transform: rotate(360deg);
   }
 }
+
+.check {
+  font-size: 10em;
+  color: green;
+}
