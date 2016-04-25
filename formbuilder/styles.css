@@ -39,3 +39,57 @@
   font-size: 10em;
   color: green;
 }
+
+
+.editable-field {
+  padding: .5em 0;
+}
+
+.editable-field:hover {
+  background: #fafafa;
+  cursor: move;
+}
+
+.editable-field label:hover {
+  cursor: move;
+}
+
+.editable-field-actions {
+  text-align: right;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.editable-field-actions button,
+button.close-btn {
+  background: none;
+  border: none;
+}
+
+form > p {
+  padding: 1em 0;
+}
+
+.panel-heading .close-btn {
+  float: right;
+  margin-right: -1em;
+}
+
+textarea.json-viewer {
+  width: 100%;
+  height: 350px;
+  font-family: Consolas, "Ubuntu Mono", "Monaco", monospace;
+}
+
+.form-area {
+  padding-bottom: 5em;
+}
+
+.field-list-entry:hover {
+  background: #fafafa;
+  cursor: move;
+}
+
+.glyphicon + span {
+  margin-left: .5em;
+}
