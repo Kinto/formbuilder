@@ -12,7 +12,7 @@ export default function collections(state = INITIAL_STATE, action) {
     return [...state, action.notification];
 
   case NOTIFICATION_REMOVE:
-    return state.filter((notif, index) => action.index !== index);
+    return state.filter((obj) => action.id !== obj.id);
 
   default:
     return state;

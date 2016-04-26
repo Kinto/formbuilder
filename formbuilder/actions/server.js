@@ -37,7 +37,7 @@ export function publishForm(callback) {
       }
     })
     .catch((error) => {
-      dispatch(addNotification({type: "error", message: error.message}));
+      dispatch(addNotification(error.message, "error"));
     });
   };
 }

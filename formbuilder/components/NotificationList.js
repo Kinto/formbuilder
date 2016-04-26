@@ -12,13 +12,13 @@ export default function NotificationList(props) {
   }
   return (
     <div>{
-      notifications.map((notif, index) => {
-        const {message, type} = notif;
+      notifications.map((notif) => {
+        const {message, type, id} = notif;
         const classes = `alert alert-${ERROR_CLASSES[type]}`;
         return (
-          <div key={index} className={classes}>
+          <div key={id} className={classes}>
             <a href="#" className="close"
-              onClick={() => removeNotification(index)}>×</a>
+              onClick={() => removeNotification(id)}>×</a>
             {message}
           </div>
         );
