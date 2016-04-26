@@ -17,8 +17,8 @@ export default function NotificationList(props) {
         const classes = `alert alert-${ERROR_CLASSES[type]}`;
         return (
           <div key={id} className={classes}>
-            <a href="#" className="close"
-              onClick={() => removeNotification(id)}>×</a>
+            <a className="close"
+               onClick={() => removeNotification(id)}>×</a>
             {message}
           </div>
         );

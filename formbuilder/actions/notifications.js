@@ -3,7 +3,12 @@ import uuid from "uuid";
 export const NOTIFICATION_ADD = "NOTIFICATION_ADD";
 export const NOTIFICATION_REMOVE = "NOTIFICATION_REMOVE";
 
-export function addNotification(message, type="info", autoDismiss=true) {
+export function addNotification(message, type="info", autoDismiss=null) {
+  if (type=="error" && autoDismiss == null) {
+    autoDismiss = false;
+  } else {
+    autoDismiss = true;
+  }
   return (dispatch) => {
     const id = uuid.v4();
     dispatch({type: NOTIFICATION_ADD, notification: {id, message, type}});
