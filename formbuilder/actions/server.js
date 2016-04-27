@@ -37,7 +37,7 @@ export function publishForm(callback) {
       }
     })
     .catch((error) => {
-      dispatch(addNotification(error.message, "error"));
+      dispatch(addNotification(error.message, {type: "error"}));
     });
   };
 }
@@ -55,7 +55,7 @@ export function submitRecord(record, collectionID, callback) {
       }
     })
     .catch((error) => {
-      dispatch(addNotification(error.message, "error"));
+      dispatch(addNotification(error.message, {type: "error"}));
     });
   };
 }
@@ -74,7 +74,7 @@ export function loadSchema(collectionID, callback) {
       }
     })
     .catch((error) => {
-      dispatch(addNotification(error.message, "error"));
+      dispatch(addNotification(error.message, {type: "error"}));
     });
   };
 }
@@ -93,7 +93,7 @@ export function getRecords(collectionID, callback) {
       }
     })
     .catch((error) => {
-      dispatch(addNotification(error.message, "error"));
+      dispatch(addNotification(error.message, {type: "error"}));
     });
   };
 }

@@ -32,7 +32,7 @@ describe("notifications actions", () => {
     });
 
     it("should send error notifications if specified", (done) => {
-      addNotification("Some error message", "error")(({type, notification}) => {
+      addNotification("Some error message", {type: "error"})(({type, notification}) => {
         expect(type).to.eql(NOTIFICATION_ADD);
         expect(notification.message ).to.eql("Some error message");
         expect(notification.type).to.eql("error");
@@ -45,7 +45,11 @@ describe("notifications actions", () => {
       });
 
       it("should dismiss a message after a specific time", () => {
-        addNotification("Some dismissable message", "info", true, 2)(dispatch);
+        addNotification("Some dismissable message", {
+          type: "info",
+          autoDismiss: true,
+          dismissAfter: 2
+        })(dispatch);
         sinon.assert.calledWithMatch(dispatch, {
           type: "NOTIFICATION_ADD",
           notification: {
@@ -62,7 +66,11 @@ describe("notifications actions", () => {
       });
 
       it("should not dismiss an undismissable message", () => {
-        addNotification("Some dismissable message", "info", false, 2)(dispatch);
+        addNotification("Some dismissable message", {
+          type: "info",
+          autoDismiss: false,
+          dismissAfter: 2
+        })(dispatch);
         sinon.assert.calledWithMatch(dispatch, {
           type: "NOTIFICATION_ADD",
           notification: {
