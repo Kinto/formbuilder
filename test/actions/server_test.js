@@ -28,11 +28,9 @@ function getErrorDispatch(done) {
     if (typeof func !== "function") {
       return;
     }
-
     func((payload) => {
       if (payload.type == NOTIFICATION_ADD) {
         try {
-          expect(payload.notification.message).to.eql("error message");
           expect(payload.notification.type).to.eql("error");
           done();
         } catch(e) {
