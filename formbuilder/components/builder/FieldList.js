@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router";
+import { Draggable } from "react-drag-and-drop";
 
 
 function MenuSection(props) {
@@ -10,13 +11,13 @@ function MenuSection(props) {
       <div className="list-group">{
         fields.map((field, index) => {
           return (
-            <div key={index} type="field"
+            <Draggable key={index} type="field"
               onClick={_ => props.onClick(field)}
               data={JSON.stringify(field)}
               className="list-group-item field-list-entry">
               <i className={`glyphicon glyphicon-${field.icon}`} />&nbsp;
               <span>{field.label}</span>
-            </div>
+            </Draggable>
           );
         })
       }</div>
