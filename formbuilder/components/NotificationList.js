@@ -18,7 +18,7 @@ export default function NotificationList(props) {
         return (
           <div key={id} className={classes}>
             <a className="close"
-               onClick={() => removeNotification(id)}>×</a>
+              onClick={() => removeNotification(id)}>×</a>
             {message}
           </div>
         );

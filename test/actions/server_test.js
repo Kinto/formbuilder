@@ -25,19 +25,21 @@ import {
 
 function getErrorDispatch(done) {
   return (func) => {
-    if (typeof func === "function") {
-      func((payload) => {
-        if (payload.type == NOTIFICATION_ADD) {
-          try {
-            expect(payload.notification.message).to.eql("error message");
-            expect(payload.notification.type).to.eql("error");
-            done();
-          } catch(e) {
-            return done(e);
-          }
-        }
-      });
+    if (typeof func !== "function") {
+      return;
     }
+
+    func((payload) => {
+      if (payload.type == NOTIFICATION_ADD) {
+        try {
+          expect(payload.notification.message).to.eql("error message");
+          expect(payload.notification.type).to.eql("error");
+          done();
+        } catch(e) {
+          return done(e);
+        }
+      }
+    });
   };
 }
 

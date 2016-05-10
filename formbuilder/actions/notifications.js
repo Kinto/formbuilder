@@ -15,12 +15,12 @@ export function addNotification(message, options) {
     ...options
   };
   if (autoDismiss == null) {
-    autoDismiss = (type == "error") ? false : true;
+    autoDismiss = type !== "error";
   }
   return (dispatch) => {
     const id = uuid.v4();
     dispatch({type: NOTIFICATION_ADD, notification: {id, message, type}});
-    if (autoDismiss == true) {
+    if (autoDismiss === true) {
       setTimeout(() => {
         dispatch({type: NOTIFICATION_REMOVE, id});
       }, dismissAfter);

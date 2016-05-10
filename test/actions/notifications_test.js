@@ -25,16 +25,17 @@ describe("notifications actions", () => {
     it("should send info notifications by default", (done) => {
       addNotification("Some info message")(({type, notification}) => {
         expect(type).to.eql(NOTIFICATION_ADD);
-        expect(notification.message ).to.eql("Some info message");
+        expect(notification.message).to.eql("Some info message");
         expect(notification.type).to.eql("info");
         done();
       });
     });
 
     it("should send error notifications if specified", (done) => {
-      addNotification("Some error message", {type: "error"})(({type, notification}) => {
+      const thunk = addNotification("Some error message", {type: "error"});
+      thunk(({type, notification}) => {
         expect(type).to.eql(NOTIFICATION_ADD);
-        expect(notification.message ).to.eql("Some error message");
+        expect(notification.message).to.eql("Some error message");
         expect(notification.type).to.eql("error");
         done();
       });
