@@ -14,6 +14,8 @@ export const SCHEMA_RETRIEVAL_DONE = "SCHEMA_RETRIEVAL_DONE";
 export const RECORDS_RETRIEVAL_PENDING = "RECORDS_RETRIEVAL_PENDING";
 export const RECORDS_RETRIEVAL_DONE = "RECORDS_RETRIEVAL_DONE";
 
+const CONNECTIVITY_ISSUES = "This is probably due to an unresponsive server or some connectivity issues.";
+
 export const api = new KintoAPI(
   config.server.remote,
   { headers: {Authorization: "Basic " + btoa(config.server.auth)} }
@@ -37,7 +39,9 @@ export function publishForm(callback) {
       }
     })
     .catch((error) => {
-      dispatch(addNotification(error.message, {type: "error"}));
+      const msg = "We were unable to publish your form. " +
+                  CONNECTIVITY_ISSUES;
+      dispatch(addNotification(msg, {type: "error"}));
     });
   };
 }
@@ -55,7 +59,9 @@ export function submitRecord(record, collectionID, callback) {
       }
     })
     .catch((error) => {
-      dispatch(addNotification(error.message, {type: "error"}));
+      const msg = "We were unable to publish your answers. " +
+                  CONNECTIVITY_ISSUES;
+      dispatch(addNotification(msg, {type: "error"}));
     });
   };
 }
@@ -74,7 +80,9 @@ export function loadSchema(collectionID, callback) {
       }
     })
     .catch((error) => {
-      dispatch(addNotification(error.message, {type: "error"}));
+      const msg = "Due to a network error, we were unable to load your form. " +
+                  CONNECTIVITY_ISSUES;
+      dispatch(addNotification(msg, {type: "error"}));
     });
   };
 }
@@ -93,7 +101,9 @@ export function getRecords(collectionID, callback) {
       }
     })
     .catch((error) => {
-      dispatch(addNotification(error.message, {type: "error"}));
+      const msg = "We were unable to retrieve the list of records for your form. " +
+                  CONNECTIVITY_ISSUES;
+      dispatch(addNotification(msg, {type: "error"}));
     });
   };
 }
