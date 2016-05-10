@@ -2,7 +2,7 @@ var path = require("path");
 var webpack = require("webpack");
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
-const serverURL = process.env.SERVER_URL || "https://kinto-forms.herokuapp.com/v1/";
+const serverURL = process.env.SERVER_URL || "https://kinto.notmyidea.org/v1/";
 
 module.exports = {
   devtool: "eval",
