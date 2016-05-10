@@ -23,6 +23,25 @@ import {
   NOTIFICATION_ADD
 } from "../../formbuilder/actions/notifications";
 
+function getErrorDispatch(done) {
+  return (func) => {
+    if (typeof func !== "function") {
+      return;
+    }
+
+    func((payload) => {
+      if (payload.type == NOTIFICATION_ADD) {
+        try {
+          expect(payload.notification.message).to.eql("error message");
+          expect(payload.notification.type).to.eql("error");
+          done();
+        } catch(e) {
+          return done(e);
+        }
+      }
+    });
+  };
+}
 
 describe("server actions", () => {
   let sandbox;
@@ -97,17 +116,7 @@ describe("server actions", () => {
         });
       });
       it("should dispatch an error if an http error occurs", (done) => {
-        dispatch = (payload) => {
-          if (payload.type == NOTIFICATION_ADD) {
-            try {
-              expect(payload.notification.type).to.eql("error");
-              expect(payload.notification.message).to.eql("error message");
-              done();
-            } catch(e) {
-              return done(e);
-            }
-          }
-        };
+        dispatch = getErrorDispatch(done);
         publishForm(() => {
           done(new Error("Redirect shouldn't be called!"));
         })(dispatch, getState);
@@ -154,17 +163,7 @@ describe("server actions", () => {
         });
       });
       it("should dispatch an error if an http error occurs", (done) => {
-        dispatch = (payload) => {
-          if (payload.type == NOTIFICATION_ADD) {
-            try {
-              expect(payload.notification.type).to.eql("error");
-              expect(payload.notification.message).to.eql("error message");
-              done();
-            } catch(e) {
-              return done(e);
-            }
-          }
-        };
+        dispatch = getErrorDispatch(done);
         submitRecord(() => {
           done(new Error("Redirect shouldn't be called!"));
         })(dispatch, getState);
@@ -219,17 +218,7 @@ describe("server actions", () => {
         });
       });
       it("should dispatch an error if an http error occurs", (done) => {
-        dispatch = (payload) => {
-          if (payload.type == NOTIFICATION_ADD) {
-            try {
-              expect(payload.notification.type).to.eql("error");
-              expect(payload.notification.message).to.eql("error message");
-              done();
-            } catch(e) {
-              return done(e);
-            }
-          }
-        };
+        dispatch = getErrorDispatch(done);
         loadSchema(collectionID, () => {
           done(new Error("Redirect shouldn't be called!"));
         })(dispatch, getState);
@@ -283,17 +272,7 @@ describe("server actions", () => {
         });
       });
       it("should dispatch an error if an http error occurs", (done) => {
-        dispatch = (payload) => {
-          if (payload.type == NOTIFICATION_ADD) {
-            try {
-              expect(payload.notification.type).to.eql("error");
-              expect(payload.notification.message).to.eql("error message");
-              done();
-            } catch(e) {
-              return done(e);
-            }
-          }
-        };
+        dispatch = getErrorDispatch(done);
         getRecords(() => {
           done(new Error("Redirect shouldn't be called!"));
         })(dispatch, getState);
