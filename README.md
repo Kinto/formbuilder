@@ -12,14 +12,6 @@ To run the formbuilder locally, you can issue the following commands:
 ```
 $ git clone https://github.com/Kinto/formbuilder.git  
 $ cd formbuilder  
-$ npm install  
-```
-Then install the unmet peer dependencies  
-```
-$ npm install react@^0.14.8  
-$ npm install react-dom@^0.14.3  
-```
-And run!  
-```
+$ npm install
 $ npm run start  
 ```
