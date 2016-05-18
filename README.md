@@ -9,8 +9,9 @@ page](https://kinto.github.io/formbuilder/)
 # Installation
 
 To run the formbuilder locally, you can issue the following commands:
-
-   $ git clone https://github.com/Kinto/formbuilder.git
-   $ cd formbuilder
-   $ npm install
-   $ npm run start
+```
+$ git clone https://github.com/Kinto/formbuilder.git  
+$ cd formbuilder  
+$ npm install
+$ npm run start  
+```

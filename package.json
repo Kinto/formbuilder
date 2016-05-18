@@ -17,11 +17,9 @@
     "dist",
     "lib"
   ],
-  "peerDependencies": {
-    "react": "^0.14.3",
-    "react-dom": "^0.14.3"
-  },
   "dependencies": {
+    "react": "^0.14.8",
+    "react-dom": "^0.14.8",
     "btoa": "^1.1.2",
     "history": "^1.17.0",
     "isomorphic-fetch": "^2.2.1",
