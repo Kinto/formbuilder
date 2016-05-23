@@ -26,7 +26,7 @@ const uiSchema = {
 export default function FormOptions(props) {
   const update = function({formData}) {
     props.updateFormProperties(formData);
-    props.history.push("");
+    props.history.pushState(null, "/builder");
   };
 
   const formData = {

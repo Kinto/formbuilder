@@ -22,12 +22,12 @@ const common = {
   header: Header
 };
 
-const LinkBack = () => {
+const LinkToBuilder = () => {
   return (
     <div className="list-group">
-      <Link className="list-group-item" to="/">
+      <Link className="list-group-item" to="/builder">
         <i className="glyphicon glyphicon-chevron-left" />
-        {" Back"}
+        {"Back"}
       </Link>
     </div>
   );
@@ -39,9 +39,9 @@ export default (
       <Route path="builder"
         components={{...common, content: FormContainer}} />
       <Route path="builder/settings"
-        components={{...common, sidebarComponent: LinkBack, content: FormOptionsContainer}} />
+        components={{...common, sidebarComponent: LinkToBuilder, content: FormOptionsContainer}} />
       <Route path="builder/json"
-        components={{...common, sidebarComponent: LinkBack, content: JsonViewContainer}} />
+        components={{...common, sidebarComponent: LinkToBuilder, content: JsonViewContainer}} />
       <Route path="builder/published/:id"
         components={{...common, sidebarComponent: Check, content: FormCreatedContainer}} />
       <Route path="form/data-sent"
