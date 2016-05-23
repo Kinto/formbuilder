@@ -229,8 +229,21 @@ export default {
             title: {type: "string", title: "Label"},
             description: {type: "string", title: "Description"},
             required: {type: "boolean"},
-          }
+          },
         },
+
+        // To make the support for fieldset work properly, we would need to
+        // define the editSchemas for every property.
+        address1: {
+          editSchema: {
+            type: "object",
+            properties: {
+              title: {type: "string", title: "Label"},
+              required: {type: "boolean"},
+            }
+          },
+
+        }
       },
       formData: {}
     }

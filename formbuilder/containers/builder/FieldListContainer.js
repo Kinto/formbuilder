@@ -7,7 +7,6 @@ import config from "../../config";
 function mapStateToProps(state) {
   return {
     fieldList: config.fieldList,
-    fieldSets: config.fieldSets,
   };
 }
 
