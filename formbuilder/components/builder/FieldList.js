@@ -26,14 +26,11 @@ function MenuSection(props) {
 }
 
 export default function FieldList(props) {
-  const {fieldList, fieldSets, addField} = props;
+  const {fieldList, addField} = props;
   return (
     <div>
       <MenuSection heading="Widgets"
         fields={fieldList}
-        onClick={addField} />
-      <MenuSection heading="Fieldsets"
-        fields={fieldSets}
         onClick={addField} />
       <div className="list-group">
         <Link to="/builder/settings" className="list-group-item">
