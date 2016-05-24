@@ -268,10 +268,10 @@ describe("form reducer", () => {
     it("should reset the form", () => {
       const initialState = form(undefined, {type: null});
       var state = form(undefined, actions.addField(textField));
-      state = form(state, actions.resetForm());
+      state = form(state, actions.resetForm(() => {
+        expect(state).eql(initialState);
+      }));
 
-      expect(state)
-        .eql(initialState);
     });
   });
 

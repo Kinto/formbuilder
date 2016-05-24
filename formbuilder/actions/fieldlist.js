@@ -31,6 +31,11 @@ export function updateFormProperties(properties) {
   return {type: FORM_UPDATE_PROPERTIES, properties};
 }
 
-export function resetForm() {
-  return {type: FORM_RESET};
+export function resetForm(callback) {
+  return (dispatch, getState) => {
+    dispatch({type: FORM_RESET});
+    if (callback) {
+      callback();
+    }
+  };
 }

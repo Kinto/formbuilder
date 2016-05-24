@@ -12,9 +12,9 @@ import FormCreatedContainer from "./containers/FormCreatedContainer";
 import UserFormContainer from "./containers/UserFormContainer";
 import RecordCreatedContainer from "./containers/RecordCreatedContainer";
 import AdminViewContainer from "./containers/AdminViewContainer";
+import WelcomeContainer from "./containers/WelcomeContainer";
 import Header from "./components/Header";
 import Check from "./components/Check";
-import Welcome from "./components/Welcome";
 
 const common = {
   notifications: NotificationContainer,
@@ -35,7 +35,7 @@ const LinkToBuilder = () => {
 
 export default (
     <Route path="/" component={App}>
-      <IndexRoute components={{...common, mainComponent: Welcome}} />
+      <IndexRoute components={{...common, mainComponent: WelcomeContainer}} />
       <Route path="builder"
         components={{...common, content: FormContainer}} />
       <Route path="builder/settings"
