@@ -9,11 +9,13 @@ import EditableField from "../../components/builder/EditableField";
 
 
 function mapStateToProps(state) {
+  console.log(state);
   return {
     error: state.form.error,
     schema: state.form.schema,
     uiSchema: state.form.uiSchema,
     formData: state.form.formData,
+    editionState: state.form.editionState,
     status: state.serverStatus.status,
   };
 }

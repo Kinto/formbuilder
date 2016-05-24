@@ -5,7 +5,12 @@ export const FIELD_INSERT = "FIELD_INSERT";
 export const FIELD_SWAP = "FIELD_SWAP";
 export const FORM_RESET = "FORM_RESET";
 export const FORM_UPDATE_PROPERTIES = "FORM_UPDATE_PROPERTIES";
+export const SET_EDIT_STATE = "SET_EDIT_STATE";
 
+
+export function setEditState(name, edit) {
+  return {type: SET_EDIT_STATE, name, edit};
+}
 
 export function addField(field) {
   return {type: FIELD_ADD, field};
