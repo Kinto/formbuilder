@@ -4,8 +4,6 @@ import { Droppable } from "react-drag-and-drop";
 import Default from "./Default";
 import SchemaField from "react-jsonschema-form/lib/components/fields/SchemaField";
 
-import EditableField from "./EditableField";
-
 export default function EditableForm(props) {
   const {error, schema} = props;
   const {properties} = schema;
@@ -22,7 +20,8 @@ export default function EditableForm(props) {
     ...SchemaField.defaultProps.registry,
     fields: {
       ...SchemaField.defaultProps.registry.fields,
-      SchemaField: EditableField,
+      SchemaField: props.EditableField,
+      TitleField: props.TitleField,
     }
   };
 
