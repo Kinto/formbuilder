@@ -15,12 +15,11 @@ export default function EditableForm(props) {
   };
 
   const onDrop = ({field}) => props.addField(JSON.parse(field));
-
   const registry = {
     ...SchemaField.defaultProps.registry,
     fields: {
       ...SchemaField.defaultProps.registry.fields,
-      SchemaField: props.EditableField,
+      SchemaField: props.SchemaField,
       TitleField: props.TitleField,
     }
   };
