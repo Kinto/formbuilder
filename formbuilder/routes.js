@@ -42,13 +42,13 @@ export default (
         components={{...common, sidebarComponent: LinkToBuilder, content: FormOptionsContainer}} />
       <Route path="builder/json"
         components={{...common, sidebarComponent: LinkToBuilder, content: JsonViewContainer}} />
-      <Route path="builder/published/:id"
+      <Route path="builder/published/:id/:adminToken"
         components={{...common, sidebarComponent: Check, content: FormCreatedContainer}} />
       <Route path="form/data-sent"
         components={{...common, sidebarComponent: Check, content: RecordCreatedContainer}} />
       <Route path="form/:id"
         components={{...common, sidebarComponent: null, header: null, content: UserFormContainer}} />
-      <Route path="admin/:id"
+      <Route path="admin/:id/:adminToken"
         components={{...common, sidebarComponent: null, header: null, content: AdminViewContainer}} />
       <Route path="*" components={{
         sidebarComponent: FieldListContainer,

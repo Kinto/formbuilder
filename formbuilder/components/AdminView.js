@@ -3,9 +3,10 @@ import CSVDownloader from "./CSVDownloader";
 
 export default class AdminView extends Component {
   componentDidMount() {
-    const collectionID = this.props.params.id;
-    this.props.getRecords(collectionID);
-    this.props.loadSchema(collectionID);
+    const collection = this.props.params.id;
+    const adminToken = this.props.params.adminToken;
+    this.props.getRecords(collection, adminToken);
+    this.props.loadSchema(collection);
   }
   render() {
     const properties = this.props.schema.properties;
@@ -26,15 +27,15 @@ export default class AdminView extends Component {
         <thead>
           <tr>{
             schemaFields.map((key) => {
-              return <th>{properties[key].title}</th>;
+              return <th key={key}>{properties[key].title}</th>;
             })
           }</tr>
         </thead>
         <tbody>
         {this.props.records.map((record) => {
-          return (<tr>{
+          return (<tr key={record.id}>{
             schemaFields.map((key) => {
-              return <td>{String(record[key])}</td>;
+              return <td key={key}>{String(record[key])}</td>;
             }
           )}
           </tr>);

@@ -2,10 +2,11 @@ import React from "react";
 
 
 export default function FormCreated(props) {
-  const collectionID = props.params.id;
+  const collection = props.params.id;
+  const adminToken = props.params.adminToken;
   const origin = window.location.origin + window.location.pathname;
-  const userformURL = `${origin}#/form/${collectionID}`;
-  const adminURL = `${origin}#/admin/${collectionID}`;
+  const userformURL = `${origin}#/form/${collection}`;
+  const adminURL = `${origin}#/admin/${collection}/${adminToken}`;
 
   const onClick = (e) => {
     e.target.select();

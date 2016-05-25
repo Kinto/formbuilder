@@ -1,7 +1,7 @@
 export default {
   server: {
     remote: process.env.SERVER_URL,
-    auth: "token:formbuilder"
+    bucket: "formbuilder",
   },
   fieldList: [
     {
