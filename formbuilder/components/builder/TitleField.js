@@ -1,17 +1,13 @@
 import React, {PropTypes} from "react";
 import {RIEInput} from "riek";
 
-const REQUIRED_FIELD_SYMBOL = "#";
-
-
-
 function TitleField(props) {
-  const update = function(formData) {
+  const onUpdate = function(formData) {
     props.updateFormProperties(formData);
   };
-    
-  const {id, title, required} = props;
-  return <legend id={id}><RIEInput propName="title" value={title} change={update} /></legend>;
+
+  const {id, title} = props;
+  return <legend id={id}><RIEInput propName="title" value={title} change={onUpdate} /></legend>;
 }
 
 if (process.env.NODE_ENV !== "production") {
