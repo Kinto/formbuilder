@@ -27,7 +27,7 @@ export default function EditableForm(props) {
   let saveButtonValue = "Create form";
   if (props.status == "pending") {
     saveButtonValue = <div>Create form <i className="spin glyphicon glyphicon-refresh" /></div>;
-  } else if (props.status == "done"){
+  } else if (props.status == "done") {
     saveButtonValue = <div>Form saved <i className="glyphicon glyphicon-ok" /></div>;
   }
   const button = (

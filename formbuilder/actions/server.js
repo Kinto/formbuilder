@@ -7,6 +7,8 @@ import config from "../config";
 export const FORM_PUBLISH = "FORM_PUBLISH";
 export const FORM_PUBLICATION_PENDING = "FORM_PUBLICATION_PENDING";
 export const FORM_PUBLICATION_DONE = "FORM_PUBLICATION_DONE";
+export const FORM_PUBLICATION_FAILED = "FORM_PUBLICATION_FAILED";
+
 export const FORM_RECORD_CREATION_PENDING = "FORM_RECORD_CREATION_PENDING";
 export const FORM_RECORD_CREATION_DONE = "FORM_RECORD_CREATION_DONE";
 export const SCHEMA_RETRIEVAL_PENDING = "SCHEMA_RETRIEVAL_PENDING";
@@ -42,6 +44,7 @@ export function publishForm(callback) {
       const msg = "We were unable to publish your form. " +
                   CONNECTIVITY_ISSUES;
       dispatch(addNotification(msg, {type: "error"}));
+      dispatch({type: FORM_PUBLICATION_FAILED});
     });
   };
 }
