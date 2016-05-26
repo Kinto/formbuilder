@@ -7,7 +7,7 @@ import * as ServerActions from "../../actions/server";
 import Form from "../../components/builder/Form";
 import EditableField from "../../components/builder/EditableField";
 import TitleField from "../../components/builder/TitleField";
-
+import DescriptionField from "../../components/builder/DescriptionField";
 
 function mapStateToProps(state) {
   return {
@@ -28,6 +28,8 @@ function mapDispatchToProps(dispatch) {
     {}, EditableField.defaultProps || {}, actions);
   TitleField.defaultProps = Object.assign(
     {}, TitleField.defaultProps || {}, actions);
+  DescriptionField.defaultProps = Object.assign(
+    {}, DescriptionField.defaultProps || {}, actions);
   return actions;
 }
 
@@ -37,7 +39,8 @@ function mergeProps(stateProps, dispatchProps, ownProps) {
     ...dispatchProps,
     ...ownProps,
     SchemaField: EditableField,
-    TitleField: TitleField,
+    TitleField,
+    DescriptionField,
     onChange: () => {}
   };
 }

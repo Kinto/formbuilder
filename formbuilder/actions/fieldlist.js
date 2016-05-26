@@ -4,7 +4,8 @@ export const FIELD_UPDATE = "FIELD_UPDATE";
 export const FIELD_INSERT = "FIELD_INSERT";
 export const FIELD_SWAP = "FIELD_SWAP";
 export const FORM_RESET = "FORM_RESET";
-export const FORM_UPDATE_PROPERTIES = "FORM_UPDATE_PROPERTIES";
+export const FORM_UPDATE_TITLE = "FORM_UPDATE_TITLE";
+export const FORM_UPDATE_DESCRIPTION = "FORM_UPDATE_DESCRIPTION";
 
 
 export function addField(field) {
@@ -27,8 +28,12 @@ export function swapFields(source, target) {
   return {type: FIELD_SWAP, source, target};
 }
 
-export function updateFormProperties(properties) {
-  return {type: FORM_UPDATE_PROPERTIES, properties};
+export function updateFormTitle(title) {
+  return {type: FORM_UPDATE_TITLE, title};
+}
+
+export function updateFormDescription(description) {
+  return {type: FORM_UPDATE_DESCRIPTION, description};
 }
 
 export function resetForm(callback) {
