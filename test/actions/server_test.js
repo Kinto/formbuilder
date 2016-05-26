@@ -4,7 +4,6 @@ import { expect } from "chai";
 import sinon from "sinon";
 
 import {
-  api,
   publishForm,
   submitRecord,
   loadSchema,
@@ -41,18 +40,18 @@ function getErrorDispatch(done) {
   };
 }
 
-describe("server actions", () => {
+describe.only("server actions", () => {
   let sandbox;
   let dispatch;
   let getState;
   let record;
-  let collectionID;
+  let collection;
 
   beforeEach(() => {
     sandbox = sinon.sandbox.create();
     dispatch = sandbox.stub();
-    collectionID: "mycoll";
-    record = {id: 1234, collectionID: collectionID};
+    collection: "mycoll";
+    record = {id: 1234, collection: collection};
 
     getState = () => {
       return {
@@ -72,7 +71,7 @@ describe("server actions", () => {
     describe("with working remote server", () => {
       let data;
       beforeEach(() => {
-        data = {id: "collectionID"};
+        data = {id: "collection"};
         sandbox.stub(api, "createCollection", () => {
           return Promise.resolve({data});
         });
@@ -97,7 +96,7 @@ describe("server actions", () => {
             });
             sinon.assert.calledWithExactly(dispatch, {
               type: FORM_PUBLICATION_DONE,
-              collectionID: data.id
+              collection: data.id
             });
             done();
           } catch(err) {
@@ -134,11 +133,11 @@ describe("server actions", () => {
       });
 
       it("should call the redirect function after a successful request", (done) => {
-        submitRecord(record, collectionID, done)(dispatch, getState);
+        submitRecord(record, collection, done)(dispatch, getState);
       });
 
       it("should call the dispatch function twice", (done) => {
-        submitRecord(record, collectionID, () => {
+        submitRecord(record, collection, () => {
           try {
             sinon.assert.calledWithExactly(dispatch, {
               type: FORM_RECORD_CREATION_PENDING
@@ -174,14 +173,14 @@ describe("server actions", () => {
     describe("with working remote server", () => {
       let data;
       beforeEach(() => {
-        data = {id: "collectionID"};
+        data = {id: "collection"};
         sandbox.stub(api, "getCollection", () => {
           return Promise.resolve({data});
         });
       });
 
       it("should call the redirect function after a successful request", (done) => {
-        loadSchema(collectionID, (schema) => {
+        loadSchema(collection, (schema) => {
           try {
             expect(schema.id).to.eql(data.id);
             done();
@@ -192,7 +191,7 @@ describe("server actions", () => {
       });
 
       it("should call the dispatch function twice", (done) => {
-        loadSchema(collectionID, () => {
+        loadSchema(collection, () => {
           try {
             sinon.assert.calledWithExactly(dispatch, {
               type: SCHEMA_RETRIEVAL_PENDING
@@ -217,7 +216,7 @@ describe("server actions", () => {
       });
       it("should dispatch an error if an http error occurs", (done) => {
         dispatch = getErrorDispatch(done);
-        loadSchema(collectionID, () => {
+        loadSchema(collection, () => {
           done(new Error("Redirect shouldn't be called!"));
         })(dispatch, getState);
       });
@@ -235,7 +234,7 @@ describe("server actions", () => {
       });
 
       it("should call the redirect function after a successful request", (done) => {
-        getRecords(collectionID, (retrieved) => {
+        getRecords(collection, (retrieved) => {
           try {
             expect(retrieved).to.eql(records);
             done();
@@ -246,7 +245,7 @@ describe("server actions", () => {
       });
 
       it("should call the dispatch function twice", (done) => {
-        getRecords(collectionID, () => {
+        getRecords(collection, () => {
           try {
             sinon.assert.calledWithExactly(dispatch, {
               type: RECORDS_RETRIEVAL_PENDING

@@ -6,6 +6,7 @@ import {addNotification} from "./notifications";
 import {getUserToken} from "../utils";
 import config from "../config";
 
+
 export const FORM_PUBLISH = "FORM_PUBLISH";
 
 export const FORM_PUBLICATION_PENDING = "FORM_PUBLICATION_PENDING";
@@ -134,6 +135,7 @@ export function publishForm(callback) {
 
 /**
  * Submit a new form answer.
+ * New credentials are created for each answer.
  **/
 export function submitRecord(record, collection, callback) {
   return (dispatch, getState) => {
@@ -185,6 +187,8 @@ export function loadSchema(collection, callback) {
 
 /**
  * Retrieve all the answers to a specific form.
+ *
+ * The userToken is derived from the the adminToken.
  **/
 export function getRecords(adminToken, callback) {
   return (dispatch, getState) => {
