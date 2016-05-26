@@ -98,3 +98,9 @@ textarea.json-viewer {
 .glyphicon + span {
   margin-left: .5em;
 }
+
+.narrow {
+  max-width: 730px;
+  margin-right: auto;
+  margin-left: auto;
+}

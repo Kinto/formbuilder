@@ -16,7 +16,9 @@ export default class UserForm extends Component {
         this.props.history.pushState(null, "/form/data-sent");
       });
     };
-    return <Form schema={this.props.schema} uiSchema={this.props.uiSchema}
-    onSubmit={onSubmit}/>;
+    return (<div className="narrow">
+      <Form schema={this.props.schema} uiSchema={this.props.uiSchema}
+        onSubmit={onSubmit}/>
+    </div>);
   }
 }
