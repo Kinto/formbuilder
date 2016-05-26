@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import CSVDownloader from "./CSVDownloader";
+import {getUserToken} from "../utils.js";
 
 export default class AdminView extends Component {
   componentDidMount() {
-    const collection = this.props.params.id;
     const adminToken = this.props.params.adminToken;
-    this.props.getRecords(collection, adminToken);
+    const collection = getUserToken(adminToken);
+    this.props.getRecords(adminToken);
     this.props.loadSchema(collection);
   }
   render() {

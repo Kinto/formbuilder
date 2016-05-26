@@ -10,7 +10,7 @@ export default function EditableForm(props) {
 
   const onClick = (event) => {
     props.publishForm(({collection, adminToken}) => {
-      props.history.pushState(null, `/builder/published/${collection}/${adminToken}`);
+      props.history.pushState(null, `/builder/published/${adminToken}`);
     });
   };
 

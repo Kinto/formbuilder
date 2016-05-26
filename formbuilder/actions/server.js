@@ -3,26 +3,45 @@ import btoa from "btoa";
 import uuid from "uuid";
 
 import {addNotification} from "./notifications";
+import {getUserToken} from "../utils";
 import config from "../config";
 
 export const FORM_PUBLISH = "FORM_PUBLISH";
+
 export const FORM_PUBLICATION_PENDING = "FORM_PUBLICATION_PENDING";
 export const FORM_PUBLICATION_DONE = "FORM_PUBLICATION_DONE";
 export const FORM_PUBLICATION_FAILED = "FORM_PUBLICATION_FAILED";
 
 export const FORM_RECORD_CREATION_PENDING = "FORM_RECORD_CREATION_PENDING";
 export const FORM_RECORD_CREATION_DONE = "FORM_RECORD_CREATION_DONE";
+
 export const SCHEMA_RETRIEVAL_PENDING = "SCHEMA_RETRIEVAL_PENDING";
 export const SCHEMA_RETRIEVAL_DONE = "SCHEMA_RETRIEVAL_DONE";
+
 export const RECORDS_RETRIEVAL_PENDING = "RECORDS_RETRIEVAL_PENDING";
 export const RECORDS_RETRIEVAL_DONE = "RECORDS_RETRIEVAL_DONE";
 
-const CONNECTIVITY_ISSUES = "This is probably due to an unresponsive server or some connectivity issues.";
+const CONNECTIVITY_ISSUES = "This is usually due to an unresponsive server or some connectivity issues.";
 
+function connectivityIssues(dispatch, message) {
+  const msg = message +  " " + CONNECTIVITY_ISSUES;
+  dispatch(addNotification(msg, {type: "error"}));
+}
+
+/**
+ * Return HTTP authentication headers from a given token.
+ **/
 function getAuthenticationHeaders(token) {
   return {Authorization: "Basic " + btoa(`form:${token}`)};
 }
 
+/**
+ * Initializes the bucket used to store all the forms and answers.
+ *
+ * - All authenticated users can create new collections
+ * - The credentials used to create this bucket aren't useful anymore after
+ *   this function as the user is removed from the permissions.
+ **/
 function initializeBucket() {
   const api = new KintoClient(
     config.server.remote,
@@ -44,16 +63,21 @@ function initializeBucket() {
   });
 }
 
+/**
+ * Publishes a new form and give the credentials to the callback function
+ * when it's done.
+ *
+ * In case a 403 is retrieved, initialisation of the bucket is triggered.
+ **/
 export function publishForm(callback) {
   const thunk =  (dispatch, getState, retry = true) => {
 
     const form = getState().form;
     const schema = form.schema;
     const uiSchema = form.uiSchema;
-    // XXX Add permissions.
     dispatch({type: FORM_PUBLICATION_PENDING});
-    const adminToken = uuid.v4();
-    const userToken = uuid.v4();
+    const adminToken = uuid.v4().replace(/-/g, "");
+    const userToken = getUserToken(adminToken);
 
     const userClient = new KintoClient(
       config.server.remote,
@@ -62,12 +86,18 @@ export function publishForm(callback) {
     userClient.fetchServerInfo().then((serverInfo) => {
       return serverInfo.user.id;
     })
+    .catch(() => {
+      connectivityIssues(dispatch, "We are unable to connect to the server.");
+      dispatch({type: FORM_PUBLICATION_FAILED});
+    })
     .then((userId) => {
       // Create a new client, authenticated as the admin.
       const bucket = new KintoClient(
         config.server.remote,
         {headers: getAuthenticationHeaders(adminToken)}
       ).bucket(config.server.bucket);
+      // The name of the collection is the user token so the user deals with
+      // less different concepts.
       bucket.createCollection(userToken, {
         data: {schema, uiSchema},
         permissions: {
@@ -94,9 +124,7 @@ export function publishForm(callback) {
             thunk(dispatch, getState, false);
           });
         }
-        const msg = "We were unable to publish your form. " +
-                    CONNECTIVITY_ISSUES;
-        dispatch(addNotification(msg, {type: "error"}));
+        connectivityIssues(dispatch, "We were unable to publish your form.");
         dispatch({type: FORM_PUBLICATION_FAILED});
       });
     });
@@ -104,10 +132,16 @@ export function publishForm(callback) {
   return thunk;
 }
 
+/**
+ * Submit a new form answer.
+ **/
 export function submitRecord(record, collection, callback) {
   return (dispatch, getState) => {
     dispatch({type: FORM_RECORD_CREATION_PENDING});
 
+    // Submit all form answers under a different users.
+    // Later-on, we could persist these userid to let users change their
+    // answers (but we're not quite there yet).
     new KintoClient(config.server.remote, {
       headers: getAuthenticationHeaders(uuid.v4())
     })
@@ -120,9 +154,7 @@ export function submitRecord(record, collection, callback) {
       }
     })
     .catch((error) => {
-      const msg = "We were unable to publish your answers. " +
-                  CONNECTIVITY_ISSUES;
-      dispatch(addNotification(msg, {type: "error"}));
+      connectivityIssues(dispatch, "We were unable to publish your answers");
     });
   };
 }
@@ -146,15 +178,17 @@ export function loadSchema(collection, callback) {
       }
     })
     .catch((error) => {
-      const msg = "Due to a network error, we were unable to load your form. " +
-                  CONNECTIVITY_ISSUES;
-      dispatch(addNotification(msg, {type: "error"}));
+      connectivityIssues(dispatch, "We were unable to load your form");
     });
   };
 }
 
-export function getRecords(collection, adminToken, callback) {
+/**
+ * Retrieve all the answers to a specific form.
+ **/
+export function getRecords(adminToken, callback) {
   return (dispatch, getState) => {
+    const collection = getUserToken(adminToken);
     dispatch({type: RECORDS_RETRIEVAL_PENDING});
     new KintoClient(config.server.remote, {
       headers: getAuthenticationHeaders(adminToken)
@@ -171,9 +205,10 @@ export function getRecords(collection, adminToken, callback) {
       }
     })
     .catch((error) => {
-      const msg = "We were unable to retrieve the list of records for your form. " +
-                  CONNECTIVITY_ISSUES;
-      dispatch(addNotification(msg, {type: "error"}));
+      connectivityIssues(
+        dispatch,
+        "We were unable to retrieve the list of records for your form."
+      );
     });
   };
 }

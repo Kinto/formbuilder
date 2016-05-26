@@ -1,12 +1,12 @@
 import React from "react";
-
+import {getUserToken} from "../utils";
 
 export default function FormCreated(props) {
-  const collection = props.params.id;
   const adminToken = props.params.adminToken;
+  const userToken = getUserToken(adminToken);
   const origin = window.location.origin + window.location.pathname;
-  const userformURL = `${origin}#/form/${collection}`;
-  const adminURL = `${origin}#/admin/${collection}/${adminToken}`;
+  const userformURL = `${origin}#/form/${userToken}`;
+  const adminURL = `${origin}#/admin/${adminToken}`;
 
   const onClick = (e) => {
     e.target.select();
