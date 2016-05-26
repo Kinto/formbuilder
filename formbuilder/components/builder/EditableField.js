@@ -93,24 +93,26 @@ function DraggableFieldContainer(props) {
 export default class EditableField extends Component {
   constructor(props) {
     super(props);
-    this.state = {edit: false, schema: props.schema};
+    this.state = {edit: props.editionState[props.name], schema: props.schema};
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({edit: false, schema: nextProps.schema});
+    this.setEditState(this.props.name, false);
+    this.setState({schema: nextProps.schema});
   }
 
   handleEdit(event) {
     event.preventDefault();
     if (shouldHandleDoubleClick(event.target)) {
-      this.setState({edit: true});
+      this.setEditState(this.props.name, true);
     }
   }
 
   handleUpdate({formData}) {
     const updated = pickKeys(this.props.schema, formData);
     const schema = {...this.props.schema, ...updated};
-    this.setState({edit: false, schema});
+    this.setEditState(this.props.name, true);
+    this.setState({schema});
     this.props.updateField(
       this.props.name, schema, formData.required, formData.title);
   }
@@ -124,7 +126,7 @@ export default class EditableField extends Component {
 
   handleCancel(event) {
     event.preventDefault();
-    this.setState({edit: false});
+    this.setEditState(this.props.name, false);
   }
 
   handleDrop(data) {
@@ -141,7 +143,7 @@ export default class EditableField extends Component {
   render() {
     const props = this.props;
 
-    if (this.state.edit) {
+    if (this.props.edit) {
       return (
         <FieldPropertiesEditor
           {...props}

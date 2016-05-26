@@ -7,6 +7,7 @@ import {
   FIELD_SWAP,
   FORM_RESET,
   FORM_UPDATE_PROPERTIES,
+  SET_EDIT_STATE
 } from "../actions/fieldlist";
 
 import {SCHEMA_RETRIEVAL_DONE} from "../actions/server";
@@ -22,6 +23,7 @@ const INITIAL_STATE = {
     "ui:order": []
   },
   formData: {},
+  editionState: {},
   currentIndex: 0,
 };
 
@@ -45,6 +47,13 @@ function addField(state, field) {
   state.schema.properties[_slug] = {...field.jsonSchema, title: name};
   state.uiSchema[_slug] = field.uiSchema;
   state.uiSchema["ui:order"] = (state.uiSchema["ui:order"] || []).concat(_slug);
+
+  // Activate the "edit" mode after addition, but only for the last
+  // added widget.
+  for (var id in state.editionState) {
+    state.editionState[id] = false;
+  }
+  state.editionState[_slug] = true;
   return state;
 }
 
@@ -138,6 +147,11 @@ function setSchema(state, data) {
   return {...state, error: null};
 }
 
+function setEditState(state, name, edit) {
+  state.editionState[name] = edit;
+  return {...state, error: null};
+}
+
 export default function form(state = INITIAL_STATE, action) {
   switch(action.type) {
   case FIELD_ADD:
@@ -157,6 +171,8 @@ export default function form(state = INITIAL_STATE, action) {
     return updateFormProperties(clone(state), action.properties);
   case SCHEMA_RETRIEVAL_DONE:
     return setSchema(clone(state), action.data);
+  case SET_EDIT_STATE:
+    return setEditState(clone(state), action.name, action.state);
   default:
     return state;
   }
