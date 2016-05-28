@@ -35,23 +35,13 @@ describe("EditableField", () => {
   });
 
   describe("Default state", () => {
-    it("should render an editable field", () => {
-      const comp = createComponent(EditableField, compProps);
-
-      expect(comp.queryAll(".editable-field"))
-        .to.have.length.of(1);
-    });
-  });
-
-  describe("Field properties edition", () => {
-    var comp;
+    let comp;
 
     beforeEach(() => {
       comp = createComponent(EditableField, compProps);
-      Simulate.click(comp.query(".edit-btn"));
     });
 
-    it("should render a properties edition form", () => {
+    it("should render an properties edition form", () => {
       expect(comp.query().classList.contains("field-editor"))
         .eql(true);
     });
@@ -64,6 +54,20 @@ describe("EditableField", () => {
       Simulate.submit(comp.query("form"));
 
       expect(comp.query("label").textContent).eql(value);
+    });
+  });
+
+  describe("Field properties edition", () => {
+    var comp;
+
+    beforeEach(() => {
+      comp = createComponent(EditableField, compProps);
+      Simulate.click(comp.query(".close-btn"));
+    });
+
+    it("should render a EditableField in render mode", () => {
+      expect(comp.queryAll(".editable-field"))
+        .to.have.length.of(1);
     });
   });
 });
