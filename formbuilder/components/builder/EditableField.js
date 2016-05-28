@@ -93,11 +93,11 @@ function DraggableFieldContainer(props) {
 export default class EditableField extends Component {
   constructor(props) {
     super(props);
-    this.state = {edit: false, schema: props.schema};
+    this.state = {edit: true, schema: props.schema};
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({edit: false, schema: nextProps.schema});
+    this.setState({schema: nextProps.schema});
   }
 
   handleEdit(event) {
