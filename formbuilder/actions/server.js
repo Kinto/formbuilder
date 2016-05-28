@@ -169,11 +169,10 @@ export function loadSchema(collection, callback) {
     })
     .bucket(config.server.bucket)
     .collection(collection)
-    .getAttributes().then(({data}) => {
-      console.log("Metadata", data);
+    .getData().then((data) => {
       dispatch({
         type: SCHEMA_RETRIEVAL_DONE,
-        data: data
+        data,
       });
       if (callback) {
         callback(data);

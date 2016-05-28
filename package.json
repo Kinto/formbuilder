@@ -21,7 +21,7 @@
     "btoa": "^1.1.2",
     "history": "^1.17.0",
     "isomorphic-fetch": "^2.2.1",
-    "kinto-client": "^0.6.0",
+    "kinto-client": "^0.8.0",
     "react": "^0.14.8",
     "react-dom": "^0.14.8",
     "react-drag-and-drop": "^2.0.1",

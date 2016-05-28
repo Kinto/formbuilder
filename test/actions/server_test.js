@@ -1,5 +1,6 @@
 /*eslint no-unused-vars: [2, { "varsIgnorePattern": "^d$" }]*/
 
+import KintoClient from "kinto-client";
 import { expect } from "chai";
 import sinon from "sinon";
 
@@ -69,6 +70,23 @@ describe.only("server actions", () => {
 
   describe("publishForm", () => {
     describe("with working remote server", () => {
+
+      it("should get the userid when using serverInfo", () => {
+        sandbox.stub(KintoClient, "constructor").
+      });
+      it("should create the collection with the expected permissions", () => {
+
+      });
+      it("should call initializeBucket if the bucket doesn't exist", () => {
+
+      });
+      it("should dispatch an error if the serverInfo request fails", () => {
+
+      });
+      it("should dispatch an error if createCollection fails", () => {
+
+      });
+
       let data;
       beforeEach(() => {
         data = {id: "collection"};
