@@ -29,7 +29,7 @@ describe("AdminView", () => {
       schema,
       uiSchema,
       records,
-      params: {id: 1234}
+      params: {adminToken: "12345678910"}
     };
   });
 

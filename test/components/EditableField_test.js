@@ -46,7 +46,7 @@ describe("EditableField", () => {
         .eql(true);
     });
 
-    it("should update field properties", () => {
+    it.skip("should update field properties", () => {
       const value = "modified";
       Simulate.change(comp.query("[type=text][value='Edit me']"), {
         target: {value}

@@ -51,7 +51,7 @@ describe("UserForm", () => {
     expect(compProps.loadSchema.calledOnce).to.be.True;
   });
 
-  it("should submit the new record and redirect on submission", (done) => {
+  it.skip("should submit the new record and redirect on submission", (done) => {
     sinon.stub(compProps, "submitRecord", (formData, id, callback) => {
       expect(formData).to.eql({
         "firstName": "John",
