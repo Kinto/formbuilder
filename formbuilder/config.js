@@ -7,7 +7,7 @@ export default {
     {
       id: "text",
       icon: "text-color",
-      label: "Single line text",
+      label: "Short text",
       jsonSchema: {
         type: "string",
         title: "Edit me",
@@ -29,7 +29,7 @@ export default {
     {
       id: "multilinetext",
       icon: "align-left",
-      label: "Multiline text",
+      label: "Long text",
       jsonSchema: {
         type: "string",
         title: "Edit me",
@@ -52,7 +52,7 @@ export default {
     {
       id: "checkbox",
       icon: "check",
-      label: "CheckBox",
+      label: "Checkbox",
       jsonSchema: {
         type: "boolean",
         title: "Edit me",
@@ -70,30 +70,9 @@ export default {
       formData: {}
     },
     {
-      id: "radiobutton",
-      icon: "record",
-      label: "Radio Button",
-      jsonSchema: {
-        type: "boolean",
-        title: "Edit me",
-        default: false
-      },
-      uiSchema: {
-        "ui:widget": "radio",
-        editSchema: {
-          type: "object",
-          properties: {
-            title: {type: "string", title: "Label"},
-            required: {type: "boolean"},
-          }
-        },
-      },
-      formData: {}
-    },
-    {
       id: "radiobuttonlist",
       icon: "list",
-      label: "Radio Button list",
+      label: "Choice list",
       jsonSchema: {
         type: "string",
         title: "Edit me",
@@ -118,88 +97,5 @@ export default {
       },
       formData: {}
     },
-    {
-      id: "selectbox",
-      icon: "list-alt",
-      label: "Select box",
-      jsonSchema: {
-        type: "string",
-        title: "Edit me",
-        enum: []
-      },
-      uiSchema: {
-        editSchema: {
-          type: "object",
-          properties: {
-            title: {type: "string", title: "Label"},
-            required: {type: "boolean"},
-            enum: {
-              type: "array",
-              title: "Options",
-              items: {
-                type: "string"
-              }
-            }
-          }
-        },
-      },
-      formData: {}
-    },
-    {
-      id: "number",
-      icon: "superscript",
-      label: "Number",
-      jsonSchema: {
-        type: "number",
-        title: "Edit me",
-        description: "",
-        multipleOf: 1,
-        minimum: 1,
-        maximum: 100,
-        default: 0
-      },
-      uiSchema: {
-        "ui:widget": "updown",
-        editSchema: {
-          type: "object",
-          properties: {
-            title: {type: "string", title: "Label"},
-            description: {type: "string", title: "Placeholder"},
-            multipleOf: {type: "number", title: "Step"},
-            minimum: {type: "number", title: "Minimum"},
-            maximum: {type: "number", title: "Maximum"},
-            required: {type: "boolean"},
-          }
-        },
-      },
-      formData: {}
-    },
-    {
-      id: "range",
-      icon: "resize-horizontal",
-      label: "Range",
-      jsonSchema: {
-        type: "number",
-        title: "Edit me",
-        multipleOf: 1,
-        minimum: 1,
-        maximum: 100,
-        default: 0
-      },
-      uiSchema: {
-        "ui:widget": "range",
-        editSchema: {
-          type: "object",
-          properties: {
-            title: {type: "string", title: "Label"},
-            multipleOf: {type: "number", title: "Step"},
-            minimum: {type: "number", title: "Minimum"},
-            maximum: {type: "number", title: "Maximum"},
-            required: {type: "boolean"},
-          }
-        },
-      },
-      formData: {}
-    }
   ],
 };
