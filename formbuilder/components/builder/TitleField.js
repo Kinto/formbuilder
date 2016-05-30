@@ -3,7 +3,7 @@ import {RIEInput} from "riek";
 
 function TitleField(props) {
   const onUpdate = function(formData) {
-    props.updateFormProperties(formData);
+    props.updateFormTitle(formData);
   };
 
   const {id, title} = props;

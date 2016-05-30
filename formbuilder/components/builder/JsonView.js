@@ -1,7 +1,7 @@
 import React from "react";
 
 
-export default function FormOptions(props) {
+export default function JSONView(props) {
   return (
     <div>
       <h3>JSONSchema</h3>

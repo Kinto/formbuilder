@@ -21,6 +21,7 @@ export default function EditableForm(props) {
       ...SchemaField.defaultProps.registry.fields,
       SchemaField: props.SchemaField,
       TitleField: props.TitleField,
+      DescriptionField: props.DescriptionField,
     }
   };
 

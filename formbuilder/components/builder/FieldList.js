@@ -42,10 +42,6 @@ export default function FieldList(props) {
         fields={fieldList}
         onClick={addField} />
       <div className="list-group">
-        <Link to="/builder/settings" className="list-group-item">
-          <i className="glyphicon glyphicon-wrench" />&nbsp;
-          Edit form properties
-        </Link>
         <Link to="/builder/json" className="list-group-item">
           <i className="glyphicon glyphicon-fullscreen" />&nbsp;
           Show as JSON
