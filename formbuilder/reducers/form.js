@@ -133,7 +133,7 @@ function updateFormTitle(state, {title}) {
   return {...state, error: null};
 }
 
-function updateFormDescription(state, description) {
+function updateFormDescription(state, {description}) {
   state.schema.description = description;
   return {...state, error: null};
 }
