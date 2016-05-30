@@ -4,7 +4,7 @@ import { Droppable } from "react-drag-and-drop";
 import Default from "./Default";
 import SchemaField from "react-jsonschema-form/lib/components/fields/SchemaField";
 
-export default function EditableForm(props) {
+export default function Form(props) {
   const {error, schema, dragndropStatus} = props;
   const {properties} = schema;
 

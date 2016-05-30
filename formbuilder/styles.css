@@ -108,6 +108,10 @@ textarea.json-viewer {
   border-bottom: 1px black dotted;
 }
 
+.edit-in-place-active {
+  width: 500px;
+}
+
 .btn {
   float: right;
 }
