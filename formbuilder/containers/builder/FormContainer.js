@@ -16,6 +16,7 @@ function mapStateToProps(state) {
     uiSchema: state.form.uiSchema,
     formData: state.form.formData,
     status: state.serverStatus.status,
+    dragndropStatus: state.dragndrop.dragndropStatus
   };
 }
 

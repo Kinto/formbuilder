@@ -98,3 +98,16 @@ textarea.json-viewer {
 .glyphicon + span {
   margin-left: .5em;
 }
+
+.dropzone-active {
+  border: 5px black dotted;
+  margin: 5px;
+}
+
+.edit-in-place:hover {
+  border-bottom: 1px black dotted;
+}
+
+.btn {
+  float: right;
+}

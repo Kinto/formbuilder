@@ -5,7 +5,7 @@ import Default from "./Default";
 import SchemaField from "react-jsonschema-form/lib/components/fields/SchemaField";
 
 export default function EditableForm(props) {
-  const {error, schema} = props;
+  const {error, schema, dragndropStatus} = props;
   const {properties} = schema;
 
   const onClick = (event) => {
@@ -41,7 +41,9 @@ export default function EditableForm(props) {
       <div className="rjsf">
         <SchemaField {...props} registry={registry} />
       </div>
-      <Droppable types={["field"]} className="form-area" onDrop={onDrop}>
+      <Droppable
+        className={dragndropStatus ? "dropzone" : null}
+        id="dropzone" types={["field"]} className="form-area" onDrop={onDrop}>
         {Object.keys(properties).length === 0 ?
           <Default /> : <div/>}
       </Droppable>

@@ -19,7 +19,7 @@ export default {
           type: "object",
           properties: {
             title: {type: "string", title: "Label"},
-            description: {type: "string", title: "Placeholder"},
+            description: {type: "string", title: "Example value"},
             required: {type: "boolean"},
           }
         },

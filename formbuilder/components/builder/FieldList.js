@@ -5,6 +5,13 @@ import { Draggable } from "react-drag-and-drop";
 
 function MenuSection(props) {
   const {heading, fields} = props;
+
+  const onDragStart = () => {
+    props.setDragStatus(true);
+  };
+  const onDragEnd = () => {
+    props.setDragStatus(false);
+  };
   return (
     <div className="panel panel-default">
       <div className="panel-heading">{heading}</div>
@@ -13,6 +20,8 @@ function MenuSection(props) {
           return (
             <Draggable key={index} type="field"
               onClick={_ => props.onClick(field)}
+              onDragStart={_ => onDragStart}
+              onDragEnd={_ => onDragEnd}
               data={JSON.stringify(field)}
               className="list-group-item field-list-entry">
               <i className={`glyphicon glyphicon-${field.icon}`} />&nbsp;
