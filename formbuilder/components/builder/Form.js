@@ -6,6 +6,7 @@ import SchemaField from "react-jsonschema-form/lib/components/fields/SchemaField
 
 export default function Form(props) {
   const {error, schema, dragndropStatus} = props;
+  console.log("dragndropstatus", dragndropStatus);
   const {properties} = schema;
 
   const onClick = (event) => {
@@ -27,7 +28,7 @@ export default function Form(props) {
 
   let saveButtonValue = "Create form";
   if (props.status == "pending") {
-    saveButtonValue = <div>Create form <i className="spin glyphicon glyphicon-refresh" /></div>;
+    saveButtonValue = <div>{saveButtonValue} <i className="spin glyphicon glyphicon-refresh" /></div>;
   }
   const button = (
     <div className="pull-right">
@@ -42,12 +43,12 @@ export default function Form(props) {
       <div className="rjsf">
         <SchemaField {...props} registry={registry} />
       </div>
-      <Droppable
-        className={dragndropStatus ? "dropzone" : null}
-        id="dropzone" types={["field"]} className="form-area" onDrop={onDrop}>
-        {Object.keys(properties).length === 0 ?
-          <Default /> : <div/>}
-      </Droppable>
+      {Object.keys(properties).length === 0 ? <Default /> : <div/>}
+      <div className={dragndropStatus ? "dropzone-active" : null} >
+        <Droppable id="dropzone" types={["field"]} className="form-area" onDrop={onDrop}>
+        {dragndropStatus ? <p>Drop your widget here</p> : null}
+        </Droppable>
+      </div>
       {Object.keys(properties).length === 0 ? <div/> : button}
     </div>
   );

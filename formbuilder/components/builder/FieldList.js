@@ -20,8 +20,8 @@ function MenuSection(props) {
           return (
             <Draggable key={index} type="field"
               onClick={_ => props.onClick(field)}
-              onDragStart={_ => onDragStart}
-              onDragEnd={_ => onDragEnd}
+              onDragStart={onDragStart}
+              onDragEnd={onDragEnd}
               data={JSON.stringify(field)}
               className="list-group-item field-list-entry">
               <i className={`glyphicon glyphicon-${field.icon}`} />&nbsp;
@@ -40,7 +40,8 @@ export default function FieldList(props) {
     <div>
       <MenuSection heading="Widgets"
         fields={fieldList}
-        onClick={addField} />
+        onClick={addField}
+        setDragStatus={props.setDragStatus} />
       <div className="list-group">
         <Link to="/builder/json" className="list-group-item">
           <i className="glyphicon glyphicon-fullscreen" />&nbsp;

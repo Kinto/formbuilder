@@ -81,10 +81,6 @@ textarea.json-viewer {
   font-family: Consolas, "Ubuntu Mono", "Monaco", monospace;
 }
 
-.form-area {
-  padding-bottom: 5em;
-}
-
 .field-list-entry:hover {
   background: #fafafa;
   cursor: move;
@@ -100,8 +96,19 @@ textarea.json-viewer {
 }
 
 .dropzone-active {
-  border: 5px black dotted;
-  margin: 5px;
+  padding-bottom: 5em;
+  background-color: white;
+  outline: 2px dashed black;
+  outline-offset: -10px;
+  font-size: 1.25rem;
+  position: relative;
+  padding: 50px 20px;
+}
+
+.dropzone-active p{
+  text-align: center;
+  margin: auto;
+  height: 100px;
 }
 
 .edit-in-place:hover {
