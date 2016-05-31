@@ -12,7 +12,7 @@ export default function Welcome(props) {
     <div>
       <div className="jumbotron">
         <div className="container">
-        <h1>Hey, welcome!</h1>
+        <h1>Create your own forms</h1>
         <p>
             This is the <strong>Kinto formbuilder</strong>, a tool to help
             you create online forms easily.
