@@ -44,7 +44,7 @@ export default (
       <Route path="form/data-sent"
         components={{...common, sidebarComponent: Check, content: RecordCreatedContainer}} />
       <Route path="form/:id"
-        components={{...common, sidebarComponent: null, header: null, content: UserFormContainer}} />
+        components={{...common, mainComponent: UserFormContainer}} />
       <Route path="admin/:adminToken"
         components={{...common, sidebarComponent: null, header: null, content: AdminViewContainer}} />
       <Route path="*" components={{

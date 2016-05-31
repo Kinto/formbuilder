@@ -70,7 +70,7 @@ describe("UserForm", () => {
       target: {value: "Doe"}
     });
     return new Promise(setImmediate).then(() => {
-      Simulate.submit(comp.query());
+      Simulate.submit(comp.query("form"));
       expect(compProps.submitRecord.calledOnce).to.be.True;
     });
 
