@@ -111,8 +111,8 @@ textarea.json-viewer {
   height: 100px;
 }
 
-.edit-in-place:hover {
-  border-bottom: 1px black dotted;
+.edit-in-place:hover:not(:focus) {
+  text-decoration: underline;
 }
 
 .edit-in-place-active {
