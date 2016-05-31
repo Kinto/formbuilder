@@ -11,7 +11,7 @@ import "./styles.css";
 const store = configureStore({
   notifications: [],
 });
-const history = createHashHistory();
+const history = createHashHistory({queryKey: false});
 
 render((
   <Provider store={store}>
