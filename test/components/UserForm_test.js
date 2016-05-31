@@ -51,7 +51,7 @@ describe("UserForm", () => {
     expect(compProps.loadSchema.calledOnce).to.be.True;
   });
 
-  it.skip("should submit the new record and redirect on submission", (done) => {
+  it("should submit the new record and redirect on submission", (done) => {
     sinon.stub(compProps, "submitRecord", (formData, id, callback) => {
       expect(formData).to.eql({
         "firstName": "John",
@@ -69,7 +69,10 @@ describe("UserForm", () => {
     Simulate.change(comp.query("#root_lastName"), {
       target: {value: "Doe"}
     });
-    Simulate.submit(comp.query());
-    expect(compProps.submitRecord.calledOnce).to.be.True;
+    return new Promise(setImmediate).then(() => {
+      Simulate.submit(comp.query());
+      expect(compProps.submitRecord.calledOnce).to.be.True;
+    });
+
   });
 });

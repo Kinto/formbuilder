@@ -4,7 +4,7 @@ import { expect } from "chai";
 import sinon from "sinon";
 import { Simulate } from "react-addons-test-utils";
 
-import { createComponent } from "../test-utils";
+import { createComponent, d } from "../test-utils";
 import config from "../../formbuilder/config";
 import EditableField from "../../formbuilder/components/builder/EditableField";
 
@@ -46,14 +46,15 @@ describe("EditableField", () => {
         .eql(true);
     });
 
-    it.skip("should update field properties", () => {
+    it("should update field properties", () => {
       const value = "modified";
       Simulate.change(comp.query("[type=text][value='Edit me']"), {
         target: {value}
       });
-      Simulate.submit(comp.query("form"));
-
-      expect(comp.query("label").textContent).eql(value);
+      return new Promise(setImmediate).then(() => {
+        Simulate.submit(comp.query("form"));
+        expect(comp.query("label").textContent).eql(value);
+      });
     });
   });
 
