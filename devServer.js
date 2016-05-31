@@ -2,7 +2,7 @@ var path = require("path");
 var express = require("express");
 var webpack = require("webpack");
 
-var env = "dev", port = 9000;
+var env = "dev", port = 8080;
 
 var webpackConfig = require("./webpack.config." + env);
 var compiler = webpack(webpackConfig);
