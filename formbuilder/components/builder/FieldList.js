@@ -49,7 +49,7 @@ export default function FieldList(props) {
         </Link>
         <button type="button"
           onClick={() => confirm("Are you sure?") && props.resetForm()}
-          className="list-group-item list-group-item-danger">
+          className="list-group-item">
           <i className="glyphicon glyphicon-remove" />&nbsp;
           Reset form
         </button>
