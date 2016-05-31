@@ -6,7 +6,7 @@ import {
 
 const INITIAL_STATE = {
   status: "init",
-  collectionID: null,
+  collection: null,
 };
 
 export default function serverStatus(state = INITIAL_STATE, action) {
@@ -22,7 +22,7 @@ export default function serverStatus(state = INITIAL_STATE, action) {
     return {
       ...state,
       status: "done",
-      collectionID: action.collectionID,
+      collection: action.collection,
     };
   default:
     return state;

@@ -10,7 +10,7 @@ import config from "../../formbuilder/config";
 const {fieldList} = config;
 const textField = fieldList.find(x => x.id === "text");
 const multilineTextField = fieldList.find(x => x.id === "multilinetext");
-const rangeField = fieldList.find(x => x.id === "range");
+const radioButtonField = fieldList.find(x => x.id === "radiobuttonlist");
 
 describe("form reducer", () => {
   describe("FIELD_ADD action", () => {
@@ -237,7 +237,7 @@ describe("form reducer", () => {
       state = form(state, actions.addField(multilineTextField));
       firstField = Object.keys(state.schema.properties)[0];
       secondField = Object.keys(state.schema.properties)[1];
-      state = form(state, actions.insertField(rangeField, secondField));
+      state = form(state, actions.insertField(radioButtonField, secondField));
       insertedField = Object.keys(state.schema.properties)[2];
     });
 
@@ -275,16 +275,17 @@ describe("form reducer", () => {
     });
   });
 
-  describe("FORM_UPDATE_PROPERTIES action", () => {
+  describe("FORM_UPDATE_TITLE action", () => {
     it("should update form properties", () => {
-      const state = form(undefined, actions.updateFormProperties({
-        title: "title",
-        description: "description",
-      }));
-      const {title, description} = state.schema;
+      const state = form(undefined, actions.updateFormTitle({title: "title"}));
+      expect(state.schema.title).eql("title");
+    });
+  });
 
-      expect(title).eql("title");
-      expect(description).eql("description");
+  describe("FORM_UPDATE_DESCRIPTION action", () => {
+    it("should update form properties", () => {
+      const state = form(undefined, actions.updateFormDescription({description: "description"}));
+      expect(state.schema.description).eql("description");
     });
   });
 });

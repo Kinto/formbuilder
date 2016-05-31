@@ -4,13 +4,14 @@ import { Droppable } from "react-drag-and-drop";
 import Default from "./Default";
 import SchemaField from "react-jsonschema-form/lib/components/fields/SchemaField";
 
-export default function EditableForm(props) {
-  const {error, schema} = props;
+export default function Form(props) {
+  const {error, schema, dragndropStatus} = props;
+  console.log("dragndropstatus", dragndropStatus);
   const {properties} = schema;
 
   const onClick = (event) => {
-    props.publishForm((collectionID) => {
-      props.history.pushState(null, `/builder/published/${collectionID}`);
+    props.publishForm(({collection, adminToken}) => {
+      props.history.pushState(null, `/builder/published/${adminToken}`);
     });
   };
 
@@ -21,14 +22,13 @@ export default function EditableForm(props) {
       ...SchemaField.defaultProps.registry.fields,
       SchemaField: props.SchemaField,
       TitleField: props.TitleField,
+      DescriptionField: props.DescriptionField,
     }
   };
 
   let saveButtonValue = "Create form";
   if (props.status == "pending") {
-    saveButtonValue = <div>Create form <i className="spin glyphicon glyphicon-refresh" /></div>;
-  } else if (props.status == "done") {
-    saveButtonValue = <div>Form saved <i className="glyphicon glyphicon-ok" /></div>;
+    saveButtonValue = <div>{saveButtonValue} <i className="spin glyphicon glyphicon-refresh" /></div>;
   }
   const button = (
     <div className="pull-right">
@@ -43,10 +43,12 @@ export default function EditableForm(props) {
       <div className="rjsf">
         <SchemaField {...props} registry={registry} />
       </div>
-      <Droppable types={["field"]} className="form-area" onDrop={onDrop}>
-        {Object.keys(properties).length === 0 ?
-          <Default /> : <div/>}
-      </Droppable>
+      {Object.keys(properties).length === 0 ? <Default /> : <div/>}
+      <div className={dragndropStatus ? "dropzone-active" : null} >
+        <Droppable id="dropzone" types={["field"]} className="form-area" onDrop={onDrop}>
+        {dragndropStatus ? <p>Drop your widget here</p> : null}
+        </Droppable>
+      </div>
       {Object.keys(properties).length === 0 ? <div/> : button}
     </div>
   );

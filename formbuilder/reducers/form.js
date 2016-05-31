@@ -6,7 +6,8 @@ import {
   FIELD_INSERT,
   FIELD_SWAP,
   FORM_RESET,
-  FORM_UPDATE_PROPERTIES,
+  FORM_UPDATE_TITLE,
+  FORM_UPDATE_DESCRIPTION,
 } from "../actions/fieldlist";
 
 import {SCHEMA_RETRIEVAL_DONE} from "../actions/server";
@@ -16,6 +17,7 @@ const INITIAL_STATE = {
   schema: {
     type: "object",
     title: "Untitled form",
+    description: "Enter some description for your form here",
     properties: {}
   },
   uiSchema: {
@@ -126,8 +128,12 @@ function swapFields(state, source, target) {
   return {...state, error: null};
 }
 
-function updateFormProperties(state, {title, description}) {
+function updateFormTitle(state, {title}) {
   state.schema.title = title;
+  return {...state, error: null};
+}
+
+function updateFormDescription(state, {description}) {
   state.schema.description = description;
   return {...state, error: null};
 }
@@ -153,8 +159,10 @@ export default function form(state = INITIAL_STATE, action) {
     return swapFields(clone(state), action.source, action.target);
   case FORM_RESET:
     return INITIAL_STATE;
-  case FORM_UPDATE_PROPERTIES:
-    return updateFormProperties(clone(state), action.properties);
+  case FORM_UPDATE_TITLE:
+    return updateFormTitle(clone(state), action.title);
+  case FORM_UPDATE_DESCRIPTION:
+    return updateFormDescription(clone(state), action.description);
   case SCHEMA_RETRIEVAL_DONE:
     return setSchema(clone(state), action.data);
   default:

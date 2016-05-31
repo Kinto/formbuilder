@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import CSVDownloader from "./CSVDownloader";
+import {getUserToken} from "../utils.js";
 
 export default class AdminView extends Component {
   componentDidMount() {
-    const collectionID = this.props.params.id;
-    this.props.getRecords(collectionID);
-    this.props.loadSchema(collectionID);
+    const adminToken = this.props.params.adminToken;
+    const collection = getUserToken(adminToken);
+    this.props.getRecords(adminToken);
+    this.props.loadSchema(collection);
   }
   render() {
     const properties = this.props.schema.properties;
@@ -26,15 +28,15 @@ export default class AdminView extends Component {
         <thead>
           <tr>{
             schemaFields.map((key) => {
-              return <th>{properties[key].title}</th>;
+              return <th key={key}>{properties[key].title}</th>;
             })
           }</tr>
         </thead>
         <tbody>
         {this.props.records.map((record) => {
-          return (<tr>{
+          return (<tr key={record.id}>{
             schemaFields.map((key) => {
-              return <td>{String(record[key])}</td>;
+              return <td key={key}>{String(record[key])}</td>;
             }
           )}
           </tr>);

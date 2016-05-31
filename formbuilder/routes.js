@@ -4,7 +4,6 @@ import { Route, IndexRoute, Link } from "react-router";
 import App from "./containers/App";
 import FieldListContainer from "./containers/builder/FieldListContainer";
 import FormContainer from "./containers/builder/FormContainer";
-import FormOptionsContainer from "./containers/builder/FormOptionsContainer";
 import JsonViewContainer from "./containers/builder/JsonViewContainer";
 
 import NotificationContainer from "./containers/NotificationContainer";
@@ -38,17 +37,15 @@ export default (
       <IndexRoute components={{...common, mainComponent: WelcomeContainer}} />
       <Route path="builder"
         components={{...common, content: FormContainer}} />
-      <Route path="builder/settings"
-        components={{...common, sidebarComponent: LinkToBuilder, content: FormOptionsContainer}} />
       <Route path="builder/json"
         components={{...common, sidebarComponent: LinkToBuilder, content: JsonViewContainer}} />
-      <Route path="builder/published/:id"
+      <Route path="builder/published/:adminToken"
         components={{...common, sidebarComponent: Check, content: FormCreatedContainer}} />
       <Route path="form/data-sent"
         components={{...common, sidebarComponent: Check, content: RecordCreatedContainer}} />
       <Route path="form/:id"
         components={{...common, sidebarComponent: null, header: null, content: UserFormContainer}} />
-      <Route path="admin/:id"
+      <Route path="admin/:adminToken"
         components={{...common, sidebarComponent: null, header: null, content: AdminViewContainer}} />
       <Route path="*" components={{
         sidebarComponent: FieldListContainer,

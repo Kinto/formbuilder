@@ -17,6 +17,6 @@ export default class UserForm extends Component {
       });
     };
     return <Form schema={this.props.schema} uiSchema={this.props.uiSchema}
-    onSubmit={onSubmit}/>;
+      onSubmit={onSubmit}/>;
   }
 }

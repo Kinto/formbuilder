@@ -43,7 +43,7 @@ class FieldPropertiesEditor extends Component {
       <div className="panel panel-default field-editor">
         <div className="panel-heading">
           <strong>Edit {name}</strong>
-          <button type="button" className="close-btn" onClick={cancel}>
+          <button type="button" className="close-btn" onClick={cancel} aria-label="Close">
             <i className="glyphicon glyphicon-remove-sign"/>
           </button>
         </div>
@@ -155,20 +155,6 @@ export default class EditableField extends Component {
         // This can only be the root form object, returning a regular SchemaField.
         return <SchemaField {...props} idSchema={{id: props.name}} />;
       }
-      // This is a preset fieldSet
-      return (
-        <DraggableFieldContainer
-          dragData={props.name}
-          onEdit={this.handleEdit.bind(this)}
-          onDelete={this.handleDelete.bind(this)}
-          onDoubleClick={this.handleEdit.bind(this)}
-          onDrop={this.handleDrop.bind(this)}>
-          <SchemaField {...props}
-            SchemaField={SchemaField}
-            schema={this.state.schema}
-            idSchema={{id: props.name}} />
-        </DraggableFieldContainer>
-      );
     }
 
     return (

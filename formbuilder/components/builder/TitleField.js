@@ -3,11 +3,11 @@ import {RIEInput} from "riek";
 
 function TitleField(props) {
   const onUpdate = function(formData) {
-    props.updateFormProperties(formData);
+    props.updateFormTitle(formData);
   };
 
   const {id, title} = props;
-  return <legend id={id}><RIEInput propName="title" value={title} change={onUpdate} /></legend>;
+  return <legend id={id}><RIEInput className="edit-in-place" propName="title" value={title} change={onUpdate} /></legend>;
 }
 
 if (process.env.NODE_ENV !== "production") {
