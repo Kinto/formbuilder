@@ -1,4 +1,5 @@
 export default {
+  projectName: process.env.PROJECT_NAME || "Formbuilder",
   server: {
     remote: process.env.SERVER_URL,
     bucket: "formbuilder",

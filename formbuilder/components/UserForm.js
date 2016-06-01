@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Form from "react-jsonschema-form";
-
+import config from "../config";
 
 export default class UserForm extends Component {
   componentDidMount() {
@@ -11,6 +11,7 @@ export default class UserForm extends Component {
   }
 
   render() {
+    const origin = window.location.origin + window.location.pathname;
     const onSubmit = ({formData}) => {
       this.props.submitRecord(formData, this.props.params.id, () => {
         this.props.history.pushState(null, "/form/data-sent");
@@ -19,6 +20,9 @@ export default class UserForm extends Component {
     return (<div className="narrow">
       <Form schema={this.props.schema} uiSchema={this.props.uiSchema}
         onSubmit={onSubmit}/>
-    </div>);
+      <p className="small">This form was created by the <a href={origin}>{config.projectName}</a>.</p>
+    </div>
+
+  );
   }
 }
