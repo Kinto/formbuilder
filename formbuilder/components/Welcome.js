@@ -17,7 +17,7 @@ export default function Welcome(props) {
             This is the <strong>Kinto formbuilder</strong>, a tool to help
             you create online forms easily.
         </p>
-        <p><button type="button" onClick={createNewForm} className="btn btn-primary btn-lg"><i className="glyphicon glyphicon-edit"></i>Create a new form!</button></p>
+        <p><button type="button" onClick={createNewForm} className="btn btn-primary btn-lg">Start a new form</button></p>
         </div>
       </div>
       <div className="container">
