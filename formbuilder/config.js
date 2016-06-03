@@ -52,7 +52,7 @@ export default {
     {
       id: "checkbox",
       icon: "check",
-      label: "Checkbox",
+      label: "Yes/No",
       jsonSchema: {
         type: "boolean",
         title: "Edit me",
@@ -80,6 +80,38 @@ export default {
       },
       uiSchema: {
         "ui:widget": "radio",
+        editSchema: {
+          type: "object",
+          properties: {
+            title: {type: "string", title: "Label"},
+            required: {type: "boolean"},
+            enum: {
+              type: "array",
+              title: "Options",
+              items: {
+                type: "string"
+              }
+            }
+          }
+        },
+      },
+      formData: {}
+    },
+    {
+      id: "multiplechoiceslist",
+      icon: "list-alt",
+      label: "Multiple choices list",
+      jsonSchema: {
+        type: "array",
+        title: "Edit me",
+        items: {
+          type: "string",
+          enum: ["option 1", "option 2", "option 3"],
+        },
+        uniqueItems: true
+      },
+      uiSchema: {
+        "ui:widget": "checkboxes",
         editSchema: {
           type: "object",
           properties: {
