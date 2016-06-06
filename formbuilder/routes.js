@@ -14,6 +14,8 @@ import AdminViewContainer from "./containers/AdminViewContainer";
 import WelcomeContainer from "./containers/WelcomeContainer";
 import Header from "./components/Header";
 import Check from "./components/Check";
+import FAQ from "./components/FAQ";
+
 
 const common = {
   notifications: NotificationContainer,
@@ -35,6 +37,8 @@ const LinkToBuilder = () => {
 export default (
     <Route path="/" component={App}>
       <IndexRoute components={{...common, mainComponent: WelcomeContainer}} />
+      <Route path="faq"
+        components={{...common, sidebarComponent: LinkToBuilder, content: FAQ}} />
       <Route path="builder"
         components={{...common, content: FormContainer}} />
       <Route path="builder/json"
