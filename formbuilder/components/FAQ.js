@@ -10,6 +10,11 @@ export default function FAQ(props) {
         In the future, we plan to let the form creator chose the location for the data,
         but for now {config.projectName} stores the data in a <a href="https://kinto-storage.org">Kinto</a> instance it hosts.
       </p>
+
+      <h3>I found a bug, where can I report it?</h3>
+      <p>We are currently using Github to manage issues.
+      If you want, you can open an issue <a href="https://www.github.com/kinto/formbuilder/issues">on our bugtracker</a>.
+      If you prefer, you can also <a href="mailto:contact@fourmilieres.net">send us an email</a>.</p>
     </div>
   );
 }
