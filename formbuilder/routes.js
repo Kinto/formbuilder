@@ -32,6 +32,15 @@ const LinkToBuilder = () => {
   );
 };
 
+const BackAndCheck = () => {
+  return (
+    <div>
+      <LinkToBuilder />
+      <Check />
+    </div>
+  );
+};
+
 export default (
     <Route path="/" component={App}>
       <IndexRoute components={{...common, mainComponent: WelcomeContainer}} />
@@ -40,7 +49,7 @@ export default (
       <Route path="builder/json"
         components={{...common, sidebarComponent: LinkToBuilder, content: JsonViewContainer}} />
       <Route path="builder/published/:adminToken"
-        components={{...common, sidebarComponent: Check, content: FormCreatedContainer}} />
+        components={{...common, sidebarComponent: BackAndCheck, content: FormCreatedContainer}} />
       <Route path="form/data-sent"
         components={{...common, sidebarComponent: Check, content: RecordCreatedContainer}} />
       <Route path="form/:id"
