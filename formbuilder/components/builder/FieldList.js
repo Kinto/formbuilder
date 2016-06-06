@@ -35,13 +35,10 @@ function MenuSection(props) {
 }
 
 export default function FieldList(props) {
-  const {fieldList, addField} = props;
-  return (
-    <div>
-      <MenuSection heading="Widgets"
-        fields={fieldList}
-        onClick={addField}
-        setDragStatus={props.setDragStatus} />
+  const {fieldList, addField, schema} = props;
+  var actionFields;
+  if (Object.keys(schema.properties).length > 0) {
+    actionFields = (
       <div className="list-group">
         <Link to="/builder/json" className="list-group-item">
           <i className="glyphicon glyphicon-fullscreen" />&nbsp;
@@ -54,6 +51,15 @@ export default function FieldList(props) {
           Reset form
         </button>
       </div>
+    );
+  }
+  return (
+    <div>
+      <MenuSection heading="Widgets"
+        fields={fieldList}
+        onClick={addField}
+        setDragStatus={props.setDragStatus} />
+      {actionFields}
     </div>
   );
 }
