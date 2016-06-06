@@ -17,6 +17,14 @@ $ npm install
 $ npm run start  
 ```
 
+# Configuration
+
+It's possible to configure a few things, using environment variables:
+
+- `PROJECT_NAME` is the name of the project. Defaults to "formbuilder".
+- `SERVER_URL` is the URL of the kinto server. It's default value depends on
+  the environment that's being used (development, production, etc.)
+
 # Architecture of the project
 
 The formbuilder is based on top of React and the [react-jsonschema-form (rjsf)](https://github.com/mozilla-services/react-jsonschema-form)
