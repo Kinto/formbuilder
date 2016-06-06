@@ -1,4 +1,5 @@
-import slug from "slug";
+import S from "string";
+
 import {
   FIELD_ADD,
   FIELD_REMOVE,
@@ -28,7 +29,7 @@ const INITIAL_STATE = {
 };
 
 function slugify(string) {
-  return slug(string, {mode: "rfc3986", replacement: "_"});
+  return S(string).slugify().replace("-", "_").s;
 }
 
 function clone(obj) {
