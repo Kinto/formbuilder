@@ -26,7 +26,7 @@ export default function Form(props) {
     }
   };
 
-  let saveButtonValue = "Create form";
+  let saveButtonValue = "Save your form";
   if (props.status == "pending") {
     saveButtonValue = <div>{saveButtonValue} <i className="spin glyphicon glyphicon-refresh" /></div>;
   }
