@@ -23,13 +23,22 @@ const common = {
   header: Header
 };
 
-const LinkToBuilder = () => {
+const LinkToBuilder = (props) => {
   return (
     <div className="list-group">
       <Link className="list-group-item" to="/builder">
         <i className="glyphicon glyphicon-chevron-left" />
-        {"Back"}
+        {props.text || "Back"}
       </Link>
+    </div>
+  );
+};
+
+const BackAndCheck = () => {
+  return (
+    <div>
+      <LinkToBuilder text="Continue editing"/>
+      <Check />
     </div>
   );
 };
@@ -44,7 +53,7 @@ export default (
       <Route path="builder/json"
         components={{...common, sidebarComponent: LinkToBuilder, content: JsonViewContainer}} />
       <Route path="builder/published/:adminToken"
-        components={{...common, sidebarComponent: Check, content: FormCreatedContainer}} />
+        components={{...common, sidebarComponent: BackAndCheck, content: FormCreatedContainer}} />
       <Route path="form/data-sent"
         components={{...common, sidebarComponent: Check, content: RecordCreatedContainer}} />
       <Route path="form/:id"
