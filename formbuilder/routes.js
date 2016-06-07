@@ -21,12 +21,12 @@ const common = {
   header: Header
 };
 
-const LinkToBuilder = () => {
+const LinkToBuilder = (props) => {
   return (
     <div className="list-group">
       <Link className="list-group-item" to="/builder">
         <i className="glyphicon glyphicon-chevron-left" />
-        {"Back"}
+        {props.text || "Back"}
       </Link>
     </div>
   );
@@ -35,7 +35,7 @@ const LinkToBuilder = () => {
 const BackAndCheck = () => {
   return (
     <div>
-      <LinkToBuilder />
+      <LinkToBuilder text="Continue editing"/>
       <Check />
     </div>
   );
