@@ -76,6 +76,12 @@ export function publishForm(callback) {
     const form = getState().form;
     const schema = form.schema;
     const uiSchema = form.uiSchema;
+
+    // Remove the "required" property if it's empty.
+    if (schema.required.length === 0) {
+      delete schema.required;
+    }
+
     dispatch({type: FORM_PUBLICATION_PENDING});
     const adminToken = uuid.v4().replace(/-/g, "");
     const userToken = getUserToken(adminToken);
