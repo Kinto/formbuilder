@@ -1,6 +1,5 @@
 import React from "react";
 import { Droppable } from "react-drag-and-drop";
-import { Link } from "react-router";
 
 import Default from "./Default";
 import SchemaField from "react-jsonschema-form/lib/components/fields/SchemaField";
@@ -27,13 +26,12 @@ export default function Form(props) {
     }
   };
 
-  let saveButtonValue = "Validate and send form";
+  let saveButtonValue = "Save your form";
   if (props.status == "pending") {
     saveButtonValue = <div>{saveButtonValue} <i className="spin glyphicon glyphicon-refresh" /></div>;
   }
   const button = (
     <div className="pull-right">
-      <Link className="btn btn-link" to="/">Delete form</Link>
       <button onClick={onClick} className="btn btn-success align-right">
         {saveButtonValue}
       </button>
