@@ -1,19 +1,21 @@
 import React, { Component } from "react";
 import CSVDownloader from "./CSVDownloader";
-import {getUserToken} from "../utils.js";
+import URLDisplay from "./URLDisplay";
+import {getUserToken, getUserURL} from "../utils";
 
 export default class AdminView extends Component {
   componentDidMount() {
     const adminToken = this.props.params.adminToken;
-    const collection = getUserToken(adminToken);
+    this.userToken = getUserToken(adminToken);
     this.props.getRecords(adminToken);
-    this.props.loadSchema(collection);
+    this.props.loadSchema(this.userToken);
   }
   render() {
     const properties = this.props.schema.properties;
     const title = this.props.schema.title;
     const ready = Object.keys(properties).length !== 0;
     const schemaFields = this.props.uiSchema["ui:order"];
+    const formUrl = getUserURL(this.userToken);
 
     let content = "loading";
     if (ready) {
@@ -24,6 +26,7 @@ export default class AdminView extends Component {
           schema={this.props.schema}
           fields={schemaFields}
           records={this.props.records} />
+        <URLDisplay url={formUrl} />
         <table className="table table-striped">
         <thead>
           <tr>{
