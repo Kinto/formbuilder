@@ -8,6 +8,7 @@ import config from "../../config";
 function mapStateToProps(state) {
   return {
     fieldList: config.fieldList,
+    schema: state.form.schema,
   };
 }
 
