@@ -128,3 +128,12 @@ textarea.json-viewer {
   margin-right: auto;
   margin-left: auto;
 }
+
+.background {
+  background-image: url(assets/background.jpg);
+  background-position: bottom;
+  color: white;
+}
+.background h1 {
+  color: white;
+}
