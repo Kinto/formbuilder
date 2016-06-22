@@ -21,7 +21,7 @@ export default function FormCreated(props) {
 
         <label>And this is the <a href={adminURL}>link to the administration dashboard</a>:</label>
           <p>Keep this URL in a safe place and give it only to the administrators.</p>
-          <URLDisplay url={userformURL} type="admin" />
+          <URLDisplay url={adminURL} type="admin" />
       </div>
     </form>
   );
