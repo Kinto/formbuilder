@@ -25,7 +25,7 @@ export default function Welcome(props) {
         <div className="col-md-4">
           <h3><i className="glyphicon glyphicon-eye-close"></i> Privacy matters</h3>
           <p>With <a href="https://kinto-storage.org">Kinto</a>, you are not giving Google or any other giants your data.</p>
-          <p>Our goal is not to host all the forms of the world, so we try to make it easy for you to <a href="http://kinto.readthedocs.io/en/stable/tutorials/install.html">host your own servers</a>.</p>
+          <p>Our goal is not to host all the forms of the world, so we try to make it easy for you to <a href="https://kinto.readthedocs.io/en/stable/tutorials/install.html">host your own servers</a>.</p>
         </div>
         <div className="col-md-4">
           <h3><i className="glyphicon glyphicon-heart-empty"></i> Open source</h3>
