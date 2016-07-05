@@ -4,6 +4,7 @@ export default {
     remote: process.env.SERVER_URL,
     bucket: "formbuilder",
   },
+  appURL: process.env.APP_URL || window.location.origin + window.location.pathname,
   fieldList: [
     {
       id: "text",

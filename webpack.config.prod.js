@@ -3,10 +3,11 @@ var webpack = require("webpack");
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const serverURL = process.env.SERVER_URL || "https://kinto.notmyidea.org/v1/";
+const appURL = process.env.APP_URL || "https://www.fourmillieres.net/";
 
 
 module.exports = {
-  entry: "./formbuilder/app",
+  entry: ["./formbuilder/app", "babel-polyfill"],
   output: {
     path: path.join(__dirname, "build"),
     filename: "bundle.js",
@@ -18,7 +19,8 @@ module.exports = {
     new webpack.DefinePlugin({
       "process.env": {
         NODE_ENV: JSON.stringify("production"),
-        SERVER_URL: JSON.stringify(serverURL)
+        SERVER_URL: JSON.stringify(serverURL),
+        APP_URL: JSON.stringify(appURL),
       },
     })
   ],

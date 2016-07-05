@@ -1,3 +1,6 @@
+import config from "./config";
+
+
 /**
  * Returns the user token from the administration token.
  *
@@ -17,8 +20,7 @@ export function getUserToken(adminToken) {
  * available.
  **/
 export function getUserURL(userToken) {
-  const origin = window.location.origin + window.location.pathname;
-  return `${origin}#/form/${userToken}`;
+  return `${config.appURL}#/form/${userToken}`;
 }
 
 /**
@@ -29,6 +31,5 @@ export function getUserURL(userToken) {
  * available.
  **/
 export function getAdminURL(adminToken) {
-  const origin = window.location.origin + window.location.pathname;
-  return `${origin}#/admin/${adminToken}`;
+  return `${config.appURL}#/admin/${adminToken}`;
 }
