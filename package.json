@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "A tool to build forms on the web",
   "scripts": {
-    "build:formbuilder": "NODE_ENV=production rimraf build && webpack --config webpack.config.prod.js --optimize-minimize && cp formbuilder/index.prod.html build/index.html",
+    "build:formbuilder": "NODE_ENV=production rimraf build && webpack --config webpack.config.prod.js && cp formbuilder/index.prod.html build/index.html",
     "build:formbuilder-gh": "rimraf build && webpack --config webpack.config.github.js && cp formbuilder/index.prod.html build/index.html",
     "lint": "eslint src test",
     "publish-to-gh-pages": "npm run build:formbuilder-gh && gh-pages --dist build/",
@@ -39,6 +39,7 @@
     "babel-eslint": "^4.1.6",
     "babel-loader": "^5.3.2",
     "babel-plugin-react-transform": "^1.1.1",
+    "babel-polyfill": "^6.9.1",
     "btoa": "^1.1.2",
     "chai": "^3.3.0",
     "css-loader": "^0.23.1",
