@@ -72,7 +72,6 @@ form > p {
 
 .panel-heading .close-btn {
   float: right;
-  margin-right: -1em;
 }
 
 textarea.json-viewer {
