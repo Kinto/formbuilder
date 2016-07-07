@@ -32,7 +32,7 @@ class FieldPropertiesEditor extends Component {
   }
 
   render() {
-    const {schema, name, required, uiSchema, cancel, update} = this.props;
+    const {schema, name, required, uiSchema, onCancel, onUpdate, onDelete} = this.props;
     const formData = {
       ...schema,
       required,
@@ -43,8 +43,11 @@ class FieldPropertiesEditor extends Component {
       <div className="panel panel-default field-editor">
         <div className="panel-heading">
           <strong>Edit {name}</strong>
-          <button type="button" className="close-btn" onClick={cancel} aria-label="Close">
+          <button type="button" className="close-btn" onClick={onCancel} aria-label="Close">
             close <i className="glyphicon glyphicon-remove-sign"/>
+          </button>
+          <button type="button" className="close-btn" onClick={onDelete} aria-label="Delete">
+            delete <i className="glyphicon glyphicon-trash"/>
           </button>
         </div>
         <div className="panel-body">
@@ -52,7 +55,7 @@ class FieldPropertiesEditor extends Component {
             schema={uiSchema.editSchema}
             formData={formData}
             onChange={this.onChange.bind(this)}
-            onSubmit={update} />
+            onSubmit={onUpdate} />
         </div>
       </div>
     );
@@ -81,7 +84,7 @@ function DraggableFieldContainer(props) {
               edit <i className="glyphicon glyphicon-edit"/>
             </button>
             <button type="button" className="delete-btn" onClick={onDelete}>
-              delete <i className="glyphicon glyphicon-remove-sign"/>
+              delete <i className="glyphicon glyphicon-trash"/>
             </button>
           </div>
         </div>
@@ -145,8 +148,9 @@ export default class EditableField extends Component {
       return (
         <FieldPropertiesEditor
           {...props}
-          cancel={this.handleCancel.bind(this)}
-          update={this.handleUpdate.bind(this)} />
+          onCancel={this.handleCancel.bind(this)}
+          onUpdate={this.handleUpdate.bind(this)}
+          onDelete={this.handleDelete.bind(this)} />
       );
     }
 
