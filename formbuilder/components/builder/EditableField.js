@@ -47,7 +47,7 @@ class FieldPropertiesEditor extends Component {
             close <i className="glyphicon glyphicon-remove-sign"/>
           </button>
           <button type="button" className="close-btn" onClick={onDelete} aria-label="Delete">
-            delete <i className="glyphicon glyphicon-remove-sign"/>
+            delete <i className="glyphicon glyphicon-trash"/>
           </button>
         </div>
         <div className="panel-body">
@@ -84,7 +84,7 @@ function DraggableFieldContainer(props) {
               edit <i className="glyphicon glyphicon-edit"/>
             </button>
             <button type="button" className="delete-btn" onClick={onDelete}>
-              delete <i className="glyphicon glyphicon-remove-sign"/>
+              delete <i className="glyphicon glyphicon-trash"/>
             </button>
           </div>
         </div>
