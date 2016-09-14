@@ -19,7 +19,7 @@ export default function CSVDownloader(props) {
   }).reduce((prev, curr) => {
     return prev + curr;
   }, "");
-  const fileContent = "data:text/plain;base64," + btoa(content);
+  const fileContent = "data:application/json;base64," + btoa(content);
 
   return <a download={filename}
             href={fileContent}
