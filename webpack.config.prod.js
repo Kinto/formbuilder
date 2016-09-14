@@ -3,7 +3,7 @@ var webpack = require("webpack");
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const serverURL = process.env.SERVER_URL || "https://kinto.notmyidea.org/v1/";
-const appURL = process.env.APP_URL || "https://www.fourmillieres.net/";
+const appURL = process.env.APP_URL || "https://www.fourmilieres.net/";
 
 
 module.exports = {
