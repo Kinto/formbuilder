@@ -11,6 +11,7 @@ import UserFormContainer from "./containers/UserFormContainer";
 import RecordCreatedContainer from "./containers/RecordCreatedContainer";
 import AdminViewContainer from "./containers/AdminViewContainer";
 import WelcomeContainer from "./containers/WelcomeContainer";
+import JsonSchemaDownloaderContainer from "./containers/builder/JsonSchemaDownloaderContainer";
 import Header from "./components/Header";
 import Check from "./components/Check";
 import FAQ from "./components/FAQ";
@@ -61,6 +62,17 @@ const LinkToHome = () => {
   );
 };
 
+const BackAndDownloadJSONSchema = () => {
+  return (
+    <div>
+      <LinkToBuilder text="Continue editing"/>
+      <div className="list-group">
+        <JsonSchemaDownloaderContainer />
+      </div>
+    </div>
+  );
+};
+
 export default (
     <Route path="/" component={App}>
       <IndexRoute components={{...common, mainComponent: WelcomeContainer}} />
@@ -69,7 +81,7 @@ export default (
       <Route path="builder"
         components={{...common, content: FormContainer}} />
       <Route path="builder/json"
-        components={{...common, sidebarComponent: LinkToBuilder, content: JsonViewContainer}} />
+        components={{...common, sidebarComponent: BackAndDownloadJSONSchema, content: JsonViewContainer}} />
       <Route path="builder/published/:adminToken"
         components={{...common, sidebarComponent: BackAndCheck, content: FormCreatedContainer}} />
       <Route path="form/data-sent"
