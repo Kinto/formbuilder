@@ -18,15 +18,6 @@ export default class AddFieldDropdown extends Component {
   }
 
   render () {
-    var dropdownItems = this.state.fieldList.map((field, index) => {
-      return {
-        "value": `${index}`,
-        "disabled": false,
-        "isDivider": false,
-        "text": field.label
-      };
-    });
-
     return (
       <Dropdown title="Add a field" dropup id="split-button-dropup">
         <Dropdown.Toggle>
