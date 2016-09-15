@@ -123,3 +123,11 @@ textarea.json-viewer {
   margin-right: auto;
   margin-left: auto;
 }
+
+.builder-form .panel {
+  margin-bottom: 0;
+}
+
+.builder-inner-actions {
+  margin-bottom: 30px;
+}
