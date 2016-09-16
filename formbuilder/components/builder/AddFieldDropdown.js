@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import SchemaField from "react-jsonschema-form/lib/components/fields/SchemaField";
 
-import ButtonDropdown from "react-bootstrap-dropdown"
+import {Dropdown, MenuItem}  from "react-bootstrap"
 
 import config from "../../config";
-
 
 export default class AddFieldDropdown extends Component {
   constructor(props) {
@@ -12,9 +11,8 @@ export default class AddFieldDropdown extends Component {
     this.state = {'fieldList': config.fieldList};
   }
 
-  handleAddField(selected) {
-    const field_index = parseInt(selected.value);
-    const field = this.state.fieldList[field_index];
+  handleAddField(field_index, event) {
+    const field = this.state.fieldList[parseInt(field_index)];
 
     this.props.addField(field);
   }
@@ -30,10 +28,23 @@ export default class AddFieldDropdown extends Component {
     });
 
     return (
-      <div className="btn-group">
-        <ButtonDropdown updateTitle={false} title="Add a field&nbsp;" items={dropdownItems} onSelect={this.handleAddField.bind(this)} className="pull-right">
-        </ButtonDropdown>
-      </div>
+      <Dropdown title="Add a field" dropup id="split-button-dropup">
+        <Dropdown.Toggle>
+          <i className="glyphicon glyphicon-plus" />
+          Add a field
+        </Dropdown.Toggle>
+
+        <Dropdown.Menu>
+          {this.state.fieldList.map((field, index) => {
+            return <MenuItem key={index}
+                eventKey={index}
+                onSelect={this.handleAddField.bind(this)}
+                ><i className={`glyphicon glyphicon-${field.icon}`} />
+                {field.label}
+              </MenuItem>
+          })}
+        </Dropdown.Menu>
+      </Dropdown>
     );
   }
 }
