@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router";
-import AddFieldDropdown from "./AddFieldDropdown"
+import FieldListDropdown from "./FieldListDropdown"
 import {Button, ButtonToolbar, ButtonGroup}  from "react-bootstrap"
 
 export default function FormActions(props) {
@@ -20,7 +20,10 @@ export default function FormActions(props) {
   return (
     <div>
       <ButtonToolbar className="builder-inner-actions">
-        <AddFieldDropdown className="pull-right" {...props} />
+        <FieldListDropdown className="pull-right" {...props}>
+          <i className="glyphicon glyphicon-plus" />
+          Add a field
+        </FieldListDropdown>
       </ButtonToolbar>
       <ButtonGroup className="pull-right">
         <Button onClick={() => confirm("This action will reset all unsaved changes, Are you sure?") && props.resetForm()}>

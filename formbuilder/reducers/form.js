@@ -2,6 +2,7 @@ import S from "string";
 
 import {
   FIELD_ADD,
+  FIELD_SWITCH,
   FIELD_REMOVE,
   FIELD_UPDATE,
   FIELD_INSERT,
@@ -48,6 +49,13 @@ function addField(state, field) {
   state.schema.properties[_slug] = {...field.jsonSchema, title: name};
   state.uiSchema[_slug] = field.uiSchema;
   state.uiSchema["ui:order"] = (state.uiSchema["ui:order"] || []).concat(_slug);
+  return state;
+}
+
+function switchField(state, propertyName, newField) {
+  state.schema.properties[propertyName] = {...newField.jsonSchema};
+  state.uiSchema[propertyName] = newField.uiSchema;
+
   return state;
 }
 
@@ -149,6 +157,8 @@ export default function form(state = INITIAL_STATE, action) {
   switch(action.type) {
   case FIELD_ADD:
     return addField(clone(state), action.field);
+  case FIELD_SWITCH:
+    return switchField(clone(state), action.property, action.newField);
   case FIELD_REMOVE:
     return removeField(clone(state), action.name);
   case FIELD_UPDATE:

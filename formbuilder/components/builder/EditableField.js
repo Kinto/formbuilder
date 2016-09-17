@@ -2,11 +2,20 @@ import React, { Component } from "react";
 import { Draggable, Droppable } from "react-drag-and-drop";
 import Form from "react-jsonschema-form";
 import SchemaField from "react-jsonschema-form/lib/components/fields/SchemaField";
+import { ButtonToolbar, Button} from "react-bootstrap";
+import FieldListDropdown from "./FieldListDropdown"
 
-
-function pickKeys(source, target) {
+// this function is use to retrieve data that'll update our field's schema
+// it take formData's values for existing keys in current field's schema
+function pickKeys(source, target, exclude_keys) {
   const result = {};
+
+  let key_is_exclude;
   for (let key in source) {
+    key_is_exclude = exclude_keys.indexOf(key) !== -1;
+    if (key_is_exclude) {
+      continue;
+    }
     result[key] = target[key];
   }
   return result;
@@ -39,16 +48,23 @@ class FieldPropertiesEditor extends Component {
       ...this.state.editedSchema,
       name: this.state.name
     };
+
     return (
       <div className="panel panel-default field-editor">
-        <div className="panel-heading">
-          <strong>Edit {name}</strong>
-          <button type="button" className="close-btn" onClick={onCancel} aria-label="Close">
-            close <i className="glyphicon glyphicon-remove-sign"/>
-          </button>
-          <button type="button" className="close-btn" onClick={onDelete} aria-label="Delete">
-            delete <i className="glyphicon glyphicon-trash"/>
-          </button>
+        <div className="panel-heading clearfix">
+            <strong className="panel-title">Edit {name}</strong>
+
+            <ButtonToolbar className="pull-right">
+              <FieldListDropdown bsStyle="link" {...this.props}>
+                change field <i className="glyphicon glyphicon-cog"/>
+              </FieldListDropdown>
+              <Button bsStyle="link" onClick={onDelete}>
+                delete <i className="glyphicon glyphicon-trash"/>
+              </Button>
+              <Button bsStyle="link" name="close-btn" onClick={onCancel}>
+                close <i className="glyphicon glyphicon-remove-sign"/>
+              </Button>
+            </ButtonToolbar>
         </div>
         <div className="panel-body">
           <Form
@@ -82,12 +98,12 @@ function DraggableFieldContainer(props) {
             {children}
           </div>
           <div className="col-sm-3 editable-field-actions">
-            <button type="button" className="edit-btn" onClick={onEdit}>
+            <Button bsStyle="link" onClick={onEdit}>
               edit <i className="glyphicon glyphicon-edit"/>
-            </button>
-            <button type="button" className="delete-btn" onClick={onDelete}>
+            </Button>
+            <Button bsStyle="link" onClick={onDelete}>
               delete <i className="glyphicon glyphicon-trash"/>
-            </button>
+            </Button>
           </div>
         </div>
       </Droppable>
@@ -113,7 +129,9 @@ export default class EditableField extends Component {
   }
 
   handleUpdate({formData}) {
-    const updated = pickKeys(this.props.schema, formData);
+    // "type" update is handle by switchField's action,
+    // it cannot be update from formData
+    const updated = pickKeys(this.props.schema, formData, ["type"]);
     const schema = {...this.props.schema, ...updated};
     this.setState({edit: false, schema});
     this.props.updateField(
