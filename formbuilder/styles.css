@@ -118,10 +118,6 @@ textarea.json-viewer {
   width: 500px;
 }
 
-.rjsf .btn {
-  float: right;
-}
-
 .narrow {
   max-width: 730px;
   margin-right: auto;
