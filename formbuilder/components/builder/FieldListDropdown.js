@@ -5,34 +5,43 @@ import {Dropdown, MenuItem}  from "react-bootstrap"
 
 import config from "../../config";
 
-export default class AddFieldDropdown extends Component {
+export default class FieldListDropdown extends Component {
   constructor(props) {
     super(props);
-    this.state = {"fieldList": config.fieldList};
+    this.state = {
+      fieldList: config.fieldList
+    };
   }
 
-  handleAddField(fieldIndex, event) {
+  handleFieldListAction(fieldIndex, event) {
     const fieldList = this.state.fieldList;
+
     fieldIndex = parseInt(fieldIndex, 10);
 
     if (typeof fieldList[fieldIndex] != "undefined") {
-      this.props.addField(fieldList[fieldIndex]);
+      const field = fieldList[fieldIndex];
+
+      if (this.props.currentFieldName !== false) {
+        this.props.switchField(this.props.currentFieldName, field);
+      } else {
+        this.props.addField(field);
+      }
+
     }
   }
 
   render () {
     return (
-      <Dropdown title="Add a field" dropup id="split-button-dropup" className={this.props.className}>
-        <Dropdown.Toggle>
-          <i className="glyphicon glyphicon-plus" />
-          Add a field
+      <Dropdown dropup={this.props.currentFieldName == false} id="split-button-dropup" className={this.props.className}>
+        <Dropdown.Toggle bsStyle={this.props.bsStyle}>
+          {this.props.children}
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
           {this.state.fieldList.map((field, index) => {
             return <MenuItem key={index}
                 eventKey={index}
-                onSelect={this.handleAddField.bind(this)}
+                onSelect={this.handleFieldListAction.bind(this)}
                 ><i className={`glyphicon glyphicon-${field.icon}`} />
                 {field.label}
               </MenuItem>
@@ -41,4 +50,9 @@ export default class AddFieldDropdown extends Component {
       </Dropdown>
     );
   }
+}
+
+FieldListDropdown.defaultProps = {
+  bsStyle: "default",
+  currentFieldName: false
 }

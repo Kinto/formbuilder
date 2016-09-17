@@ -60,18 +60,31 @@
   padding-right: 0;
 }
 
-.editable-field-actions button,
-button.close-btn {
-  background: none;
-  border: none;
-}
-
 form > p {
   padding: 1em 0;
 }
 
-.panel-heading .close-btn {
-  float: right;
+.field-editor .panel-heading {
+  padding: 0;
+}
+
+.field-editor .btn,
+.editable-field-actions .btn {
+  text-transform: none;
+}
+
+.editable-field-actions .btn {
+  padding: 0;
+  margin-left: 6px;
+}
+
+.editable-field-actions .btn:last {
+  margin-left: 0px;
+}
+
+.panel-heading .panel-title {
+  display: inline-block;
+  padding: 4px 16px;
 }
 
 textarea.json-viewer {
