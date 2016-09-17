@@ -55,7 +55,9 @@ class FieldPropertiesEditor extends Component {
             schema={uiSchema.editSchema}
             formData={formData}
             onChange={this.onChange.bind(this)}
-            onSubmit={onUpdate} />
+            onSubmit={onUpdate}>
+            <button type="submit" className="btn btn-info pull-right">Submit</button>
+          </Form>
         </div>
       </div>
     );
