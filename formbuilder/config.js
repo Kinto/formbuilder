@@ -99,5 +99,26 @@ export default {
       },
       formData: {}
     },
+    {
+      id: "date",
+      icon: "calendar",
+      label: "Date",
+      jsonSchema: {
+        type: "string",
+        format: "date",
+        title: "Edit me",
+      },
+      uiSchema: {
+        "ui:widget": "alt-date",
+        editSchema: {
+          type: "object",
+          properties: {
+            title: {type: "string", title: "Label"},
+            required: {type: "boolean"}
+          }
+        },
+      },
+      formData: {}
+    },
   ],
 };
