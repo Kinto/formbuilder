@@ -100,6 +100,35 @@ export default {
       formData: {}
     },
     {
+      id: "select",
+      icon: "chevron-down",
+      label: "Select List",
+      jsonSchema: {
+        type: "string",
+        format: "string",
+        title: "Edit me",
+        enum: ["option 1", "option 2", "option 3"],
+      },
+      uiSchema: {
+        "ui:widget": "select",
+        editSchema: {
+          type: "object",
+          properties: {
+            title: {type: "string", title: "Label"},
+            required: {type: "boolean"},
+            enum: {
+              type: "array",
+              title: "Options",
+              items: {
+                type: "string"
+              }
+            }
+          }
+        },
+      },
+      formData: {}
+    },
+    {
       id: "date",
       icon: "calendar",
       label: "Date",
