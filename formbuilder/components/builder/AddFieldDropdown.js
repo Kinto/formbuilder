@@ -8,12 +8,12 @@ import config from "../../config";
 export default class AddFieldDropdown extends Component {
   constructor(props) {
     super(props);
-    this.state = {'fieldList': config.fieldList};
+    this.state = {"fieldList": config.fieldList};
   }
 
   handleAddField(field_index, event) {
-    const field = this.state.fieldList[parseInt(field_index)];
-
+    field_index = parseInt(field_index);
+    const field = this.state.fieldList[field_index];
     this.props.addField(field);
   }
 

@@ -41,14 +41,21 @@ function unique(array) {
 }
 
 function addField(state, field) {
-  // Generating a usually temporary random, unique field name.
-  state.currentIndex += 1;
-  const name = `Question ${state.currentIndex}`;
-  const _slug = slugify(name);
-  state.schema.properties[_slug] = {...field.jsonSchema, title: name};
-  state.uiSchema[_slug] = field.uiSchema;
-  state.uiSchema["ui:order"] = (state.uiSchema["ui:order"] || []).concat(_slug);
-  return state;
+  let error = null;
+
+  if (typeof field != 'undefined') {
+    // Generating a usually temporary random, unique field name.
+    state.currentIndex += 1;
+    const name = `Question ${state.currentIndex}`;
+    const _slug = slugify(name);
+    state.schema.properties[_slug] = {...field.jsonSchema, title: name};
+    state.uiSchema[_slug] = field.uiSchema;
+    state.uiSchema["ui:order"] = (state.uiSchema["ui:order"] || []).concat(_slug);
+  } else {
+    error = "You tried to add a field that's doesn't exist, operation aborted.";
+  }
+
+  return {...state, error} ;
 }
 
 function removeField(state, name) {
