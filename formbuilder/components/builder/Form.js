@@ -6,7 +6,6 @@ import SchemaField from "react-jsonschema-form/lib/components/fields/SchemaField
 
 export default function Form(props) {
   const {error, schema, dragndropStatus} = props;
-  console.log("dragndropstatus", dragndropStatus);
   const {properties} = schema;
 
   const onClick = (event) => {
