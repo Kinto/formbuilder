@@ -62,10 +62,10 @@ const LinkToHome = () => {
   );
 };
 
-const BackAndDownloadJSONSchema = () => {
+const BackAndDownloadJSONSchema = (props) => {
   return (
     <div>
-      <LinkToBuilder text="Continue editing"/>
+      <LinkToBuilder text="Continue editing" {...props}/>
       <div className="list-group">
         <JsonSchemaDownloaderContainer />
       </div>
