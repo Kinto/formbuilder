@@ -2,6 +2,7 @@ import React from "react";
 import { Droppable } from "react-drag-and-drop";
 
 import Default from "./Default";
+import AddFieldDropdown from "./AddFieldDropdown"
 import SchemaField from "react-jsonschema-form/lib/components/fields/SchemaField";
 
 export default function Form(props) {
@@ -30,11 +31,14 @@ export default function Form(props) {
   if (props.status == "pending") {
     saveButtonValue = <div>{saveButtonValue} <i className="spin glyphicon glyphicon-refresh" /></div>;
   }
-  const button = (
+  const buttons = (
     <div className="pull-right">
-      <button onClick={onClick} className="btn btn-success align-right">
-        {saveButtonValue}
-      </button>
+      <AddFieldDropdown {...props} />&nbsp;
+      <div className="btn-group">
+        <button onClick={onClick} className="btn btn-success">
+          {saveButtonValue}
+        </button>
+      </div>
     </div>);
 
   return (
@@ -49,7 +53,7 @@ export default function Form(props) {
         {dragndropStatus ? <p>Drop your widget here</p> : null}
         </Droppable>
       </div>
-      {Object.keys(properties).length === 0 ? <div/> : button}
+      {Object.keys(properties).length === 0 ? <div/> : buttons}
     </div>
   );
 }
