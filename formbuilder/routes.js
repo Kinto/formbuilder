@@ -24,20 +24,29 @@ const common = {
 };
 
 const LinkToBuilder = (props) => {
+  const {children} = props;
+  const browserHistory = props.history;
+
   return (
     <div className="list-group">
-      <Link className="list-group-item" to="/builder">
+      <button type="button" className="list-group-item" onClick={() => {browserHistory.goBack();}}>
         <i className="glyphicon glyphicon-chevron-left" />
         {props.text || "Back"}
-      </Link>
+      </button>
+      {children}
     </div>
   );
 };
 
-const BackAndCheck = () => {
+const BackAndCheck = (props) => {
   return (
     <div>
-      <LinkToBuilder text="Continue editing"/>
+      <LinkToBuilder text="Continue editing" {...props} >
+        <Link className="list-group-item" to="/builder/json">
+          <i className="glyphicon glyphicon-fullscreen" />
+          View as Json
+        </Link>
+      </LinkToBuilder>
       <Check />
     </div>
   );
