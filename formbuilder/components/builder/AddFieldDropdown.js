@@ -11,10 +11,13 @@ export default class AddFieldDropdown extends Component {
     this.state = {"fieldList": config.fieldList};
   }
 
-  handleAddField(field_index, event) {
-    field_index = parseInt(field_index);
-    const field = this.state.fieldList[field_index];
-    this.props.addField(field);
+  handleAddField(fieldIndex, event) {
+    const fieldList = this.state.fieldList;
+    fieldIndex = parseInt(fieldIndex, 10);
+
+    if (typeof fieldList[fieldIndex] != 'undefined') {
+      this.props.addField(fieldList[fieldIndex]);
+    }
   }
 
   render () {
