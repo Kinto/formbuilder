@@ -2,7 +2,6 @@ import React from "react";
 import { Route, IndexRoute, Link } from "react-router";
 
 import App from "./containers/App";
-import FieldListContainer from "./containers/builder/FieldListContainer";
 import FormContainer from "./containers/builder/FormContainer";
 import JsonViewContainer from "./containers/builder/JsonViewContainer";
 
@@ -20,37 +19,56 @@ import FAQ from "./components/FAQ";
 
 const common = {
   notifications: NotificationContainer,
-  sidebarComponent: FieldListContainer,
   header: Header
 };
 
 const LinkToBuilder = (props) => {
+  const {children} = props;
+  const browserHistory = props.history;
+
   return (
     <div className="list-group">
-      <Link className="list-group-item" to="/builder">
+      <button type="button" className="list-group-item" onClick={() => {browserHistory.goBack();}}>
         <i className="glyphicon glyphicon-chevron-left" />
         {props.text || "Back"}
-      </Link>
+      </button>
+      {children}
     </div>
   );
 };
 
-const BackAndCheck = () => {
+const BackAndCheck = (props) => {
   return (
     <div>
-      <LinkToBuilder text="Continue editing"/>
+      <LinkToBuilder text="Continue editing" {...props} >
+        <Link className="list-group-item" to="/builder/json">
+          <i className="glyphicon glyphicon-fullscreen" />
+          View as Json
+        </Link>
+      </LinkToBuilder>
       <Check />
     </div>
   );
 };
 
-const BackAndDownloadJSONSchema = () => {
+const BackAndDownloadJSONSchema = (props) => {
   return (
     <div>
-      <LinkToBuilder text="Continue editing"/>
+      <LinkToBuilder text="Continue editing" {...props}/>
       <div className="list-group">
         <JsonSchemaDownloaderContainer />
       </div>
+    </div>
+  );
+};
+
+const LinkToHome = () => {
+  return (
+    <div>
+      <Link className="list-group-item" to="/">
+        <i className="glyphicon glyphicon-chevron-left" />
+        "Home"
+      </Link>
     </div>
   );
 };
@@ -73,7 +91,7 @@ export default (
       <Route path="admin/:adminToken"
         components={{...common, sidebarComponent: null, header: null, content: AdminViewContainer}} />
       <Route path="*" components={{
-        sidebarComponent: FieldListContainer,
+        sidebarComponent: LinkToHome,
         content: _ => <h1>Page not found.</h1>
       }}/>
     </Route>
