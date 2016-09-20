@@ -2,7 +2,6 @@ import React from "react";
 import { Route, IndexRoute, Link } from "react-router";
 
 import App from "./containers/App";
-import FieldListContainer from "./containers/builder/FieldListContainer";
 import FormContainer from "./containers/builder/FormContainer";
 import JsonViewContainer from "./containers/builder/JsonViewContainer";
 
@@ -19,7 +18,6 @@ import FAQ from "./components/FAQ";
 
 const common = {
   notifications: NotificationContainer,
-  sidebarComponent: FieldListContainer,
   header: Header
 };
 
@@ -52,6 +50,17 @@ const BackAndCheck = (props) => {
   );
 };
 
+const LinkToHome = () => {
+  return (
+    <div>
+      <Link className="list-group-item" to="/">
+        <i className="glyphicon glyphicon-chevron-left" />
+        "Home"
+      </Link>
+    </div>
+  );
+};
+
 export default (
     <Route path="/" component={App}>
       <IndexRoute components={{...common, mainComponent: WelcomeContainer}} />
@@ -70,7 +79,7 @@ export default (
       <Route path="admin/:adminToken"
         components={{...common, sidebarComponent: null, header: null, content: AdminViewContainer}} />
       <Route path="*" components={{
-        sidebarComponent: FieldListContainer,
+        sidebarComponent: LinkToHome,
         content: _ => <h1>Page not found.</h1>
       }}/>
     </Route>

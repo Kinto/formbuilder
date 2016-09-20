@@ -15,14 +15,14 @@ export default class AddFieldDropdown extends Component {
     const fieldList = this.state.fieldList;
     fieldIndex = parseInt(fieldIndex, 10);
 
-    if (typeof fieldList[fieldIndex] != 'undefined') {
+    if (typeof fieldList[fieldIndex] != "undefined") {
       this.props.addField(fieldList[fieldIndex]);
     }
   }
 
   render () {
     return (
-      <Dropdown title="Add a field" dropup id="split-button-dropup">
+      <Dropdown title="Add a field" dropup id="split-button-dropup" className={this.props.className}>
         <Dropdown.Toggle>
           <i className="glyphicon glyphicon-plus" />
           Add a field
