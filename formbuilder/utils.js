@@ -8,7 +8,7 @@ import config from "./config";
  * are stored. This is useful to always have one id to pass to the clients,
  * and they can figure out what the user token and collection name is.
  **/
-export function getUserToken(adminToken) {
+export function getFormID(adminToken) {
   return adminToken.slice(0, adminToken.length / 2);
 }
 
@@ -19,7 +19,7 @@ export function getUserToken(adminToken) {
  * be something we want to pass rather than relying on it being globally
  * available.
  **/
-export function getUserURL(userToken) {
+export function getFormURL(userToken) {
   return `${config.appURL}#/form/${userToken}`;
 }
 

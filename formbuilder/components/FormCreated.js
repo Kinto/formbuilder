@@ -1,12 +1,12 @@
 import React from "react";
-import {getUserToken, getUserURL, getAdminURL} from "../utils";
+import {getFormID, getFormURL, getAdminURL} from "../utils";
 import URLDisplay from "./URLDisplay";
 
 export default function FormCreated(props) {
   const adminToken = props.params.adminToken;
-  const userToken = getUserToken(adminToken);
+  const formID = getFormID(adminToken);
 
-  const userformURL = getUserURL(userToken);
+  const userformURL = getFormURL(formID);
   const adminURL = getAdminURL(adminToken);
 
   return (

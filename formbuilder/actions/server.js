@@ -3,7 +3,7 @@ import btoa from "btoa";
 import uuid from "uuid";
 
 import {addNotification} from "./notifications";
-import {getUserToken} from "../utils";
+import {getFormID} from "../utils";
 import config from "../config";
 
 
@@ -84,7 +84,7 @@ export function publishForm(callback) {
 
     dispatch({type: FORM_PUBLICATION_PENDING});
     const adminToken = uuid.v4().replace(/-/g, "");
-    const formID = getUserToken(adminToken);
+    const formID = getFormID(adminToken);
 
     // Create a client authenticated as the admin.
     const bucket = new KintoClient(
@@ -154,14 +154,14 @@ export function submitRecord(record, collection, callback) {
   };
 }
 
-export function loadSchema(collection, callback) {
+export function loadSchema(formID, callback) {
   return (dispatch, getState) => {
     dispatch({type: SCHEMA_RETRIEVAL_PENDING});
     new KintoClient(config.server.remote, {
-      headers: getAuthenticationHeaders(collection)
+      headers: getAuthenticationHeaders("EVERYONE")
     })
     .bucket(config.server.bucket)
-    .collection(collection)
+    .collection(formID)
     .getData().then((data) => {
       dispatch({
         type: SCHEMA_RETRIEVAL_DONE,
@@ -184,7 +184,7 @@ export function loadSchema(collection, callback) {
  **/
 export function getRecords(adminToken, callback) {
   return (dispatch, getState) => {
-    const formID = getUserToken(adminToken);
+    const formID = getFormID(adminToken);
     dispatch({type: RECORDS_RETRIEVAL_PENDING});
     new KintoClient(config.server.remote, {
       headers: getAuthenticationHeaders(adminToken)
