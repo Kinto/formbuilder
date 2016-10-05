@@ -84,56 +84,43 @@ export function publishForm(callback) {
 
     dispatch({type: FORM_PUBLICATION_PENDING});
     const adminToken = uuid.v4().replace(/-/g, "");
-    const userToken = getUserToken(adminToken);
+    const formID = getUserToken(adminToken);
 
-    const userClient = new KintoClient(
+    // Create a client authenticated as the admin.
+    const bucket = new KintoClient(
       config.server.remote,
-      {headers: getAuthenticationHeaders(userToken)}
-    );
-    userClient.fetchServerInfo().then((serverInfo) => {
-      return serverInfo.user.id;
+      {headers: getAuthenticationHeaders(adminToken)}
+    ).bucket(config.server.bucket);
+
+    // The name of the collection is the user token so the user deals with
+    // less different concepts.
+    bucket.createCollection(formID, {
+      data: {schema, uiSchema},
+      permissions: {
+        "record:create": ["system.Authenticated"]
+      }
     })
-    .catch(() => {
-      connectivityIssues(dispatch, "We are unable to connect to the server.");
-      dispatch({type: FORM_PUBLICATION_FAILED});
-    })
-    .then((userId) => {
-      // Create a new client, authenticated as the admin.
-      const bucket = new KintoClient(
-        config.server.remote,
-        {headers: getAuthenticationHeaders(adminToken)}
-      ).bucket(config.server.bucket);
-      // The name of the collection is the user token so the user deals with
-      // less different concepts.
-      bucket.createCollection(userToken, {
-        data: {schema, uiSchema},
-        permissions: {
-          "record:create": ["system.Authenticated"],
-          "read": [userId]
-        }
-      })
-      .then(({data}) => {
-        dispatch({
-          type: FORM_PUBLICATION_DONE,
-          collection: data.id,
-        });
-        if (callback) {
-          callback({
-            collection: data.id,
-            adminToken,
-          });
-        }
-      })
-      .catch((error) => {
-        // If the bucket doesn't exist, try to create it.
-        if (error.response.status === 403 && retry === true) {
-          return initializeBucket().then(() => {
-            thunk(dispatch, getState, false);
-          });
-        }
-        connectivityIssues(dispatch, "We were unable to publish your form.");
-        dispatch({type: FORM_PUBLICATION_FAILED});
+    .then(({data}) => {
+      dispatch({
+        type: FORM_PUBLICATION_DONE,
+        collection: data.id,
       });
+      if (callback) {
+        callback({
+          collection: data.id,
+          adminToken,
+        });
+      }
+    })
+    .catch((error) => {
+      // If the bucket doesn't exist, try to create it.
+      if (error.response.status === 403 && retry === true) {
+        return initializeBucket().then(() => {
+          thunk(dispatch, getState, false);
+        });
+      }
+      connectivityIssues(dispatch, "We were unable to publish your form.");
+      dispatch({type: FORM_PUBLICATION_FAILED});
     });
   };
   return thunk;
@@ -193,17 +180,17 @@ export function loadSchema(collection, callback) {
 /**
  * Retrieve all the answers to a specific form.
  *
- * The userToken is derived from the the adminToken.
+ * The formID is derived from the the adminToken.
  **/
 export function getRecords(adminToken, callback) {
   return (dispatch, getState) => {
-    const collection = getUserToken(adminToken);
+    const formID = getUserToken(adminToken);
     dispatch({type: RECORDS_RETRIEVAL_PENDING});
     new KintoClient(config.server.remote, {
       headers: getAuthenticationHeaders(adminToken)
     })
     .bucket(config.server.bucket)
-    .collection(collection)
+    .collection(formID)
     .listRecords().then(({data}) => {
       dispatch({
         type: RECORDS_RETRIEVAL_DONE,
