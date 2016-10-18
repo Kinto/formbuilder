@@ -2,18 +2,20 @@ import React, { Component } from "react";
 import { Draggable, Droppable } from "react-drag-and-drop";
 import Form from "react-jsonschema-form";
 import SchemaField from "react-jsonschema-form/lib/components/fields/SchemaField";
-import { ButtonToolbar, Button} from "react-bootstrap";
+import { ButtonToolbar, Button } from "react-bootstrap";
 import FieldListDropdown from "./FieldListDropdown"
 
-// this function is use to retrieve data that'll update our field's schema
-// it take formData's values for existing keys in current field's schema
-function pickKeys(source, target, exclude_keys) {
+/**
+ * Recopies the keys listed in "source" using the values in the "target"
+ * object, excluding keys listed in the "excludedKey" argument.
+ **/
+function pickKeys(source, target, excludedKeys) {
   const result = {};
 
-  let key_is_exclude;
+  let isExcluded;
   for (let key in source) {
-    key_is_exclude = exclude_keys.indexOf(key) !== -1;
-    if (key_is_exclude) {
+    isExcluded = excludedKeys.indexOf(key) !== -1;
+    if (isExcluded) {
       continue;
     }
     result[key] = target[key];
@@ -129,8 +131,8 @@ export default class EditableField extends Component {
   }
 
   handleUpdate({formData}) {
-    // "type" update is handle by switchField's action,
-    // it cannot be update from formData
+    // Exclude the "type" key when picking the keys as it is handled by the
+    // SWITCH_FIELD action.
     const updated = pickKeys(this.props.schema, formData, ["type"]);
     const schema = {...this.props.schema, ...updated};
     this.setState({edit: false, schema});

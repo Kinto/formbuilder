@@ -11,9 +11,9 @@ export default class FieldListDropdown extends Component {
 
     let fieldListAction = 'add_field';
     if (this.props.currentFieldName !== false) {
-      // By default FieldListDropdown add a new field
-      // Here we want to switch from a field type to a other one
-      // (ex: "input" to "checkbox")
+      // By default FieldListDropdown adds a new field, but in this case
+      // we want to switch from a field type to a other one (ex: "input" to
+      // "checkbox").
       fieldListAction = "switch_field";
     }
 
@@ -26,7 +26,6 @@ export default class FieldListDropdown extends Component {
   handleFieldListAction(fieldIndex, event) {
     const fieldList = this.state.fieldList;
     fieldIndex = parseInt(fieldIndex, 10);
-
 
     if (typeof fieldList[fieldIndex] !== "undefined") {
       const field = fieldList[fieldIndex];
