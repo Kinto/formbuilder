@@ -25,6 +25,7 @@ export default class FieldListDropdown extends Component {
   handleFieldListAction(fieldIndex, event) {
     const fieldList = this.state.fieldList;
     fieldIndex = parseInt(fieldIndex, 10);
+
     if (typeof fieldList[fieldIndex] !== "undefined") {
       const field = fieldList[fieldIndex];
 
