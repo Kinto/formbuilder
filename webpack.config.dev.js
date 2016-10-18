@@ -1,7 +1,7 @@
 var path = require("path");
 var webpack = require("webpack");
 
-const serverURL = process.env.SERVER_URL || "http://localhost:8888/v1/";
+const serverURL = process.env.SERVER_URL || "https://kinto.dev.mozaws.net/v1/" || "http://localhost:8888/v1/";
 
 module.exports = {
   devtool: "eval",

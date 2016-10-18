@@ -5,13 +5,15 @@ import SchemaField from "react-jsonschema-form/lib/components/fields/SchemaField
 import { ButtonToolbar, Button} from "react-bootstrap";
 import FieldListDropdown from "./FieldListDropdown"
 
-
-function pickKeys(source, target) {
+// this function is use to retrieve data that'll update our field's schema
+// it take formData's values for existing keys in current field's schema
+function pickKeys(source, target, exclude_keys) {
   const result = {};
+
+  let key_is_exclude;
   for (let key in source) {
-    if (key =="type") {
-      // type dont have to be update from form data.
-      // it break switchField action.
+    key_is_exclude = exclude_keys.indexOf(key) !== -1;
+    if (key_is_exclude) {
       continue;
     }
     result[key] = target[key];
@@ -127,7 +129,9 @@ export default class EditableField extends Component {
   }
 
   handleUpdate({formData}) {
-    const updated = pickKeys(this.props.schema, formData);
+    // "type" update is handle by switchField's action,
+    // it cannot be update from formData
+    const updated = pickKeys(this.props.schema, formData, ["type"]);
     const schema = {...this.props.schema, ...updated};
     this.setState({edit: false, schema});
     this.props.updateField(

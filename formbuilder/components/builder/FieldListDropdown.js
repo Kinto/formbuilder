@@ -8,20 +8,30 @@ import config from "../../config";
 export default class FieldListDropdown extends Component {
   constructor(props) {
     super(props);
+
+    let fieldListAction = 'add_field';
+    if (this.props.currentFieldName !== false) {
+      // By default FieldListDropdown add a new field
+      // Here we want to switch from a field type to a other one
+      // (ex: "input" to "checkbox")
+      fieldListAction = "switch_field";
+    }
+
     this.state = {
-      fieldList: config.fieldList
+      fieldList: config.fieldList,
+      fieldListAction: fieldListAction
     };
   }
 
   handleFieldListAction(fieldIndex, event) {
     const fieldList = this.state.fieldList;
-
     fieldIndex = parseInt(fieldIndex, 10);
 
-    if (typeof fieldList[fieldIndex] != "undefined") {
+
+    if (typeof fieldList[fieldIndex] !== "undefined") {
       const field = fieldList[fieldIndex];
 
-      if (this.props.currentFieldName !== false) {
+      if (this.state.fieldListAction === "switch_field") {
         this.props.switchField(this.props.currentFieldName, field);
       } else {
         this.props.addField(field);
@@ -32,7 +42,7 @@ export default class FieldListDropdown extends Component {
 
   render () {
     return (
-      <Dropdown dropup={this.props.currentFieldName == false} id="split-button-dropup" className={this.props.className}>
+      <Dropdown dropup={this.state.fieldListAction === "add_field"} id="split-button-dropup" className={this.props.className}>
         <Dropdown.Toggle bsStyle={this.props.bsStyle}>
           {this.props.children}
         </Dropdown.Toggle>
