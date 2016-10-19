@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import SchemaField from "react-jsonschema-form/lib/components/fields/SchemaField";
 
-import {Dropdown, MenuItem}  from "react-bootstrap"
+import {Dropdown, MenuItem}  from "react-bootstrap";
 
 import config from "../../config";
 
@@ -9,7 +8,7 @@ export default class FieldListDropdown extends Component {
   constructor(props) {
     super(props);
 
-    let fieldListAction = 'add_field';
+    let fieldListAction = "add_field";
     if (typeof(this.props.name) !== "undefined") {
       // By default FieldListDropdown adds a new field, but in this case
       // we want to switch from a field to a other one (ex: "input" to
@@ -52,7 +51,7 @@ export default class FieldListDropdown extends Component {
                 onSelect={this.handleFieldListAction.bind(this)}
                 ><i className={`glyphicon glyphicon-${field.icon}`} />
                 {field.label}
-              </MenuItem>
+              </MenuItem>;
           })}
         </Dropdown.Menu>
       </Dropdown>
@@ -62,4 +61,4 @@ export default class FieldListDropdown extends Component {
 
 FieldListDropdown.defaultProps = {
   bsStyle: "default"
-}
+};

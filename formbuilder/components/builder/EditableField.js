@@ -3,7 +3,7 @@ import { Draggable, Droppable } from "react-drag-and-drop";
 import Form from "react-jsonschema-form";
 import SchemaField from "react-jsonschema-form/lib/components/fields/SchemaField";
 import { ButtonToolbar, Button } from "react-bootstrap";
-import FieldListDropdown from "./FieldListDropdown"
+import FieldListDropdown from "./FieldListDropdown";
 
 /**
  * Recopies the keys listed in "source" using the values in the "target"
