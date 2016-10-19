@@ -6,8 +6,16 @@ function TitleField(props) {
     props.updateFormTitle(formData);
   };
 
-  const {id, title} = props;
-  return <legend id={id}><RIEInput className="edit-in-place" propName="title" value={title} change={onUpdate} /></legend>;
+  const {id, title=""} = props;
+  return (
+    <legend id={id}>
+      <RIEInput
+        className="edit-in-place"
+        propName="title"
+        value={title}
+        change={onUpdate} />
+    </legend>
+  );
 }
 
 if (process.env.NODE_ENV !== "production") {
