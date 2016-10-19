@@ -17,6 +17,10 @@ $ npm install
 $ npm run start  
 ```
 
+You also need to have a [Kinto](https://kinto.readthedocs.io) server running,
+in order to store your data. If you don't already have one, follow [the
+installation instructions](http://kinto.readthedocs.io/en/stable/tutorials/install.html)!
+
 # Configuration
 
 It's possible to configure a few things, using environment variables:
