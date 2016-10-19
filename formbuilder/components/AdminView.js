@@ -36,8 +36,8 @@ export default class AdminView extends Component {
           }</tr>
         </thead>
         <tbody>
-        {this.props.records.map((record) => {
-          return (<tr key={record.id}>{
+        {this.props.records.map((record, idx) => {
+          return (<tr key={idx}>{
             schemaFields.map((key) => {
               return <td key={key}>{String(record[key])}</td>;
             }

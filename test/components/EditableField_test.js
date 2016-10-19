@@ -52,7 +52,7 @@ describe("EditableField", () => {
       Simulate.change(comp.query("[type=text][value='Edit me']"), {
         target: {value}
       });
-      return new Promise(setImmediate).then(() => {
+      return new Promise().then(() => {
         Simulate.submit(comp.query("form"));
         expect(comp.query("label").textContent).eql(value);
       });
