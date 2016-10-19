@@ -25,6 +25,7 @@ describe("EditableField", () => {
       schema,
       uiSchema,
       addField: sandbox.spy(),
+      switchField: sandbox.spy(),
       updateField: sandbox.spy(),
       onChange: sandbox.spy(),
     };
@@ -63,7 +64,7 @@ describe("EditableField", () => {
 
     beforeEach(() => {
       comp = createComponent(EditableField, compProps);
-      Simulate.click(comp.query(".close-btn"));
+      Simulate.click(comp.query("[name=close-btn]"));
     });
 
     it("should render a EditableField in render mode", () => {
