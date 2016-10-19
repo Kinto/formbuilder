@@ -163,3 +163,7 @@ textarea.json-viewer {
 .background h1 {
   color: white !important;
 }
+
+.checkbox label strong{
+  padding-left: 3px;
+}
