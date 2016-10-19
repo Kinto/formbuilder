@@ -10,7 +10,7 @@ export default function Welcome(props) {
 
   return (
     <div>
-      <div className="jumbotron">
+      <div className="jumbotron background">
         <div className="container">
         <h1>Create your own forms</h1>
         <p>

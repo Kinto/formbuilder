@@ -153,3 +153,13 @@ textarea.json-viewer {
 .builder-inner-actions {
   margin-bottom: 30px;
 }
+
+.background {
+  background-image: url(assets/background.jpg);
+  background-position: bottom;
+  color: white !important;
+}
+
+.background h1 {
+  color: white !important;
+}

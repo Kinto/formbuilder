@@ -7,6 +7,7 @@ const createHashHistory = require("history/lib/createHashHistory");
 import routes from "./routes";
 import configureStore from "./store/configureStore";
 import "./styles.css";
+import "./bootswatch.less";
 
 const store = configureStore({
   notifications: [],
