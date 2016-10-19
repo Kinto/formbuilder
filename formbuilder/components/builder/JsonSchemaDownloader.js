@@ -11,5 +11,5 @@ export default function JsonSchemaDownloader(props) {
       <i className="glyphicon glyphicon-download" />&nbsp;
         Download JSON
     </a>
-  )
+  );
 }
