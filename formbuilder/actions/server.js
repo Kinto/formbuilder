@@ -78,7 +78,7 @@ export function publishForm(callback) {
     const uiSchema = form.uiSchema;
 
     // Remove the "required" property if it's empty.
-    if (schema.required.length === 0) {
+    if (schema.required && schema.required.length === 0) {
       delete schema.required;
     }
 
