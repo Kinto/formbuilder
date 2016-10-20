@@ -9,19 +9,36 @@ export default function FormCreated(props) {
   const userformURL = getFormURL(formID);
   const adminURL = getAdminURL(adminToken);
 
+  const twitterText = `I've just created a form, it is at ${userformURL}!`;
+  const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(twitterText)}`;
+
+  const emailSubject = `Hey, I just created a new form`;
+  const emailBody = ```
+Hi folks,
+
+I just created a new form and it's available at:
+
+    ${userformURL}
+
+Please, take some time to fill it,
+
+```;
+
+  const emailUrl = `mailto:?subject=${emailSubject}&body=${encodeURIComponent(emailBody)}`;
   return (
     <form>
-      <h3>Here we go! Your form is now ready to be filled.</h3>
+      <h3>Neat, your form is now ready!</h3>
       <div className="form-group">
-        <label>This is the <a href={userformURL}>link to give to the form fillers</a>:</label>
-        <p>They will be presented the form you just built.</p>
+        <ul className="social">
+          <li><i className="glyphicon glyphicon-send" />
+            <a href={emailUrl}>Send by email</a>
+          </li>
+          <li><i className="glyphicon glyphicon-cloud" />
+            <a href={twitterUrl}>Tweet it</a>
+          </li>
+        </ul>
         <URLDisplay url={userformURL} />
-
-        <hr />
-
-        <label>And this is the <a href={adminURL}>link to the administration dashboard</a>:</label>
-          <p>Keep this URL in a safe place and give it only to the administrators.</p>
-          <URLDisplay url={adminURL} type="admin" />
+        <URLDisplay url={adminURL} type="admin" />
       </div>
     </form>
   );
