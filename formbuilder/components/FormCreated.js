@@ -52,7 +52,7 @@ export default class FormCreated extends Component {
               className="btn btn-link"
               data-clipboard-text={userformURL}
               onSuccess={this.onClipboardCopied.bind(this)}>
-              <i className="glyphicon glyphicon-copy" /> <a>{this.state.copied ? "Copied" : "Copy to clipboard"}</a>
+              <i className="glyphicon glyphicon-copy" /> <a>{this.state.copied ? "Copied!" : "Copy to clipboard"}</a>
             </ClipboardButton>
             </li>
           </ul>
