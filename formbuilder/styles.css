@@ -132,7 +132,7 @@ textarea.json-viewer {
   height: 100px;
 }
 
-.edit-in-place:hover {
+span.edit-in-place:hover {
   cursor: pointer;
 }
 
