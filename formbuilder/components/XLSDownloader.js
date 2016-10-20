@@ -22,21 +22,21 @@ export default function XLSDownloader(props) {
   //   }
   // ]
   // After the pre-processing is done, we will have data in
-  // above mentioned format in `formatted_data` which can be
+  // above mentioned format in `formattedData` which can be
   // then easily fed to `json2xls`.
-  var formatted_data = [];
+  var formattedData = [];
   var rows = props.records;
-  var records_count = rows.length;
-  for ( var i = 0; i < records_count; i++ ) {
-    var temp_data = {};
+  var recordsCount = rows.length;
+  for ( var i = 0; i < recordsCount; i++ ) {
+    var tempData = {};
     for ( var j = 0; j < fieldNames.length; j++ ) {
-      temp_data[fieldNames[j]] = rows[i][fields[j]];
+      tempData[fieldNames[j]] = rows[i][fields[j]];
     }
-    formatted_data.push(temp_data);
+    formattedData.push(tempData);
   }
   // END of pre-processing
 
-  var xls = json2xls(formatted_data);
+  var xls = json2xls(formattedData);
   const fileContent = "data:text/plain;base64," + btoa(xls);
 
   return <a download={filename}
