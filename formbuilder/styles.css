@@ -132,6 +132,10 @@ textarea.json-viewer {
   height: 100px;
 }
 
+span.edit-in-place:hover {
+  cursor: pointer;
+}
+
 .edit-in-place:hover:not(:focus) {
   text-decoration: underline;
 }
