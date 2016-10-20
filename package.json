@@ -27,6 +27,7 @@
     "kinto-client": "^0.8.0",
     "react": "^15.3.2",
     "react-bootstrap": "^0.30.3",
+    "react-clipboard.js": "^0.2.5",
     "react-dom": "^15.3.2",
     "react-drag-and-drop": "^2.0.1",
     "react-jsonschema-form": "^0.40.0",

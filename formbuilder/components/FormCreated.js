@@ -1,43 +1,65 @@
-import React from "react";
+import React, { Component } from "react";
+import ClipboardButton from "react-clipboard.js";
 import {getFormID, getFormURL, getAdminURL} from "../utils";
 import URLDisplay from "./URLDisplay";
 
-export default function FormCreated(props) {
-  const adminToken = props.params.adminToken;
-  const formID = getFormID(adminToken);
+export default class FormCreated extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      copied: false
+    };
+  }
 
-  const userformURL = getFormURL(formID);
-  const adminURL = getAdminURL(adminToken);
+  onClipboardCopied() {
+    this.setState({copied: true});
+  }
 
-  const twitterText = `I've just created a form, it is at ${userformURL}!`;
-  const twitterUrl = `https://twitter.com/intent/tweet?text=${twitterText}`;
+  render() {
+    const adminToken = props.params.adminToken;
+    const formID = getFormID(adminToken);
 
-  const emailSubject = `Hey, I just created a new form`;
-  const emailBody = `Hi folks,
+    const userformURL = getFormURL(formID);
+    const adminURL = getAdminURL(adminToken);
 
-I just created a new form and it's available at:
+    const twitterText = `I've just created a form, it is at ${userformURL}!`;
+    const twitterUrl = `https://twitter.com/intent/tweet?text=${twitterText}`;
 
-    ${userformURL}
+    const emailSubject = `Hey, I just created a new form`;
+    const emailBody = `Hi folks,
 
-Please, take some time to fill it,
-`;
+  I just created a new form and it's available at:
 
-  const emailUrl = `mailto:?subject=${emailSubject}&body=${encodeURIComponent(emailBody)}`;
-  return (
-    <form>
-      <h3>Neat, your form is now ready!</h3>
-      <div className="form-group">
-        <ul className="social">
-          <li><i className="glyphicon glyphicon-send" />
-            <a href={emailUrl}> Send by email</a>
-          </li>
-          <li><i className="glyphicon glyphicon-cloud" />
-            <a href={twitterUrl}> Tweet it</a>
-          </li>
-        </ul>
-        <URLDisplay url={userformURL} />
-        <URLDisplay url={adminURL} type="admin" />
-      </div>
-    </form>
-  );
+      ${userformURL}
+
+  Please, take some time to fill it,
+  `;
+
+    const emailUrl = `mailto:?subject=${emailSubject}&body=${encodeURIComponent(emailBody)}`;
+    return (
+      <form>
+        <h3>Neat, your form is now ready!</h3>
+        <div className="form-group">
+          <ul className="social">
+            <li><button className="btn btn-link"><i className="glyphicon glyphicon-send" />
+              <a href={emailUrl}> Send by email</a></button>
+            </li>
+            <li><button className="btn btn-link"><i className="glyphicon glyphicon-cloud" />
+              <a href={twitterUrl}> Tweet it</a></button>
+            </li>
+            <li>
+            <ClipboardButton
+              className="btn btn-link"
+              data-clipboard-text={userformURL}
+              onSuccess={this.onClipboardCopied.bind(this)}>
+              <i className="glyphicon glyphicon-copy" /> <a>{this.state.copied ? "Copied" : "Copy to clipboard"}</a>
+            </ClipboardButton>
+            </li>
+          </ul>
+          <URLDisplay url={userformURL} />
+          <URLDisplay url={adminURL} type="admin" />
+        </div>
+      </form>
+    );
+  }
 }
