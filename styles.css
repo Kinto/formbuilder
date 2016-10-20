@@ -36,8 +36,9 @@
 }
 
 .check {
-  font-size: 10em;
-  color: green;
+  font-size: 13em;
+  color: #455;
+  margin-left: 50px;
 }
 
 
@@ -57,7 +58,6 @@
 .editable-field-actions {
   text-align: right;
   padding-left: 0;
-  padding-right: 0;
 }
 
 .editable-field-actions button,
@@ -66,13 +66,35 @@ button.close-btn {
   border: none;
 }
 
+.editable-field-actions button:last-child {
+  padding-right: 0;
+}
+
 form > p {
   padding: 1em 0;
 }
 
-.panel-heading .close-btn {
-  float: right;
-  margin-right: -1em;
+.field-editor .panel-heading {
+  padding: 0;
+}
+
+.field-editor .btn,
+.editable-field-actions .btn {
+  text-transform: none;
+}
+
+.editable-field-actions .btn {
+  padding: 0;
+  margin-left: 6px;
+}
+
+.editable-field-actions .btn:last {
+  margin-left: 0px;
+}
+
+.panel-heading .panel-title {
+  display: inline-block;
+  padding: 4px 16px;
 }
 
 textarea.json-viewer {
@@ -119,12 +141,28 @@ textarea.json-viewer {
   width: 500px;
 }
 
-.rjsf .btn {
-  float: right;
-}
-
 .narrow {
   max-width: 730px;
   margin-right: auto;
   margin-left: auto;
+}
+
+.builder-form .panel {
+  margin-bottom: 0;
+}
+
+.builder-inner-actions {
+  margin-bottom: 30px;
+}
+
+.social {
+  margin-left: 0px;
+  margin-right: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+.social li{
+  list-style-type: none;
+  display: inline;
+  padding-left: 10px;
 }
