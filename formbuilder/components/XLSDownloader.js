@@ -9,6 +9,21 @@ export default function XLSDownloader(props) {
     return props.schema.properties[key].title;
   });
 
+  // Pre-processing of data
+  // json2xls takes json in the following format
+  // json_data = [
+  //   {
+  //     col1: row1value1,
+  //     col2: row1value2
+  //   },
+  //   {
+  //     col1: row2value1,
+  //     col2: row2value2
+  //   }
+  // ]
+  // After the pre-processing is done, we will have data in
+  // above mentioned format in `formatted_data` which can be
+  // then easily fed to `json2xls`.
   var formatted_data = [];
   var rows = props.records;
   var records_count = rows.length;
@@ -19,6 +34,7 @@ export default function XLSDownloader(props) {
     }
     formatted_data.push(temp_data);
   }
+  // END of pre-processing
 
   var xls = json2xls(formatted_data);
   const fileContent = "data:text/plain;base64," + btoa(xls);
