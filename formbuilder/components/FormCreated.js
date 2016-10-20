@@ -10,19 +10,17 @@ export default function FormCreated(props) {
   const adminURL = getAdminURL(adminToken);
 
   const twitterText = `I've just created a form, it is at ${userformURL}!`;
-  const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(twitterText)}`;
+  const twitterUrl = `https://twitter.com/intent/tweet?text=${twitterText}`;
 
   const emailSubject = `Hey, I just created a new form`;
-  const emailBody = ```
-Hi folks,
+  const emailBody = `Hi folks,
 
 I just created a new form and it's available at:
 
     ${userformURL}
 
 Please, take some time to fill it,
-
-```;
+`;
 
   const emailUrl = `mailto:?subject=${emailSubject}&body=${encodeURIComponent(emailBody)}`;
   return (
@@ -31,10 +29,10 @@ Please, take some time to fill it,
       <div className="form-group">
         <ul className="social">
           <li><i className="glyphicon glyphicon-send" />
-            <a href={emailUrl}>Send by email</a>
+            <a href={emailUrl}> Send by email</a>
           </li>
           <li><i className="glyphicon glyphicon-cloud" />
-            <a href={twitterUrl}>Tweet it</a>
+            <a href={twitterUrl}> Tweet it</a>
           </li>
         </ul>
         <URLDisplay url={userformURL} />
