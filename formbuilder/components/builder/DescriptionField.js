@@ -6,8 +6,17 @@ function DescriptionField(props) {
     props.updateFormDescription(formData);
   };
 
-  const {id, description} = props;
-  return <p id={id}><RIEInput className="edit-in-place" classEditing="edit-in-place-active" propName="description" value={description} change={onUpdate} /></p>;
+  const {id, description=""} = props;
+  return (
+    <p id={id}>
+      <RIEInput
+        className="edit-in-place"
+        classEditing="edit-in-place-active"
+        propName="description"
+        value={description}
+        change={onUpdate} />
+    </p>
+  );
 }
 
 if (process.env.NODE_ENV !== "production") {

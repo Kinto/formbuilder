@@ -179,7 +179,7 @@ export default class EditableField extends Component {
     if (props.schema.type === "object") {
       if (!props.name) {
         // This can only be the root form object, returning a regular SchemaField.
-        return <SchemaField {...props} idSchema={{id: props.name}} />;
+        return <SchemaField {...props} idSchema={{$id: props.name}} />;
       }
     }
 
@@ -194,7 +194,7 @@ export default class EditableField extends Component {
         onDrop={this.handleDrop.bind(this)}>
         <SchemaField {...props}
           schema={this.state.schema}
-          idSchema={{id: props.name}} />
+          idSchema={{$id: props.name}} />
       </DraggableFieldContainer>
     );
   }

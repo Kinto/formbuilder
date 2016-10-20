@@ -72,6 +72,39 @@ export default {
       formData: {}
     },
     {
+      id: "multiple-checkbox",
+      icon: "check",
+      label: "Multiple choices",
+      jsonSchema: {
+        type: "array",
+        title: "A multiple choices list",
+        items: {
+          type: "string",
+          enum: ["choice 1", "choice 2", "choice 3"],
+        },
+        uniqueItems: true,
+      },
+      uiSchema: {
+        "ui:widget": "checkboxes",
+        editSchema: {
+          type: "object",
+          properties: {
+            title: {type: "string", title: "Label"},
+            required: {type: "boolean"},
+            enum: {
+              type: "array",
+              title: "Choices",
+              items: {
+                type: "string"
+              },
+              default: ["choice 1", "choice 2", "choice 3"],
+            }
+          }
+        },
+      },
+      formData: {}
+    },
+    {
       id: "radiobuttonlist",
       icon: "list",
       label: "Choice list",
