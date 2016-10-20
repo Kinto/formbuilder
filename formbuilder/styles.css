@@ -36,8 +36,9 @@
 }
 
 .check {
-  font-size: 10em;
-  color: green;
+  font-size: 13em;
+  color: #455;
+  margin-left: 50px;
 }
 
 
@@ -162,4 +163,16 @@ textarea.json-viewer {
 
 .background h1 {
   color: white !important;
+}
+
+.social {
+  margin-left: 0px;
+  margin-right: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+.social li{
+  list-style-type: none;
+  display: inline;
+  padding-left: 10px;
 }

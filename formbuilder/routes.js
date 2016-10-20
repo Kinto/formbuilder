@@ -42,8 +42,7 @@ const BackAndCheck = (props) => {
     <div>
       <LinkToBuilder text="Continue editing" {...props} >
         <Link className="list-group-item" to="/builder/json">
-          <i className="glyphicon glyphicon-fullscreen" />
-          View as Json
+          <i className="glyphicon glyphicon-fullscreen" /> View as JSON
         </Link>
       </LinkToBuilder>
       <Check />
