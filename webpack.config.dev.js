@@ -5,6 +5,9 @@ const serverURL = process.env.SERVER_URL || "http://localhost:8888/v1/";
 
 module.exports = {
   devtool: "eval",
+  node: {
+    fs: "empty"
+  },
   entry: [
     "webpack-hot-middleware/client?reload=true",
     "./formbuilder/app"
