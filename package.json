@@ -23,6 +23,7 @@
     "btoa": "^1.1.2",
     "history": "^1.17.0",
     "isomorphic-fetch": "^2.2.1",
+    "json2csv": "^3.7.0",
     "kinto-client": "^0.8.0",
     "react": "^15.3.2",
     "react-bootstrap": "^0.30.3",
