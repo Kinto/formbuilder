@@ -1,21 +1,21 @@
 import React, { Component } from "react";
 import CSVDownloader from "./CSVDownloader";
 import URLDisplay from "./URLDisplay";
-import {getUserToken, getUserURL} from "../utils";
+import {getFormID, getFormURL} from "../utils";
 
 export default class AdminView extends Component {
   componentDidMount() {
     const adminToken = this.props.params.adminToken;
-    this.userToken = getUserToken(adminToken);
+    this.formID = getFormID(adminToken);
     this.props.getRecords(adminToken);
-    this.props.loadSchema(this.userToken);
+    this.props.loadSchema(this.formID);
   }
   render() {
     const properties = this.props.schema.properties;
     const title = this.props.schema.title;
     const ready = Object.keys(properties).length !== 0;
     const schemaFields = this.props.uiSchema["ui:order"];
-    const formUrl = getUserURL(this.userToken);
+    const formUrl = getFormURL(this.formID);
 
     let content = "loading";
     if (ready) {
