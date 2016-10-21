@@ -24,11 +24,12 @@ export default function XLSDownloader(props) {
   // After the pre-processing is done, we will have data in
   // above mentioned format in `formattedData` which can be
   // then easily fed to `json2xls`.
-  var formattedData = props.records.map((key) => {
-    var tempData = {};
-    for ( var i = 0; i < fieldNames.length; i++ ) {
-      tempData[fieldNames[i]] = key[fields[i]];
-    }
+  var tempData;
+  var formattedData = props.records.map((record) => {
+    tempData = {};
+    fieldNames.map((fieldName, index) => {
+      tempData[fieldName] = record[fields[index]];
+    });
     return tempData;
   });
   // END of pre-processing
