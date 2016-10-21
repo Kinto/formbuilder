@@ -40,7 +40,7 @@ export default class FormCreated extends Component {
       <form>
         <h3>Neat, your form is now ready!</h3>
         <div className="form-group">
-          <ul className="social">
+          <ul className="list-inline">
             <li><button className="btn btn-link"><i className="glyphicon glyphicon-send" />
               <a href={emailUrl}> Send by email</a></button>
             </li>
