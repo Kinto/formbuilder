@@ -1,25 +1,15 @@
 import React from "react";
-
+import json2csv from "json2csv";
 import btoa from "btoa";
 
 export default function CSVDownloader(props) {
   const filename = props.schema.title + ".csv";
-  const titles = props.fields.map((key) => {
+  const fields = props.fields;
+  const fieldNames = props.fields.map((key) => {
     return props.schema.properties[key].title;
   });
-  let content = "\"" + titles.join("\";\"") + "\";\n";
-  content = content + props.records.map((record) => {
-    return props.fields
-      .map((field) => {
-        return record[field];
-      })
-      .reduce((prev, curr) => {
-        return prev + "\"" + String(curr).replace("\"", "\\\"") + "\";";
-      }, "") + "\n";
-  }).reduce((prev, curr) => {
-    return prev + curr;
-  }, "");
-  const fileContent = "data:text/plain;base64," + btoa(content);
+  var csv = json2csv({ data: props.records, fields: fields, fieldNames: fieldNames});
+  const fileContent = "data:text/plain;base64," + btoa(csv);
 
   return <a download={filename}
             href={fileContent}
