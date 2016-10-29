@@ -155,15 +155,11 @@ textarea.json-viewer {
 }
 
 .background {
-  background-image: url(assets/background.jpg);
+  background-image: url(../assets/background.jpg);
   background-position: bottom;
   color: white !important;
 }
 
 .background h1 {
   color: white !important;
-}
-
-.checkbox label strong{
-  padding-left: 3px;
 }
