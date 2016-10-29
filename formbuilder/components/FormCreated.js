@@ -28,12 +28,12 @@ export default class FormCreated extends Component {
     const emailSubject = `Hey, I just created a new form`;
     const emailBody = `Hi folks,
 
-  I just created a new form and it's available at:
+I just created a new form and it's available at:
 
-      ${userformURL}
+    ${userformURL}
 
-  Please, take some time to fill it,
-  `;
+Please, take some time to fill it,
+`;
 
     const emailUrl = `mailto:?subject=${emailSubject}&body=${encodeURIComponent(emailBody)}`;
     return (
