@@ -16,7 +16,7 @@ export default class FormCreated extends Component {
   }
 
   render() {
-    const adminToken = props.params.adminToken;
+    const adminToken = this.props.params.adminToken;
     const formID = getFormID(adminToken);
 
     const userformURL = getFormURL(formID);
