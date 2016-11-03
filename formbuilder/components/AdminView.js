@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import CSVDownloader from "./CSVDownloader";
 import XLSDownloader from "./XLSDownloader";
+import DownloadFormatDropdown from "./DownloadFormatDropdown";
 import URLDisplay from "./URLDisplay";
 import {getFormID, getFormURL} from "../utils";
 
@@ -23,14 +24,10 @@ export default class AdminView extends Component {
       content = (
       <div>
         <h3>Results for {title}</h3>
-        <XLSDownloader
-          schema={this.props.schema}
-          fields={schemaFields}
-          records={this.props.records} />
-        <CSVDownloader
-          schema={this.props.schema}
-          fields={schemaFields}
-          records={this.props.records} />
+        <DownloadFormatDropdown className="pull-right">
+          <i className="glyphicon glyphicon-download" />
+          Download as..
+        </DownloadFormatDropdown>
         <URLDisplay url={formUrl} />
         <table className="table table-striped">
         <thead>

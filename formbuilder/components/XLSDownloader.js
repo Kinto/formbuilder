@@ -39,5 +39,5 @@ export default function XLSDownloader(props) {
 
   return <a download={filename}
             href={fileContent}
-            className="btn btn-primary pull-right">Download XLS</a>;
+            className="pull-right">Download XLS</a>;
 }

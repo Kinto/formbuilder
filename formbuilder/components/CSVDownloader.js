@@ -13,5 +13,5 @@ export default function CSVDownloader(props) {
 
   return <a download={filename}
             href={fileContent}
-            className="btn btn-primary pull-right">Download CSV</a>;
+            className="pull-right">Download CSV</a>;
 }
