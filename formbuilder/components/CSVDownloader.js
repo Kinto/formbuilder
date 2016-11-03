@@ -12,6 +12,5 @@ export default function CSVDownloader(props) {
   const fileContent = "data:text/plain;base64," + btoa(csv);
 
   return <a download={filename}
-            href={fileContent}
-            className="pull-right">Download CSV</a>;
+            href={fileContent}>CSV</a>;
 }

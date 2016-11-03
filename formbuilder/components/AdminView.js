@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import CSVDownloader from "./CSVDownloader";
 import XLSDownloader from "./XLSDownloader";
-import DownloadFormatDropdown from "./DownloadFormatDropdown";
 import URLDisplay from "./URLDisplay";
 import {getFormID, getFormURL} from "../utils";
+
+import {DropdownButton, MenuItem}  from "react-bootstrap";
 
 export default class AdminView extends Component {
   componentDidMount() {
@@ -24,13 +25,20 @@ export default class AdminView extends Component {
       content = (
       <div>
         <h3>Results for {title}</h3>
-        <DownloadFormatDropdown className="pull-right"
-          schema={this.props.schema}
-          fields={schemaFields}
-          records={this.props.records}
-          ><i className="glyphicon glyphicon-download" />&nbsp;
-          Download
-        </DownloadFormatDropdown>
+        <DropdownButton title="Download as..." id="bg-nested-dropdown" className="pull-right">
+          <MenuItem>
+            <CSVDownloader
+              schema={this.props.schema}
+              fields={schemaFields}
+              records={this.props.records} />
+          </MenuItem>
+          <MenuItem>
+            <XLSDownloader
+              schema={this.props.schema}
+              fields={schemaFields}
+              records={this.props.records} />
+          </MenuItem>
+        </DropdownButton>
         <URLDisplay url={formUrl} />
         <table className="table table-striped">
         <thead>
