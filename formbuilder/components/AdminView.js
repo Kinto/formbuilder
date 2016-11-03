@@ -24,9 +24,12 @@ export default class AdminView extends Component {
       content = (
       <div>
         <h3>Results for {title}</h3>
-        <DownloadFormatDropdown className="pull-right">
-          <i className="glyphicon glyphicon-download" />
-          Download as..
+        <DownloadFormatDropdown className="pull-right"
+          schema={this.props.schema}
+          fields={schemaFields}
+          records={this.props.records}
+          ><i className="glyphicon glyphicon-download" />&nbsp;
+          Download
         </DownloadFormatDropdown>
         <URLDisplay url={formUrl} />
         <table className="table table-striped">
