@@ -36,9 +36,8 @@
 }
 
 .check {
-  font-size: 13em;
-  color: #455;
-  margin-left: 50px;
+  font-size: 10em;
+  color: green;
 }
 
 
@@ -133,6 +132,10 @@ textarea.json-viewer {
   height: 100px;
 }
 
+span.edit-in-place:hover {
+  cursor: pointer;
+}
+
 .edit-in-place:hover:not(:focus) {
   text-decoration: underline;
 }
@@ -155,14 +158,12 @@ textarea.json-viewer {
   margin-bottom: 30px;
 }
 
-.social {
-  margin-left: 0px;
-  margin-right: 0px;
-  padding-left: 0px;
-  padding-right: 0px;
+.background {
+  background-image: url(/6bf8fc44564d66ed577ce8836a32b36c.jpg);
+  background-position: bottom;
+  color: white !important;
 }
-.social li{
-  list-style-type: none;
-  display: inline;
-  padding-left: 10px;
+
+.background h1 {
+  color: white !important;
 }
