@@ -25,19 +25,19 @@ export default class AdminView extends Component {
       content = (
       <div>
         <h3>Results for {title}</h3>
-        <DropdownButton title="Download as..." id="bg-nested-dropdown" className="pull-right">
-          <MenuItem>
+        <DropdownButton title="Download results" id="bg-nested-dropdown" className="pull-right">
+          <li>
             <CSVDownloader
               schema={this.props.schema}
               fields={schemaFields}
               records={this.props.records} />
-          </MenuItem>
-          <MenuItem>
+          </li>
+          <li>
             <XLSDownloader
               schema={this.props.schema}
               fields={schemaFields}
               records={this.props.records} />
-          </MenuItem>
+          </li>
         </DropdownButton>
         <URLDisplay url={formUrl} />
         <table className="table table-striped">
