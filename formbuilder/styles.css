@@ -35,6 +35,12 @@
   }
 }
 
+/* Override default navbar
+   Prevent first form element dropdown menu to get out of the viewport */
+.navbar {
+  min-height: 8em;
+}
+
 .check {
   font-size: 13em;
   color: #455;
