@@ -174,3 +174,7 @@ span.edit-in-place:hover {
 .background h1 {
   color: white !important;
 }
+
+.checkbox label strong{
+  padding-left: 3px;
+}
