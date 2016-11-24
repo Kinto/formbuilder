@@ -32,5 +32,5 @@ app.listen(port, host, function(err) {
     return;
   }
 
-  console.log("Listening at http://"+host+":" + port);
+  console.log("Listening at http://" + host + ":" + port);
 });
