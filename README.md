@@ -10,6 +10,8 @@ Or deploy it on Scalingo in a single click on this button:
 
 [![Deploy to Scalingo](https://cdn.scalingo.com/deploy/button.svg)](https://my.scalingo.com/deploy)
 
+Scalingo offer a 1 month free trial then 7.20€ / month.
+
 # Installation
 
 To run the formbuilder locally, you can issue the following commands:
