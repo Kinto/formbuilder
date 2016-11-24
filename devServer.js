@@ -2,14 +2,8 @@ var path = require("path");
 var express = require("express");
 var webpack = require("webpack");
 
-var port = 8080;
-if (process.env.PORT) {
-  port = parseInt(process.env.PORT);
-}
-var host = "localhost";
-if (process.env.HOST) {
-  host = process.env.HOST;
-}
+var port = process.env.PORT || 8080;
+var host = process.env.HOST || "localhost";
 
 var env = "dev";
 
