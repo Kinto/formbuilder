@@ -1,0 +1,25 @@
+{
+  "name": "Formbuilder",
+  "description": "Create your own forms and surveys, get your data back.",
+  "repository": "https://github.com/Kinto/formbuilder",
+  "website": "https://github.com/Kinto/formbuilder#readme",
+  "logo": "https://avatars0.githubusercontent.com/u/13413813",
+  "env": {
+    "PROJECT_NAME": {
+      "description": "Name of the project. Defaults to \"formbuilder\".",
+      "value": "$APP"
+    },
+    "SERVER_URL": {
+      "description": "URL of the kinto server. It's default value depends on the environment that's being used (development, production, etc.)",
+      "value": "https://demo-kinto.scalingo.io/v1"
+    },
+    "HOST": {
+      "description": "Listens connection on the specified host. Defaults to \"localhost\".",
+      "value": "0.0.0.0"
+    },
+    "NPM_CONFIG_PRODUCTION": {
+      "description": "Install dev dependencies",
+      "value": "false"
+    }
+  }
+}
