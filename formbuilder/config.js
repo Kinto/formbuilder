@@ -95,10 +95,8 @@ export default {
               type: "object",
               title: "Choices",
               properties: {
-                type: {
-                  type: "string"
-                },
                 enum: {
+                  title: null,
                   type: "array",
                   items: {
                     type: "string"
