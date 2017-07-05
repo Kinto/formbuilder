@@ -1,4 +1,5 @@
 var path = require("path");
+var KintoClient = require("kinto-http").default;
 var express = require("express");
 var webpack = require("webpack");
 
@@ -22,6 +23,9 @@ app.get("/", function(req, res) {
 app.get("/react-jsonschema-form.css", function(req, res) {
   res.sendFile(path.join(__dirname, "css", "react-jsonschema-form.css"));
 });
+
+var url = process.env.SERVER_URL || "http://localhost:8888/v1/"; // I would like to get this from config, but been unable so far.
+new KintoClient(url); // This will simply check the URL format over Kinto Standards
 
 app.listen(port, "localhost", function(err) {
   if (err) {
