@@ -8,6 +8,9 @@ const appURL = process.env.APP_URL || "https://www.fourmilieres.net/";
 
 module.exports = {
   entry: ["./formbuilder/app", "babel-polyfill"],
+  node: {
+    fs: "empty"
+  },
   output: {
     path: path.join(__dirname, "build"),
     filename: "bundle.js",

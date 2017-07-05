@@ -24,6 +24,7 @@
     "history": "^1.17.0",
     "isomorphic-fetch": "^2.2.1",
     "json2csv": "^3.7.0",
+    "json2xls": "^0.1.2",
     "kinto-http": "^4.3.4",
     "react": "^15.3.2",
     "react-bootstrap": "^0.30.3",

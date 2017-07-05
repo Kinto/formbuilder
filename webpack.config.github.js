@@ -6,6 +6,9 @@ const serverURL = process.env.SERVER_URL || "https://kinto.notmyidea.org/v1/";
 
 module.exports = {
   devtool: "eval",
+  node: {
+    fs: "empty"
+  },
   entry: "./formbuilder/app",
   output: {
     path: path.join(__dirname, "build"),
