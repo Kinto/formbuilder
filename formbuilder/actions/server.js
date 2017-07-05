@@ -1,4 +1,4 @@
-import KintoClient from "kinto-client";
+import KintoClient from "kinto-http";
 import btoa from "btoa";
 import uuid from "uuid";
 
@@ -113,6 +113,9 @@ export function publishForm(callback) {
       }
     })
     .catch((error) => {
+      if (error.response === undefined) {
+        throw error;
+      }
       // If the bucket doesn't exist, try to create it.
       if (error.response.status === 403 && retry === true) {
         return initializeBucket().then(() => {
