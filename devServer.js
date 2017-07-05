@@ -1,5 +1,5 @@
 var path = require("path");
-var KintoClient = require("kinto-client").default;
+var KintoClient = require("kinto-http");
 var express = require("express");
 var webpack = require("webpack");
 
