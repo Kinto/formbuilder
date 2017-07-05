@@ -1,4 +1,4 @@
-import KintoClient from "kinto-client";
+import KintoClient from "kinto-http";
 import btoa from "btoa";
 import uuid from "uuid";
 
