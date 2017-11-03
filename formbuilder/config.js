@@ -91,13 +91,19 @@ export default {
           properties: {
             title: {type: "string", title: "Label"},
             required: {type: "boolean"},
-            enum: {
-              type: "array",
+            items: {
+              type: "object",
               title: "Choices",
-              items: {
-                type: "string"
-              },
-              default: ["choice 1", "choice 2", "choice 3"],
+              properties: {
+                enum: {
+                  title: null,
+                  type: "array",
+                  items: {
+                    type: "string"
+                  },
+                  default: ["choice 1", "choice 2", "choice 3"],
+                }
+              }
             }
           }
         },
