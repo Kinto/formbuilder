@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ClipboardButton from "react-clipboard.js";
-import {getFormID, getFormURL, getAdminURL} from "../utils";
+import {getFormID, getFormURL, getFormEditURL, getAdminURL} from "../utils";
 import URLDisplay from "./URLDisplay";
 
 export default class FormCreated extends Component {
@@ -20,6 +20,7 @@ export default class FormCreated extends Component {
     const formID = getFormID(adminToken);
 
     const userformURL = getFormURL(formID);
+    const userformEditURL = getFormEditURL(adminToken);
     const adminURL = getAdminURL(adminToken);
 
     const twitterText = `I've just created a form, it is at ${userformURL}!`;
@@ -57,6 +58,7 @@ Please, take some time to fill it,
             </li>
           </ul>
           <URLDisplay url={userformURL} />
+          <URLDisplay url={userformEditURL} />
           <URLDisplay url={adminURL} type="admin" />
         </div>
       </form>

@@ -7,6 +7,7 @@ import JsonViewContainer from "./containers/builder/JsonViewContainer";
 
 import NotificationContainer from "./containers/NotificationContainer";
 import FormCreatedContainer from "./containers/FormCreatedContainer";
+import FormEditContainer from "./containers/builder/FormEditContainer";
 import UserFormContainer from "./containers/UserFormContainer";
 import RecordCreatedContainer from "./containers/RecordCreatedContainer";
 import AdminViewContainer from "./containers/AdminViewContainer";
@@ -79,6 +80,8 @@ export default (
         components={{...common, sidebarComponent: LinkToBuilder, content: FAQ}} />
       <Route path="builder"
         components={{...common, content: FormContainer}} />
+      <Route path="builder/edit/:adminId"
+        components={{...common, content: FormEditContainer}} />
       <Route path="builder/json"
         components={{...common, sidebarComponent: BackAndDownloadJSONSchema, content: JsonViewContainer}} />
       <Route path="builder/published/:adminToken"

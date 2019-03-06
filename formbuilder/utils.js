@@ -23,6 +23,10 @@ export function getFormURL(formID) {
   return `${config.appURL}#/form/${formID}`;
 }
 
+export function getFormEditURL(adminID) {
+  return `${config.appURL}#/builder/edit/${adminID}`;
+}
+
 /**
  * Returns the admin URL from the admin token.
  *

@@ -157,11 +157,11 @@ export function submitRecord(record, collection, callback) {
   };
 }
 
-export function loadSchema(formID, callback) {
+export function loadSchema(formID, callback, adminId) {
   return (dispatch, getState) => {
     dispatch({type: SCHEMA_RETRIEVAL_PENDING});
     new KintoClient(config.server.remote, {
-      headers: getAuthenticationHeaders("EVERYONE")
+      headers: getAuthenticationHeaders(adminId ? adminId : "EVERYONE")
     })
     .bucket(config.server.bucket)
     .collection(formID)
