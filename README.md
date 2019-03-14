@@ -24,7 +24,7 @@ $ npm run start
 ```
 
 You also need to have a [Kinto](https://kinto.readthedocs.io) server **greater
-than 4.3.1** in order to store your data and **less than 11.0.0** for an OOTB
+than 4.3.1** in order to store your data and **less than 11.0.0** for an out-of-the-box
 experience (when basicauth was removed by default). The latest version of Kinto
 at the time was **9.2.3**. If you don't already have Kinto, follow
 [the installation instructions](http://kinto.readthedocs.io/en/stable/tutorials/install.html).

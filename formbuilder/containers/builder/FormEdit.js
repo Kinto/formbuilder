@@ -5,7 +5,7 @@ import {getFormID} from "../../utils";
 export default class FormEdit extends Component {
 
   componentDidMount() {
-    // If the schema is empty, then try to load the schema from the
+    // If the schema is empty, then load the schema into the state
     if (!this.state) {
       const formId = getFormID(this.props.params.adminId);
       const callback = (data) => {
